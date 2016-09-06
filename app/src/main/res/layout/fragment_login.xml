@@ -24,7 +24,7 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_marginBottom="@dimen/margin"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
             <TextView
@@ -52,9 +52,11 @@
                 android:text="¿olvidaste tu contraseña?"
                 android:textSize="@dimen/sizeText_ss"
                 android:layout_gravity="center"
-                android:layout_marginBottom="20dp"/>
+                android:layout_marginBottom="20dp"
+                android:id="@+id/tvtvRecoverPassword" />
 
             <Button
+                android:id="@+id/btnLogIn"
                 style="@style/button_blue"
                 android:text="INGRESAR"
                 android:layout_marginBottom="20dp"
@@ -66,18 +68,20 @@
                 android:text="CREAR CUENTA"
                 android:textColor="@color/colorPrimary"
                 android:textSize="@dimen/sizeText_s"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:id="@+id/tvRegister" />
 
         </LinearLayout>
 
         <!--zone form Register-->
         <LinearLayout
+            android:id="@+id/zoneRegister"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:visibility="visible"
+            android:visibility="gone"
             >
 
             <TextView
@@ -114,8 +118,10 @@
                 android:layout_margin="@dimen/margin">
 
                 <CheckBox
+                    android:id="@+id/checkTerm"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:checked="false" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -130,7 +136,7 @@
                 style="@style/button_blue"
                 android:text="CREAR CUENTA"
                 android:layout_marginBottom="@dimen/margin"
-                />
+                android:id="@+id/btnRegister" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -146,7 +152,8 @@
                     android:layout_height="wrap_content"
                     android:text="ingresa aqui"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/sizeText_s"/>
+                    android:textSize="@dimen/sizeText_s"
+                    android:id="@+id/tvLogIn" />
             </LinearLayout>
 
 
@@ -181,15 +188,18 @@
 
                 <Button
                     style="@style/button_social_network"
-                    android:background="@drawable/background_btn_facebook"/>
+                    android:background="@drawable/background_btn_facebook"
+                    android:id="@+id/btnFacebook" />
 
                 <Button
                     style="@style/button_social_network"
-                    android:background="@drawable/background_btn_twitter"/>
+                    android:background="@drawable/background_btn_twitter"
+                    android:id="@+id/btnTwitter" />
 
                 <Button
                     style="@style/button_social_network"
-                    android:background="@drawable/background_btn_gmail"/>
+                    android:background="@drawable/background_btn_gmail"
+                    android:id="@+id/btnGmail" />
 
             </LinearLayout>
 
