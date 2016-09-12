@@ -9,6 +9,7 @@ public class MainActivity extends Activity {
 
     RelativeLayout fragment;
 
+    FragmentChef    fragmentChef;
     FragmentLogin   fragmentLogin;
     FragmentProfile fragmentProfile;
 
@@ -22,13 +23,14 @@ public class MainActivity extends Activity {
 
 
         inicializate();
-        goFragmentLogin();
+        goFragmentChef();
     }
 
     private void inicializate(){
 
         fragment = (RelativeLayout) findViewById(R.id.rlFragment);
 
+        fragmentChef    = new FragmentChef();
         fragmentLogin   = new FragmentLogin();
         fragmentProfile = new FragmentProfile();
     }
@@ -43,6 +45,13 @@ public class MainActivity extends Activity {
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentProfile);
         fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void goFragmentChef(){
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.rlFragment, fragmentChef);
+//        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
