@@ -9,6 +9,5 @@ public class viewTools {
      * this method convert px to dp.
      */
     public static void m(){
-
     }
 }

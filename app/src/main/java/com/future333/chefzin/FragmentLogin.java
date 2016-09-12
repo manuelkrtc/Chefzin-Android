@@ -100,6 +100,13 @@ public class FragmentLogin extends Fragment {
                 isViewRegister(false);
             }
         });
+
+        btnLogIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).goFragmentProfile();
+            }
+        });
     }
 
     private void isViewRegister(boolean isViewRegister){
@@ -111,4 +118,5 @@ public class FragmentLogin extends Fragment {
             zoneRegister.setVisibility(View.GONE);
         }
     }
+
 }

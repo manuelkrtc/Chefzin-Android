@@ -29,6 +29,14 @@
         <item name="android:textColor">     @color/colorPrimary</item>
     </style>
 
+    <style name="subTitle" >
+        <item name="android:layout_width">  wrap_content</item>
+        <item name="android:layout_height"> wrap_content</item>
+        <item name="android:textStyle">     bold</item>
+        <item name="android:textSize">      @dimen/sizeText_x</item>
+        <item name="android:textColor">     @color/colorPrimary</item>
+    </style>
+
     <style name="button_blue" >
         <item name="android:layout_width">  150dp</item>
         <item name="android:layout_height"> 30dp</item>
