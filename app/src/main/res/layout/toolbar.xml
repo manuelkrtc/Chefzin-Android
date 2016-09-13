@@ -12,4 +12,27 @@
         android:src="@mipmap/ic_chefzin_white"
         android:layout_centerInParent="true"/>
 
+    <ImageButton
+        style="@style/icon"
+        android:id="@+id/btnProfile"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_chefzin_white"/>
+
+    <ImageButton
+        style="@style/icon"
+        android:id="@+id/btnUpdate"
+        android:layout_toLeftOf="@+id/btnMenu"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_chefzin_white"/>
+
+    <ImageButton
+        style="@style/icon"
+        android:id="@+id/btnMenu"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_chefzin_white"/>
+
+
+
 </RelativeLayout>

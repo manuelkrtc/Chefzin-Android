@@ -5,7 +5,6 @@
 
     <dimen name="toolbar_height">56dp</dimen>
 
-
     <dimen name="margin_x"> 40dp</dimen>
     <dimen name="margin">   20dp</dimen>
     <dimen name="margin_s"> 10dp</dimen>
@@ -15,6 +14,9 @@
     <dimen name="sizeText">     14sp</dimen>
     <dimen name="sizeText_s">   12sp</dimen>
     <dimen name="sizeText_ss">  10sp</dimen>
+
+    <dimen name="icon_touchable">   48dp</dimen>
+    <dimen name="icon_padding">     12dp</dimen>
 
 
 </resources>
