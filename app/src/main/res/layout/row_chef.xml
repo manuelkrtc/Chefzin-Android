@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:background="@color/white">
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/img_chef"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/zoneInfChef"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/svDescription"
+        android:layout_marginBottom="@dimen/margin"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorPrimary"/>
+
+        <TextView
+            style="@style/title"
+            android:id="@+id/tvNameChef"
+            android:text="Julian Serna"
+            android:textStyle="normal"
+            />
+
+        <TextView
+            style="@style/subTitle"
+            android:id="@+id/tvSpecialtyChef"
+            android:text="Vegetariana"
+            android:textStyle="normal"
+            android:textSize="12dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/svDescription"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="@dimen/margin_x"
+        android:layout_marginRight="@dimen/margin_x"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/grey"
+            android:text="Manuel mafdfdf  dfdfdfss sd  vffgf gfgfgfg g fdgf f fg fdgfg      fds ddasdg sdfgrsg dfgfgfgfdg  gfdgfg   v fdgfgf  gg dfgdgdfggdfdfdfd dfdf f dsfdf ddfffsdjfjfn fhndsfdsjlkfv n fjkfkl fjfkjlsjk dsjfkd dfdkfdjfdfjkdfkld vidjkljfddf fdfjdfdskfn jfdksjdsjfdsklj"/>
+
+    </ScrollView>
+
+
+</LinearLayout>

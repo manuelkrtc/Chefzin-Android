@@ -21,6 +21,14 @@
         <item name="android:background">            @drawable/background_line_blue</item>
     </style>
 
+    <style name="superTitle" >
+        <item name="android:layout_width">  wrap_content</item>
+        <item name="android:layout_height"> wrap_content</item>
+        <item name="android:textStyle">     bold</item>
+        <item name="android:textSize">      @dimen/sizeText_xxx</item>
+        <item name="android:textColor">     @color/colorPrimary</item>
+    </style>
+
     <style name="title" >
         <item name="android:layout_width">  wrap_content</item>
         <item name="android:layout_height"> wrap_content</item>
@@ -58,7 +66,12 @@
         <item name="android:background">    @drawable/background_ic</item>
     </style>
 
-
-
+    <style name="stripRhombus" >
+        <item name="android:layout_width">          match_parent</item>
+        <item name="android:layout_height">         10dp</item>
+        <item name="android:layout_marginLeft">     @dimen/margin</item>
+        <item name="android:layout_marginRight">    @dimen/margin</item>
+        <item name="android:src">                   @mipmap/strip_rhombus</item>
+    </style>
 
 </resources>
