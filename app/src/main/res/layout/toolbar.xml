@@ -24,7 +24,7 @@
         android:id="@+id/btnUpdate"
         android:layout_toLeftOf="@+id/btnMenu"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_chefzin_white"/>
+        android:src="@mipmap/ic_update"/>
 
     <ImageButton
         style="@style/icon"
