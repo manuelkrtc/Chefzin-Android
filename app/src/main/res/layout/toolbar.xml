@@ -17,7 +17,8 @@
         android:id="@+id/btnProfile"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_chefzin_white"/>
+        android:layout_marginLeft="@dimen/icon_margin"
+        android:src="@mipmap/ic_profile"/>
 
     <ImageButton
         style="@style/icon"
@@ -31,8 +32,7 @@
         android:id="@+id/btnMenu"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/ic_chefzin_white"/>
-
-
+        android:layout_marginRight="@dimen/icon_margin"
+        android:src="@mipmap/ic_list"/>
 
 </RelativeLayout>
