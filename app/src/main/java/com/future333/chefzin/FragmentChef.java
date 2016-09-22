@@ -84,20 +84,8 @@ public class FragmentChef extends Fragment {
             TextView    tvSpecialtyChef    = (TextView) v.findViewById(R.id.tvSpecialtyChef);
 
             RatingBar       ratingBar       = (RatingBar) v.findViewById(R.id.ratingBar);
-            LinearLayout    zoneRating      = (LinearLayout) v.findViewById(R.id.zoneRating);
 
-            ratingBar.setRating(3.5F);
-            LayerDrawable stars = (LayerDrawable) ratingBar.getProgressDrawable();
-            stars.getDrawable(2).setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_ATOP);
-
-            if(chef.name.equals("manuel")){
-                ratingBar.setVisibility(View.GONE);
-                zoneRating.setVisibility(View.VISIBLE);
-            }else{
-                ratingBar.setVisibility(View.VISIBLE);
-                zoneRating.setVisibility(View.GONE);
-            }
-
+            ratingBar.setRating(3.2F);
 
             if(tvNameChef != null)  tvNameChef.setText(chef.name);
             else                    tvNameChef.setVisibility(View.GONE);
@@ -107,7 +95,6 @@ public class FragmentChef extends Fragment {
 
             if(tvSpecialtyChef != null) tvSpecialtyChef.setText(chef.specialty);
             else                        tvSpecialtyChef.setVisibility(View.GONE);
-
 
             return v;
         }
