@@ -11,6 +11,7 @@ public class MainActivity extends Activity {
 
     FragmentChef    fragmentChef;
     FragmentLogin   fragmentLogin;
+    FragmentHorary  fragmentHorary;
     FragmentProfile fragmentProfile;
 
     FragmentTransaction fragmentTransaction;
@@ -20,10 +21,8 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
         inicializate();
-        goFragmentChef();
+        goFragmentHorary();
     }
 
     private void inicializate(){
@@ -32,6 +31,7 @@ public class MainActivity extends Activity {
 
         fragmentChef    = new FragmentChef();
         fragmentLogin   = new FragmentLogin();
+        fragmentHorary  = new FragmentHorary();
         fragmentProfile = new FragmentProfile();
     }
 
@@ -52,6 +52,12 @@ public class MainActivity extends Activity {
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentChef);
 //        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void goFragmentHorary(){
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.rlFragment, fragmentHorary);
         fragmentTransaction.commit();
     }
 

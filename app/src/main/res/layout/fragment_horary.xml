@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:paddingTop="@dimen/margin_x"
+    android:paddingBottom="@dimen/margin_x">
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="284dp"
+        android:layout_marginBottom="@dimen/margin"
+        />
+
+    <!--<com.daimajia.slider.library.Indicators.PagerIndicator-->
+        <!--android:id="@+id/custom_indicator"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--/>-->
+
+    <com.daimajia.slider.library.Indicators.PagerIndicator
+        android:id="@+id/custom_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/slider"
+        android:gravity="center"
+        custom:selected_color="@color/colorPrimary"
+        custom:unselected_color="@color/grey"
+        custom:shape="oval"
+        custom:selected_padding_left="3dp"
+        custom:selected_padding_right="3dp"
+        custom:unselected_padding_left="3dp"
+        custom:unselected_padding_right="3dp"
+        custom:selected_width="8dp"
+        custom:selected_height="8dp"
+        custom:unselected_width="8dp"
+        custom:unselected_height="8dp"
+        />
+
+
+
+    <TextView
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin"
+        android:layout_above="@+id/strip"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:text="Para ayudar a combatir la mala costumbre de no comer bien, te recomendamos a nuestros chefs expertos, cocinaran con amor para que disfrutes de principio a fin."/>
+
+
+    <ImageView
+        style="@style/stripRhombus"
+        android:id="@+id/strip"
+        android:layout_alignParentBottom="true"
+        />
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+
