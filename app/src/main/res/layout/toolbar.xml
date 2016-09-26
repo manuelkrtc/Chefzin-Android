@@ -18,7 +18,8 @@
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/icon_margin"
-        android:src="@mipmap/ic_profile"/>
+        android:src="@mipmap/ic_profile"
+        android:onClick="btnProfile"/>
 
     <ImageButton
         style="@style/icon"

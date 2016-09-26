@@ -3,10 +3,15 @@ package com.future333.chefzin;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 
+    ImageView btnMenu;
+    ImageView btnUpdate;
+    ImageView btnProfile;
     RelativeLayout fragment;
 
     FragmentChef    fragmentChef;
@@ -27,17 +32,24 @@ public class MainActivity extends Activity {
 
     private void inicializate(){
 
-        fragment = (RelativeLayout) findViewById(R.id.rlFragment);
+        btnMenu     = (ImageView) findViewById(R.id.btnMenu);
+        btnUpdate   = (ImageView) findViewById(R.id.btnUpdate);
+        btnProfile  = (ImageView) findViewById(R.id.btnProfile);
+        fragment    = (RelativeLayout) findViewById(R.id.rlFragment);
 
         fragmentChef    = new FragmentChef();
-        fragmentLogin   = new FragmentLogin();
+//        fragmentLogin   = new FragmentLogin();
+        fragmentLogin   = FragmentLogin.newInstance();
         fragmentHorary  = new FragmentHorary();
         fragmentProfile = new FragmentProfile();
     }
 
+
+    //--------------------------------------- goFragments ------------------------------------------
     private void goFragmentLogin(){
         fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.rlFragment, fragmentLogin);
+        fragmentTransaction.replace(R.id.rlFragment, FragmentLogin.newInstance());
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -51,7 +63,6 @@ public class MainActivity extends Activity {
     public void goFragmentChef(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentChef);
-//        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -64,5 +75,22 @@ public class MainActivity extends Activity {
     @Override
     public void onBackPressed() {
         getFragmentManager().popBackStack();
+    }
+
+    //-------------------------------------- buttons Toolbar ---------------------------------------
+    public void btnProfile(View view){
+        goFragmentLogin();
+    }
+
+    private void setToolbartEmpty(){
+        btnMenu.setVisibility(View.GONE);
+        btnUpdate.setVisibility(View.GONE);
+        btnProfile.setVisibility(View.GONE);
+    }
+
+    private void setToolbartFull(){
+        btnMenu.setVisibility(View.GONE);
+        btnUpdate.setVisibility(View.GONE);
+        btnProfile.setVisibility(View.GONE);
     }
 }

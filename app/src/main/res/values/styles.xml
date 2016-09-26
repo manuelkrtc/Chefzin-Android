@@ -19,6 +19,7 @@
         <item name="android:textSize">              @dimen/sizeText_s</item>
         <item name="android:gravity">               center</item>
         <item name="android:background">            @drawable/background_line_blue</item>
+        <item name="android:singleLine">            true</item>
     </style>
 
     <style name="superTitle" >
