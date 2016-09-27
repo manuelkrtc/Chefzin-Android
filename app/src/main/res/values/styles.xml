@@ -16,7 +16,7 @@
         <item name="android:padding">               5dp</item>
         <item name="android:layout_marginTop">      5dp</item>
         <item name="android:layout_marginBottom">   5dp</item>
-        <item name="android:textSize">              @dimen/sizeText_s</item>
+        <item name="android:textSize">              @dimen/sizeText</item>
         <item name="android:gravity">               center</item>
         <item name="android:background">            @drawable/background_line_blue</item>
         <item name="android:singleLine">            true</item>
@@ -25,9 +25,10 @@
     <style name="superTitle" >
         <item name="android:layout_width">  wrap_content</item>
         <item name="android:layout_height"> wrap_content</item>
-        <item name="android:textStyle">     bold</item>
-        <item name="android:textSize">      @dimen/sizeText_xxx</item>
+        <item name="android:textSize">      @dimen/sizeText_xxxx</item>
         <item name="android:textColor">     @color/colorPrimary</item>
+        <item name="fontName">              raleway_bold.ttf</item>
+        <item name="android:layout_marginBottom">25dp</item>
     </style>
 
     <style name="title" >
@@ -44,6 +45,13 @@
         <item name="android:textStyle">     bold</item>
         <item name="android:textSize">      @dimen/sizeText_x</item>
         <item name="android:textColor">     @color/colorPrimary</item>
+    </style>
+
+    <style name="text" >
+        <item name="android:gravity">   center</item>
+        <item name="android:textSize">  @dimen/sizeText_x</item>
+        <item name="android:textColor"> @color/colorPrimary</item>
+        <item name="fontName">          raleway_extraLight.ttf</item>
     </style>
 
     <style name="button_blue" >

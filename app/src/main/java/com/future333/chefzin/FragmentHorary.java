@@ -33,9 +33,9 @@ public class FragmentHorary extends Fragment {
         inicializate(view);
 
         ArrayList<Horary> horaries = new ArrayList<>();
-        horaries.add(new Horary("Desayuno", R.drawable.img_breakfast));
-        horaries.add(new Horary("Almuerzo", R.drawable.img_lunch));
-        horaries.add(new Horary("Cena",     R.drawable.img_dinner));
+        horaries.add(new Horary("DESAYUNO", R.drawable.img_breakfast));
+        horaries.add(new Horary("ALMUERZO", R.drawable.img_lunch));
+        horaries.add(new Horary("CENA",     R.drawable.img_dinner));
 
         initSlider(horaries);
 

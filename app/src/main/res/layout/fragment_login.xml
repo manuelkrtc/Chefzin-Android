@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -83,12 +84,15 @@
                 android:layout_marginTop="@dimen/margin_x"
                 android:layout_marginBottom="@dimen/margin_x"
                 android:text="COMPLETA TUS DATOS"
+
                 />
 
-            <EditText
+            <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etName"
-                android:hint="Nombres y apellidos"/>
+                android:hint="Nombres y apellidos"
+                custom:fontName="raleway_light.ttf"
+                />
 
             <EditText
                 style="@style/form"

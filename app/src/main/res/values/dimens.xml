@@ -10,7 +10,8 @@
     <dimen name="margin">   20dp</dimen>
     <dimen name="margin_s"> 10dp</dimen>
 
-    <dimen name="sizeText_xxx">  20sp</dimen>
+    <dimen name="sizeText_xxxx">25sp</dimen>
+    <dimen name="sizeText_xxx"> 20sp</dimen>
     <dimen name="sizeText_xx">  18sp</dimen>
     <dimen name="sizeText_x">   16sp</dimen>
     <dimen name="sizeText">     14sp</dimen>

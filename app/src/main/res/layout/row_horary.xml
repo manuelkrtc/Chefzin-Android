@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
     android:paddingTop="@dimen/margin_x"
     android:paddingBottom="0dp"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android = "http://schemas.android.com/apk/res/android"
     >
 
-    <TextView
+    <com.future333.chefzin.view.FontTextView
         style="@style/superTitle"
         android:id="@+id/tvHorary"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/margin"
-        android:text="Desayuno"
+        android:text="DESAYUNO"
         />
 
     <ImageView
         android:id="@+id/ivHorary"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="match_parent"
         android:layout_below="@+id/tvHorary"
         android:src="@drawable/img_breakfast"
         android:scaleType="centerCrop"

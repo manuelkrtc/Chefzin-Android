@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:gravity="center">
 
         <com.daimajia.slider.library.SliderLayout
             android:id="@+id/slider"
@@ -23,7 +24,7 @@
             android:id="@+id/custom_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_x"
             android:layout_below="@+id/slider"
             android:gravity="center"
             custom:selected_color="@color/colorPrimary"
@@ -39,21 +40,20 @@
             custom:unselected_height="8dp"
             />
 
-
-
-        <TextView
+        <com.future333.chefzin.view.FontTextView
+            style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin"
-            android:layout_above="@+id/strip"
-            android:gravity="center"
-            android:layout_centerHorizontal="true"
-            android:text="Para ayudar a combatir la mala costumbre de no comer bien, te recomendamos a nuestros chefs expertos, cocinaran con amor para que disfrutes de principio a fin."/>
-
+            android:layout_marginBottom="@dimen/margin_x"
+            android:layout_marginLeft="@dimen/margin_x"
+            android:layout_marginRight="@dimen/margin_x"
+            android:text="Para ayudar a combatir la mala costumbre de no comer bien, te recomendamos a nuestros chefs expertos, cocinaran con amor para que disfrutes de principio a fin."
+            />
 
         <ImageView
             style="@style/stripRhombus"
             android:id="@+id/strip"
+            android:layout_marginBottom="@dimen/margin_s"
             />
 
     </LinearLayout>
