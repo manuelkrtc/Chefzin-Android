@@ -5,6 +5,7 @@
 
     <dimen name="toolbar_height">56dp</dimen>
 
+    <dimen name="margin_xx">60dp</dimen>
     <dimen name="margin_x"> 40dp</dimen>
     <dimen name="margin">   20dp</dimen>
     <dimen name="margin_s"> 10dp</dimen>

@@ -1,11 +1,12 @@
 package com.future333.chefzin.view;
 
-import clickdelivery.pidefarma.R;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.TextView;
+
+import com.future333.chefzin.R;
 
 public class FontTextView extends TextView {
 

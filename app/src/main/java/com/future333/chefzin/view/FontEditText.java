@@ -6,7 +6,8 @@ import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.widget.EditText;
 
-import clickdelivery.pidefarma.R;
+import com.future333.chefzin.R;
+
 
 public class FontEditText extends EditText {
 
