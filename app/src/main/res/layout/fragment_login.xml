@@ -3,7 +3,8 @@
     xmlns:custom  = "http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,48 +24,42 @@
             android:visibility="visible"
             >
 
-            <TextView
+            <com.future333.chefzin.view.FontTextView
                 style="@style/title"
-                android:layout_marginBottom="@dimen/margin_x"
                 android:text="INICIAR SESIÓN"
                 />
 
-            <EditText
+            <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etEmailLog"
                 android:hint="Correo electrónico"/>
 
-            <EditText
+            <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etPasswordLog"
                 android:hint="Contraseña"
                 android:layout_marginBottom="@dimen/margin"/>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.future333.chefzin.view.FontTextView
+                style="@style/text"
+                android:id="@+id/tvRecoverPassword"
                 android:text="¿olvidaste tu contraseña?"
-                android:textSize="@dimen/sizeText_ss"
-                android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:id="@+id/tvtvRecoverPassword" />
+                />
 
-            <Button
-                android:id="@+id/btnLogIn"
+            <com.future333.chefzin.view.FontButton
                 style="@style/button_blue"
+                android:id="@+id/btnLogIn"
                 android:text="INGRESAR"
                 android:layout_marginBottom="20dp"
                 />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.future333.chefzin.view.FontTextView
+                style="@style/textBold"
+                android:id="@+id/tvRegister"
                 android:text="CREAR CUENTA"
-                android:textColor="@color/colorPrimary"
-                android:textSize="@dimen/sizeText_s"
-                android:textStyle="bold"
-                android:id="@+id/tvRegister" />
+                />
 
         </LinearLayout>
 
@@ -76,35 +71,31 @@
             android:orientation="vertical"
             android:gravity="center_horizontal"
             android:layout_marginBottom="20dp"
-            android:visibility="gone"
+            android:visibility="visible"
             >
 
-            <TextView
+            <com.future333.chefzin.view.FontTextView
                 style="@style/title"
-                android:layout_marginTop="@dimen/margin_x"
-                android:layout_marginBottom="@dimen/margin_x"
                 android:text="COMPLETA TUS DATOS"
-
                 />
 
             <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etName"
                 android:hint="Nombres y apellidos"
-                custom:fontName="raleway_light.ttf"
                 />
 
-            <EditText
+            <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etEmail"
                 android:hint="Correo electrónico"/>
 
-            <EditText
+            <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etPassword"
                 android:hint="Contraseña"/>
 
-            <EditText
+            <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etPasswordConfirm"
                 android:hint="Confirmar contraseña"/>
@@ -119,39 +110,39 @@
                     android:id="@+id/checkTerm"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="false" />
+                    android:checked="false"
+                    android:layout_gravity="center_vertical"/>
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    style="@style/text"
                     android:layout_height="wrap_content"
+                    android:gravity="left"
                     android:text="Acepto voluntariamente los términos y condiciones de chefzin."
-                    android:textSize="@dimen/sizeText_ss"
-                    android:layout_gravity="center"/>
+                    />
 
             </LinearLayout>
 
-            <Button
+            <com.future333.chefzin.view.FontButton
                 style="@style/button_blue"
+                android:id="@+id/btnRegister"
                 android:text="CREAR CUENTA"
                 android:layout_marginBottom="@dimen/margin"
-                android:id="@+id/btnRegister" />
+                />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/text"
                     android:text="Si ya tienes cuenta "
-                    android:textSize="@dimen/sizeText_s"/>
+                    />
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/text"
+                    android:id="@+id/tvLogIn"
                     android:text="ingresa aqui"
                     android:textColor="@color/colorPrimary"
-                    android:textSize="@dimen/sizeText_s"
-                    android:id="@+id/tvLogIn" />
+                    />
             </LinearLayout>
 
 
@@ -164,17 +155,13 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.future333.chefzin.view.FontTextView
+                style="@style/text"
                 android:text="O"
-                android:textSize="@dimen/sizeText_s"
                 android:layout_marginBottom="@dimen/margin"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="@dimen/sizeText_s"
+            <com.future333.chefzin.view.FontTextView
+                style="@style/text"
                 android:text="CONECTAR CON"/>
 
             <!--zone social networks-->
@@ -182,6 +169,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_margin="@dimen/margin"
                 >
 
                 <Button
@@ -191,21 +179,14 @@
 
                 <Button
                     style="@style/button_social_network"
-                    android:background="@drawable/background_btn_twitter"
-                    android:id="@+id/btnTwitter" />
-
-                <Button
-                    style="@style/button_social_network"
                     android:background="@drawable/background_btn_gmail"
                     android:id="@+id/btnGmail" />
 
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <com.future333.chefzin.view.FontTextView
+                style="@style/text"
                 android:layout_marginBottom="@dimen/margin"
-                android:textSize="@dimen/sizeText_s"
                 android:text="no publicamos sin su autorización"/>
 
             <RelativeLayout
@@ -221,7 +202,7 @@
                     android:layout_alignLeft="@+id/tvTermConditions"
                     android:background="@color/colorPrimary"/>
 
-                <TextView
+                <com.future333.chefzin.view.FontTextView
                     android:id="@+id/tvTermConditions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -230,6 +211,7 @@
                     android:textSize="@dimen/sizeText_s"
                     android:text="Términos y condiciones"
                     android:textStyle="bold"
+                    custom:fontName="raleway_semiBold.ttf"
                     />
 
                 <View
@@ -243,6 +225,12 @@
             </RelativeLayout>
 
         </LinearLayout>
+
+        <ImageView
+            style="@style/stripRhombus"
+            android:id="@+id/strip"
+            android:layout_marginBottom="@dimen/margin_s"
+            />
 
     </LinearLayout>
 

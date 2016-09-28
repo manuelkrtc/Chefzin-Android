@@ -9,7 +9,7 @@
     >
 
     <TextView
-        style="@style/superTitle"
+        style="@style/title"
         android:id="@+id/tvChefs"
         android:layout_centerHorizontal="true"
         android:text="CHEFS"

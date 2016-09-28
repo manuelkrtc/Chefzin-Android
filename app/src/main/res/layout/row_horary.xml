@@ -10,7 +10,7 @@
     >
 
     <com.future333.chefzin.view.FontTextView
-        style="@style/superTitle"
+        style="@style/title"
         android:id="@+id/tvHorary"
         android:layout_centerHorizontal="true"
         android:text="DESAYUNO"

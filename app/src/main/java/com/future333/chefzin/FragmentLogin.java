@@ -37,7 +37,6 @@ public class FragmentLogin extends Fragment {
     Button btnRegister;
 
     Button btnGmail;
-    Button btnTwitter;
     Button btnFacebook;
 
     TextView tvLogIn;
@@ -78,12 +77,11 @@ public class FragmentLogin extends Fragment {
         btnRegister = (Button) v.findViewById(R.id.btnRegister);
 
         btnGmail    = (Button) v.findViewById(R.id.btnGmail);
-        btnTwitter  = (Button) v.findViewById(R.id.btnTwitter);
         btnFacebook = (Button) v.findViewById(R.id.btnFacebook);
 
         tvLogIn             = (TextView) v.findViewById(R.id.tvLogIn);
         tvRegister          = (TextView) v.findViewById(R.id.tvRegister);
-        tvRecoverPassword   = (TextView) v.findViewById(R.id.tvtvRecoverPassword);
+        tvRecoverPassword   = (TextView) v.findViewById(R.id.tvRecoverPassword);
 
         zoneLogIn       = (LinearLayout) v.findViewById(R.id.zoneLogIn);
         zoneRegister    = (LinearLayout) v.findViewById(R.id.zoneRegister);

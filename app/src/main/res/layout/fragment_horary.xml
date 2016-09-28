@@ -41,7 +41,7 @@
             />
 
         <com.future333.chefzin.view.FontTextView
-            style="@style/text"
+            style="@style/textInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x"
