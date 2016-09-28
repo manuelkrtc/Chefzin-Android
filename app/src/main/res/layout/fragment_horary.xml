@@ -42,8 +42,6 @@
 
         <com.future333.chefzin.view.FontTextView
             style="@style/textInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_x"
             android:layout_marginLeft="@dimen/margin_x"
             android:layout_marginRight="@dimen/margin_x"
@@ -53,7 +51,6 @@
         <ImageView
             style="@style/stripRhombus"
             android:id="@+id/strip"
-            android:layout_marginBottom="@dimen/margin_s"
             />
 
     </LinearLayout>

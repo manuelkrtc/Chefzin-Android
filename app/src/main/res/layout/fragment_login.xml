@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="@dimen/margin_x"
         android:gravity="center">
 
         <!--zone form Log In-->
@@ -229,7 +228,6 @@
         <ImageView
             style="@style/stripRhombus"
             android:id="@+id/strip"
-            android:layout_marginBottom="@dimen/margin_s"
             />
 
     </LinearLayout>

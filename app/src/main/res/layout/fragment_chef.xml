@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingTop="@dimen/margin_x"
-    android:paddingBottom="@dimen/margin_x"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <TextView
+    <com.future333.chefzin.view.FontTextView
         style="@style/title"
         android:id="@+id/tvChefs"
         android:layout_centerHorizontal="true"

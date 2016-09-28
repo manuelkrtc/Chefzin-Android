@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background="@color/white">
+    android:background="@color/white"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
 
     <ImageView
@@ -24,26 +26,24 @@
         android:layout_above="@+id/svDescription"
         android:layout_marginBottom="@dimen/margin"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
             android:background="@color/colorPrimary"/>
 
-        <TextView
-            style="@style/title"
+        <com.future333.chefzin.view.FontTextView
+            style="@style/titleMedium"
             android:id="@+id/tvNameChef"
             android:text="Julian Serna"
-            android:textStyle="normal"
             />
 
-        <TextView
-            style="@style/subTitle"
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textBold"
             android:id="@+id/tvSpecialtyChef"
             android:text="Vegetariana"
-            android:textStyle="normal"
-            android:textSize="12dp"
             />
 
         <View
@@ -74,9 +74,8 @@
         android:layout_alignParentBottom="true"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textInfo"
             android:layout_marginTop="10dp"
             android:gravity="center"
             android:textColor="@color/grey"

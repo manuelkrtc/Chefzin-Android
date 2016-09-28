@@ -68,11 +68,19 @@ public class FragmentHorary extends Fragment {
         public View getView() {
             View v = LayoutInflater.from(getContext()).inflate(R.layout.row_horary, null);
 
-            ImageView   ivHorary    = (ImageView)v.findViewById(R.id.ivHorary);
-            TextView    tvHorary    = (TextView) v.findViewById(R.id.tvHorary);
+            ImageView   ivHorary    = (ImageView)   v.findViewById(R.id.ivHorary);
+            TextView    tvHorary    = (TextView)    v.findViewById(R.id.tvHorary);
+            ViewGroup   lyParent    = (ViewGroup)   v.findViewById(R.id.lyParent);
 
             tvHorary.setText(horary.name);
             ivHorary.setImageResource(horary.image);
+
+            lyParent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MainActivity)getActivity()).goFragmentChef();
+                }
+            });
 
             return v;
         }

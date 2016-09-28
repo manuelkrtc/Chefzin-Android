@@ -48,7 +48,7 @@ public class MainActivity extends Activity {
     //--------------------------------------- goFragments ------------------------------------------
     private void goFragmentLogin(){
         fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.rlFragment, FragmentLogin.newInstance());
+        fragmentTransaction.add(R.id.rlFragment, FragmentLogin.newInstance());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -63,6 +63,7 @@ public class MainActivity extends Activity {
     public void goFragmentChef(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentChef);
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 

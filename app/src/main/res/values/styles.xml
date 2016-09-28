@@ -27,20 +27,23 @@
         <item name="android:layout_width">          wrap_content</item>
         <item name="android:layout_height">         wrap_content</item>
         <item name="android:layout_marginBottom">   25dp</item>
+        <item name="android:layout_marginTop">      @dimen/margin_x</item>
         <item name="android:textSize">              @dimen/sizeText_xxxx</item>
         <item name="android:textColor">             @color/colorPrimary</item>
         <item name="fontName">                      raleway_bold.ttf</item>
     </style>
 
-    <style name="subTitle" >
+    <style name="titleMedium" >
         <item name="android:layout_width">  wrap_content</item>
         <item name="android:layout_height"> wrap_content</item>
-        <item name="android:textStyle">     bold</item>
-        <item name="android:textSize">      @dimen/sizeText_x</item>
+        <item name="android:textSize">      @dimen/sizeText_xxxx</item>
         <item name="android:textColor">     @color/colorPrimary</item>
+        <item name="fontName">              raleway_medium.ttf</item>
     </style>
 
     <style name="textInfo" >
+        <item name="android:layout_width">  wrap_content</item>
+        <item name="android:layout_height"> wrap_content</item>
         <item name="android:gravity">   center</item>
         <item name="android:textSize">  @dimen/sizeText_x</item>
         <item name="android:textColor"> @color/colorPrimary</item>
@@ -93,6 +96,8 @@
         <item name="android:layout_marginLeft">     @dimen/margin</item>
         <item name="android:layout_marginRight">    @dimen/margin</item>
         <item name="android:src">                   @mipmap/strip_rhombus</item>
+        <item name="android:layout_marginBottom">   @dimen/margin_s</item>
+
     </style>
 
     <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
