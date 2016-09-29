@@ -78,6 +78,7 @@ public class FragmentChef extends Fragment {
         public View getView() {
             View v = LayoutInflater.from(getContext()).inflate(R.layout.row_chef, null);
 
+            ViewGroup   lyParent           = (ViewGroup)v.findViewById(R.id.lyParent);
             ImageView   ivChef             = (ImageView)v.findViewById(R.id.ivChef);
             TextView    tvNameChef         = (TextView) v.findViewById(R.id.tvNameChef);
             TextView    tvDescription      = (TextView) v.findViewById(R.id.tvDescription);
@@ -87,14 +88,21 @@ public class FragmentChef extends Fragment {
 
             ratingBar.setRating(3.2F);
 
-            if(tvNameChef != null)  tvNameChef.setText(chef.name);
+            if(chef.name != null)  tvNameChef.setText(chef.name);
             else                    tvNameChef.setVisibility(View.GONE);
 
-            if(tvDescription != null)   tvDescription.setText(chef.description);
+            if(chef.description != null)   tvDescription.setText(chef.description);
             else                        tvDescription.setVisibility(View.GONE);
 
-            if(tvSpecialtyChef != null) tvSpecialtyChef.setText(chef.specialty);
+            if(chef.specialty != null) tvSpecialtyChef.setText(chef.specialty);
             else                        tvSpecialtyChef.setVisibility(View.GONE);
+
+            lyParent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MainActivity)getActivity()).goFragmentMenu();
+                }
+            });
 
             return v;
         }

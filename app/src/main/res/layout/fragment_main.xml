@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:gravity="center"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <com.future333.chefzin.view.FontTextView
+        style="@style/title"
+        android:id="@+id/tvChefs"
+        android:layout_centerHorizontal="true"
+        android:text="MENU"
+        />
+
+    <com.daimajia.slider.library.SliderLayout
+        android:id="@+id/slider"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_below="@+id/tvChefs"
+        android:layout_above="@+id/strip"
+        custom:indicator_visibility="invisible"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:paddingLeft="@dimen/margin"
+        android:paddingRight="@dimen/margin"
+        android:gravity="center">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@drawable/background_btn_green"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/shape_rectangle_corner_transparent"
+            android:elevation="8dp"
+            >
+
+            <com.future333.chefzin.view.FontTextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Agregar"
+                android:textSize="@dimen/sizeText_xxx"
+                android:gravity="center"
+                custom:fontName="raleway_bold.ttf"
+                android:textColor="@color/white"/>
+
+            <ImageView
+                android:layout_width="@dimen/icon_size"
+                android:layout_height="@dimen/icon_size"
+                android:src="@mipmap/ic_chefzin_white"
+                />
+
+            <LinearLayout
+                android:layout_width="42sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_ss"
+                android:padding="@dimen/margin_ss"
+                android:background="@drawable/shape_rectangle_stroke_corner_white"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <com.future333.chefzin.view.FontTextView
+                    android:id="@+id/tvMore"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="+"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sizeText_x"
+                    custom:fontName="raleway_semiBold.ttf"/>
+
+                <com.future333.chefzin.view.FontTextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textSize="@dimen/sizeText_xxx"
+                    android:textColor="@color/white"
+                    custom:fontName="raleway_semiBold.ttf"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <ImageView
+        style="@style/stripRhombus"
+        android:id="@+id/strip"
+        android:layout_alignParentBottom="true"
+        />
+
+</LinearLayout>

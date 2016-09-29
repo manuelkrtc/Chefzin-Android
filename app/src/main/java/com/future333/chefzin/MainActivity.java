@@ -73,6 +73,12 @@ public class MainActivity extends Activity {
         fragmentTransaction.commit();
     }
 
+    public void goFragmentMenu(){
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.rlFragment, new FragmentMain());
+        fragmentTransaction.commit();
+    }
+
     @Override
     public void onBackPressed() {
         getFragmentManager().popBackStack();

@@ -76,6 +76,7 @@
         <item name="fontName">              raleway_bold.ttf</item>
     </style>
 
+
     <style name="button_social_network" >
         <item name="android:layout_width">  48dp</item>
         <item name="android:layout_height"> 48dp</item>

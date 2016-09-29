@@ -9,6 +9,7 @@
     <dimen name="margin_x"> 40dp</dimen>
     <dimen name="margin">   20dp</dimen>
     <dimen name="margin_s"> 10dp</dimen>
+    <dimen name="margin_ss">5dp</dimen>
 
     <dimen name="sizeText_xxxx">25sp</dimen>
     <dimen name="sizeText_xxx"> 20sp</dimen>
@@ -21,6 +22,7 @@
     <dimen name="icon_touchable">   48dp</dimen>
     <dimen name="icon_padding">     12dp</dimen>
     <dimen name="icon_margin">      4dp</dimen>
+    <dimen name="icon_size">        24dp</dimen>
 
 
 </resources>
