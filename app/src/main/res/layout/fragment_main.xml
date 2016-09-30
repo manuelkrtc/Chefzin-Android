@@ -9,13 +9,6 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <com.future333.chefzin.view.FontTextView
-        style="@style/title"
-        android:id="@+id/tvChefs"
-        android:layout_centerHorizontal="true"
-        android:text="MENU"
-        />
-
     <com.daimajia.slider.library.SliderLayout
         android:id="@+id/slider"
         android:layout_width="match_parent"
