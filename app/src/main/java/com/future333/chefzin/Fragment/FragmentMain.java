@@ -1,5 +1,5 @@
 
-package com.future333.chefzin;
+package com.future333.chefzin.Fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.future333.chefzin.R;
 import com.future333.chefzin.model.Chef;
 import com.future333.chefzin.model.Product;
 

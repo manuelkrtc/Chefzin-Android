@@ -49,7 +49,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/margin_s"
-                    android:text="Ensalada de frutas con coco y miel"
+                    android:text="Ensalada de frutas con"
                     android:textColor="@color/white"
                     custom:fontName="raleway_bold.ttf"
                     android:textSize="@dimen/sizeText_xxx"

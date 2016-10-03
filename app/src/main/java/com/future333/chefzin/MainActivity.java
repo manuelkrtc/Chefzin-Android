@@ -7,6 +7,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.future333.chefzin.Fragment.FragmentChef;
+import com.future333.chefzin.Fragment.FragmentHorary;
+import com.future333.chefzin.Fragment.FragmentLogin;
+import com.future333.chefzin.Fragment.FragmentMain;
+import com.future333.chefzin.Fragment.FragmentProfile;
+
 public class MainActivity extends Activity {
 
     ImageView btnMenu;
@@ -14,9 +20,9 @@ public class MainActivity extends Activity {
     ImageView btnProfile;
     RelativeLayout fragment;
 
-    FragmentChef    fragmentChef;
-    FragmentLogin   fragmentLogin;
-    FragmentHorary  fragmentHorary;
+    FragmentChef fragmentChef;
+    FragmentLogin fragmentLogin;
+    FragmentHorary fragmentHorary;
     FragmentProfile fragmentProfile;
 
     FragmentTransaction fragmentTransaction;
