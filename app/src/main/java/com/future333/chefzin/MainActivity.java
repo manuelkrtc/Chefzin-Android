@@ -12,9 +12,14 @@ import com.future333.chefzin.Fragment.FragmentHorary;
 import com.future333.chefzin.Fragment.FragmentLogin;
 import com.future333.chefzin.Fragment.FragmentMain;
 import com.future333.chefzin.Fragment.FragmentProfile;
+import com.future333.chefzin.model.User;
 
 public class MainActivity extends Activity {
 
+    Activity    ctx;
+    AppHandler  app;
+
+    //View
     ImageView btnMenu;
     ImageView btnUpdate;
     ImageView btnProfile;
@@ -34,9 +39,14 @@ public class MainActivity extends Activity {
 
         inicializate();
         goFragmentHorary();
+
+        app.userCtr.getUserLocal(ctx);
     }
 
     private void inicializate(){
+
+        ctx = this;
+        app = ((AppHandler)getApplication());
 
         btnMenu     = (ImageView) findViewById(R.id.btnMenu);
         btnUpdate   = (ImageView) findViewById(R.id.btnUpdate);
@@ -82,6 +92,7 @@ public class MainActivity extends Activity {
     public void goFragmentMenu(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, new FragmentMain());
+        fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -92,7 +103,10 @@ public class MainActivity extends Activity {
 
     //-------------------------------------- buttons Toolbar ---------------------------------------
     public void btnProfile(View view){
-        goFragmentLogin();
+        User user = app.userCtr.getUser();
+
+        if(user == null)    goFragmentLogin();
+        else                goFragmentProfile();
     }
 
     private void setToolbartEmpty(){

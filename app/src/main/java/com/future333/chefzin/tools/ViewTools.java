@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -12,18 +13,14 @@ import java.util.ArrayList;
  */
 public class ViewTools {
 
-    /**
-     * this method setFocusable a EditText and activate keyboard.
-     */
+    /** this method setFocusable a EditText and activate keyboard. */
     public static void focusableEditText(Activity activity, EditText editText){
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    /**
-     * Este metodo toma una lista de editText asociada a un formulario y setFocusable al que se encuentre vacio.
-     */
+    /**Este metodo toma una lista de editText asociada a un formulario y setFocusable al que se encuentre vacio.*/
     public static void focusableForm(Activity activity, ArrayList<EditText> editTextArray){
         for(EditText editText: editTextArray){
             if(editText.getText().toString().equals("")){
@@ -31,5 +28,9 @@ public class ViewTools {
                 return;
             }
         }
+    }
+
+    public static void msj(Context ctx, String msj){
+        Toast.makeText(ctx,msj,Toast.LENGTH_SHORT).show();
     }
 }

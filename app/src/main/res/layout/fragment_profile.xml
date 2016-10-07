@@ -8,6 +8,7 @@
     android:orientation="vertical"
     android:paddingTop="@dimen/margin_x"
     android:paddingBottom="@dimen/margin_x"
+    android:clickable="true"
     android:background="@color/white"
     >
 
@@ -18,6 +19,7 @@
 
     <TextView
         style="@style/title"
+        android:id="@+id/tvName"
         android:layout_marginTop="@dimen/margin_s"
         android:layout_marginBottom="@dimen/margin_x"
         android:text="Manuel Páez"
@@ -40,7 +42,7 @@
 
     <Button
         style="@style/form"
-        android:id="@+id/btnSignOff"
+        android:id="@+id/btnLogOut"
         android:hint="cerrar sesión"/>
 
 </LinearLayout>
