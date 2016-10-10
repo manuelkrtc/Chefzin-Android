@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.FormatTools;
@@ -55,11 +56,23 @@ public class UserCtr {
         logOutListener.onSuccessful();
     }
 
+    public void register(Activity ctx, FormRegister formRegister, OnLogInListener logInListener){
+        String validationRegister = validationRegister(formRegister);
+        if(validationRegister==null){
+            try {
+                apiRegister(ctx,formRegister,logInListener );
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e("errorChefzin","error registro");
+            }
+        }else {
+            logInListener.onError(validationRegister);
+        }
+    }
+
     public void getUserLocal(Activity ctx){
         restoreLocalUser(ctx);
     }
-
-
 
     //----------------------------------------------------------------------------------------------
     private void apiLogin(final Activity ctx, String email, String password, final OnLogInListener logInListener){
@@ -75,7 +88,7 @@ public class UserCtr {
                                 if(response.getBoolean("response")){
                                     getApiInfoUser(ctx, response.getJSONObject("data").getString("token"),logInListener);
                                 }else {
-                                    logInListener.onError("Usuario o contraseña incorrecta.");
+                                    logInListener.onError(response.getJSONObject("data").getString("mensaje"));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -89,6 +102,34 @@ public class UserCtr {
                 }
             });
             SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+    }
+
+    private void apiRegister(final Activity ctx, FormRegister formRegister, final OnLogInListener logInListener) throws JSONException {
+        String parametros = new Gson().toJson(formRegister);
+        JSONObject jsonParam = new JSONObject(parametros);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_REGISTER, jsonParam,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getBoolean("response")){
+                                getApiInfoUser(ctx, response.getJSONObject("data").getString("token"),logInListener);
+                            }else {
+                                logInListener.onError(response.getJSONObject("data").getString("mensaje"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("responseLog", error.toString());
+                logInListener.onError("Error de conexión.");
+            }
+        });
+        SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
     private void getApiInfoUser(final Activity ctx, String token, final OnLogInListener logInListener){
@@ -130,6 +171,30 @@ public class UserCtr {
             return "El campo contraseña esta vacío.";
         if(password.length()<6)
             return "La contraseña debe tener mínimo 6 caracteres.";
+        return null;
+    }
+
+    private String validationRegister(FormRegister formRegister){
+        if(formRegister.getNombres().equals(""))
+            return "El campo nombres esta vacío.";
+        if(formRegister.getApellidos().equals(""))
+            return "El campo apellidos esta vacío.";
+        if(formRegister.getEmail().equals(""))
+            return "El campo correo electrónico esta vacío.";
+        if(!android.util.Patterns.EMAIL_ADDRESS.matcher(formRegister.getEmail()).matches())
+            return "Correo electrónico invalido.";
+        if(formRegister.getPassword().equals(""))
+            return "El campo contraseña esta vacío.";
+        if(formRegister.getPassword().length()<6)
+            return "La contraseña debe tener mínimo 6 caracteres.";
+        if(!formRegister.getPassword().equals(formRegister.getPassword_confirmation()))
+            return "Las contraseñas no coinciden.";
+        if(formRegister.getTelefono().equals(""))
+            return "El campo telefono esta vacío.";
+        if(formRegister.getTelefono().length()<7 || formRegister.getTelefono().length()>10)
+            return "Telefono invalido.";
+        if(!formRegister.isCheckTerm())
+            return "No has aceptado términos y condiciones.";
         return null;
     }
 

@@ -26,6 +26,7 @@ import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.model.Controller.UserCtr;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ToolsNotif;
@@ -50,7 +51,9 @@ public class FragmentLogin extends Fragment {
     //View
     EditText etName;
     EditText etEmail;
+    EditText etLastName;
     EditText etPassword;
+    EditText etTelephone;
     EditText etEmailLog;
     EditText etPasswordLog;
     EditText etPasswordConfirm;
@@ -110,7 +113,9 @@ public class FragmentLogin extends Fragment {
         etPasswordLog       = (EditText) v.findViewById(R.id.etPasswordLog);
         etName              = (EditText) v.findViewById(R.id.etName);
         etEmail             = (EditText) v.findViewById(R.id.etEmail);
+        etLastName          = (EditText) v.findViewById(R.id.etLastName);
         etPassword          = (EditText) v.findViewById(R.id.etPassword);
+        etTelephone         = (EditText) v.findViewById(R.id.etTelephone);
         etPasswordConfirm   = (EditText) v.findViewById(R.id.etPasswordConfirm);
 
         return v;
@@ -145,6 +150,7 @@ public class FragmentLogin extends Fragment {
             public void onClick(View view) {
                 String email = etEmailLog.getText().toString();
                 String password = etPasswordLog.getText().toString();
+
                 app.userCtr.logIn(ctx, email, password, new UserCtr.OnLogInListener() {
                     @Override
                     public void onSuccessful() {
@@ -163,7 +169,27 @@ public class FragmentLogin extends Fragment {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ((MainActivity)getActivity()).goFragmentProfile();
+                FormRegister formRegister = new FormRegister();
+                formRegister.setNombres(etName.getText().toString());
+                formRegister.setApellidos(etLastName.getText().toString());
+                formRegister.setEmail(etEmail.getText().toString());
+                formRegister.setPassword(etPassword.getText().toString());
+                formRegister.setPassword_confirmation(etPasswordConfirm.getText().toString());
+                formRegister.setTelefono(etTelephone.getText().toString());
+                formRegister.setCheckTerm(checkTerm.isChecked());
+
+                app.userCtr.register(ctx, formRegister, new UserCtr.OnLogInListener() {
+                    @Override
+                    public void onSuccessful() {
+                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        getActivity().onBackPressed();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        ViewTools.msj(ctx,error);
+                    }
+                });
             }
         });
     }
