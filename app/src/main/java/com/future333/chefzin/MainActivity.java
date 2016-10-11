@@ -61,7 +61,6 @@ public class MainActivity extends Activity {
         ctx = this;
         app = ((AppHandler)getApplication());
 
-
         btnMenu     = (ImageView) findViewById(R.id.btnMenu);
         btnUpdate   = (ImageView) findViewById(R.id.btnUpdate);
         btnProfile  = (ImageView) findViewById(R.id.btnProfile);
@@ -80,6 +79,8 @@ public class MainActivity extends Activity {
         fragmentTransaction.add(R.id.rlFragment, FragmentLogin.newInstance());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
+        setToolbartEmpty();
     }
 
     public void goFragmentProfile(){
@@ -87,6 +88,8 @@ public class MainActivity extends Activity {
         fragmentTransaction.add(R.id.rlFragment, fragmentProfile);
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+
+        setToolbartEmpty();
     }
 
     public void goFragmentChef(){
@@ -111,13 +114,13 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
+        setToolbartFull();
         getFragmentManager().popBackStack();
     }
 
     //-------------------------------------- buttons Toolbar ---------------------------------------
     public void btnProfile(View view){
         User user = app.userCtr.getUser();
-
         if(user == null)    goFragmentLogin();
         else                goFragmentProfile();
     }
@@ -129,8 +132,8 @@ public class MainActivity extends Activity {
     }
 
     private void setToolbartFull(){
-        btnMenu.setVisibility(View.GONE);
-        btnUpdate.setVisibility(View.GONE);
-        btnProfile.setVisibility(View.GONE);
+        btnMenu.setVisibility(View.VISIBLE);
+        btnUpdate.setVisibility(View.VISIBLE);
+        btnProfile.setVisibility(View.VISIBLE);
     }
 }
