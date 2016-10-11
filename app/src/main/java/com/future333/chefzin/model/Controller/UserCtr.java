@@ -38,7 +38,7 @@ public class UserCtr {
 
     //-------------------------------- public methods--------------------------------------------------------------
 
-    public void logIn(Activity ctx, String email, String password, OnLogInListener logInListener){
+    public void logIn(Activity ctx, String email, String password, ApiTools.OnLogInListener logInListener){
         String validationLogin = validationLogin(email, password);
         if(validationLogin==null){
             apiLogin(ctx,email,password,logInListener);
@@ -47,7 +47,7 @@ public class UserCtr {
         }
     }
 
-    public void logOut(Activity ctx, OnLogOutListener logOutListener){
+    public void logOut(Activity ctx, ApiTools.OnLogOutListener logOutListener){
         if(this.user == null){
             Log.e("ErrorChefIn","NO hay una sesion activa");
             return;
@@ -56,7 +56,7 @@ public class UserCtr {
         logOutListener.onSuccessful();
     }
 
-    public void register(Activity ctx, FormRegister formRegister, OnLogInListener logInListener){
+    public void register(Activity ctx, FormRegister formRegister, ApiTools.OnLogInListener logInListener){
         String validationRegister = validationRegister(formRegister);
         if(validationRegister==null){
             try {
@@ -75,7 +75,7 @@ public class UserCtr {
     }
 
     //----------------------------------------------------------------------------------------------
-    private void apiLogin(final Activity ctx, String email, String password, final OnLogInListener logInListener){
+    private void apiLogin(final Activity ctx, String email, String password, final ApiTools.OnLogInListener logInListener){
             HashMap<String, String> parametros = new HashMap();
             parametros.put("email", email);
             parametros.put("password", FormatTools.string_to_md5(password));
@@ -104,7 +104,7 @@ public class UserCtr {
             SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegister(final Activity ctx, FormRegister formRegister, final OnLogInListener logInListener) throws JSONException {
+    private void apiRegister(final Activity ctx, FormRegister formRegister, final ApiTools.OnLogInListener logInListener) throws JSONException {
         String parametros = new Gson().toJson(formRegister);
         JSONObject jsonParam = new JSONObject(parametros);
 
@@ -132,7 +132,7 @@ public class UserCtr {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void getApiInfoUser(final Activity ctx, String token, final OnLogInListener logInListener){
+    private void getApiInfoUser(final Activity ctx, String token, final ApiTools.OnLogInListener logInListener){
         JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ApiTools.URL_BASE + ApiTools.URL_INFO_USER + token,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -221,12 +221,5 @@ public class UserCtr {
     }
 
     //----------------------------------------------------------------------------------------------
-    public interface OnLogInListener {
-        public void onSuccessful();
-        public void onError(String error);
-    }
 
-    public interface OnLogOutListener{
-        public void onSuccessful();
-    }
 }

@@ -12,5 +12,13 @@ public class ApiTools {
     public final static String URL_HORARIOS     = "gethorariosfranjas/all";
     public final static String URL_INFO_USER    = "getuser?api_token=";
 
+    public interface OnLogInListener {
+        public void onSuccessful();
+        public void onError(String error);
+    }
+
+    public interface OnLogOutListener{
+        public void onSuccessful();
+    }
 
 }

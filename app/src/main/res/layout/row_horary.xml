@@ -10,7 +10,7 @@
 
     <com.future333.chefzin.view.FontTextView
         style="@style/title"
-        android:id="@+id/tvHorary"
+        android:id="@+id/tvName"
         android:layout_centerHorizontal="true"
         android:text="DESAYUNO"
         />
@@ -19,10 +19,20 @@
         android:id="@+id/ivHorary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tvHorary"
+        android:layout_below="@+id/tvName"
         android:src="@drawable/img_breakfast"
         android:scaleType="centerCrop"
         />
+
+    <com.future333.chefzin.view.FontTextView
+        style="@style/textBold"
+        android:id="@+id/tvHorary"
+        android:layout_centerHorizontal="true"
+        android:text="8:00 - 11:30 am"
+        android:layout_alignParentBottom="true"
+        android:textColor="@color/white"
+        />
+
 
 </RelativeLayout>
 

@@ -12,7 +12,10 @@ import com.future333.chefzin.Fragment.FragmentHorary;
 import com.future333.chefzin.Fragment.FragmentLogin;
 import com.future333.chefzin.Fragment.FragmentMain;
 import com.future333.chefzin.Fragment.FragmentProfile;
+import com.future333.chefzin.model.Controller.HoraryCtr;
 import com.future333.chefzin.model.User;
+import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.ViewTools;
 
 public class MainActivity extends Activity {
 
@@ -38,9 +41,19 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         inicializate();
-        goFragmentHorary();
-
         app.userCtr.getUserLocal(ctx);
+
+        app.horaryCtr.getApiHorary(ctx, new ApiTools.OnLogInListener() {
+            @Override
+            public void onSuccessful() {
+                goFragmentHorary();
+            }
+
+            @Override
+            public void onError(String error) {
+                ViewTools.msj(ctx,error);
+            }
+        });
     }
 
     private void inicializate(){
@@ -48,13 +61,13 @@ public class MainActivity extends Activity {
         ctx = this;
         app = ((AppHandler)getApplication());
 
+
         btnMenu     = (ImageView) findViewById(R.id.btnMenu);
         btnUpdate   = (ImageView) findViewById(R.id.btnUpdate);
         btnProfile  = (ImageView) findViewById(R.id.btnProfile);
         fragment    = (RelativeLayout) findViewById(R.id.rlFragment);
 
         fragmentChef    = new FragmentChef();
-//        fragmentLogin   = new FragmentLogin();
         fragmentLogin   = FragmentLogin.newInstance();
         fragmentHorary  = new FragmentHorary();
         fragmentProfile = new FragmentProfile();

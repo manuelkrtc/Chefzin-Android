@@ -2,6 +2,7 @@ package com.future333.chefzin;
 
 import android.app.Application;
 
+import com.future333.chefzin.model.Controller.HoraryCtr;
 import com.future333.chefzin.model.Controller.UserCtr;
 
 /**
@@ -9,6 +10,7 @@ import com.future333.chefzin.model.Controller.UserCtr;
  */
 public class AppHandler extends Application {
 
-    public UserCtr userCtr = new UserCtr();
+    public UserCtr      userCtr    = new UserCtr();
+    public HoraryCtr    horaryCtr  = new HoraryCtr();
 
 }

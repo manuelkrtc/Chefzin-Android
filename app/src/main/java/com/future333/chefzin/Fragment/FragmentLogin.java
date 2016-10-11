@@ -151,7 +151,7 @@ public class FragmentLogin extends Fragment {
                 String email = etEmailLog.getText().toString();
                 String password = etPasswordLog.getText().toString();
 
-                app.userCtr.logIn(ctx, email, password, new UserCtr.OnLogInListener() {
+                app.userCtr.logIn(ctx, email, password, new ApiTools.OnLogInListener() {
                     @Override
                     public void onSuccessful() {
                         ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
@@ -178,7 +178,7 @@ public class FragmentLogin extends Fragment {
                 formRegister.setTelefono(etTelephone.getText().toString());
                 formRegister.setCheckTerm(checkTerm.isChecked());
 
-                app.userCtr.register(ctx, formRegister, new UserCtr.OnLogInListener() {
+                app.userCtr.register(ctx, formRegister, new ApiTools.OnLogInListener() {
                     @Override
                     public void onSuccessful() {
                         ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());

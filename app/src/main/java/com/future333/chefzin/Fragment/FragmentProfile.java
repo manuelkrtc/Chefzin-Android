@@ -14,6 +14,7 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Controller.UserCtr;
 import com.future333.chefzin.model.User;
+import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ViewTools;
 
 /**
@@ -64,7 +65,7 @@ public class FragmentProfile extends Fragment {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                app.userCtr.logOut(ctx, new UserCtr.OnLogOutListener() {
+                app.userCtr.logOut(ctx, new ApiTools.OnLogOutListener() {
                     @Override
                     public void onSuccessful() {
                         ViewTools.msj(ctx,"Vuelve pronto.");

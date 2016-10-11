@@ -1,5 +1,6 @@
 package com.future333.chefzin.Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,20 +13,38 @@ import android.widget.TextView;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Chef;
+import com.future333.chefzin.model.Controller.HoraryCtr;
 import com.future333.chefzin.model.Horary;
+import com.future333.chefzin.tools.DateTools;
+import com.future333.chefzin.tools.ToolsNotif;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by manuel on 12/09/16.
  */
 public class FragmentHorary extends Fragment {
 
+    Activity ctx;
+    AppHandler  app;
+
     SliderLayout slider;
     PagerIndicator pagerIndicator;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ctx = getActivity();
+        app = ((AppHandler)getActivity().getApplication());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -34,12 +53,9 @@ public class FragmentHorary extends Fragment {
 
         inicializate(view);
 
-        ArrayList<Horary> horaries = new ArrayList<>();
-        horaries.add(new Horary("DESAYUNO", R.drawable.img_breakfast));
-        horaries.add(new Horary("ALMUERZO", R.drawable.img_lunch));
-        horaries.add(new Horary("CENA",     R.drawable.img_dinner));
 
-        initSlider(horaries);
+
+        initSlider(app.horaryCtr.getHoraries());
 
         return view;
     }
@@ -70,12 +86,20 @@ public class FragmentHorary extends Fragment {
         public View getView() {
             View v = LayoutInflater.from(getContext()).inflate(R.layout.row_horary, null);
 
-            ImageView   ivHorary    = (ImageView)   v.findViewById(R.id.ivHorary);
+            TextView    tvName      = (TextView)    v.findViewById(R.id.tvName);
             TextView    tvHorary    = (TextView)    v.findViewById(R.id.tvHorary);
+            ImageView   ivHorary    = (ImageView)   v.findViewById(R.id.ivHorary);
             ViewGroup   lyParent    = (ViewGroup)   v.findViewById(R.id.lyParent);
 
-            tvHorary.setText(horary.name);
-            ivHorary.setImageResource(horary.image);
+            if(horary.getNombre() != null)  tvName.setText(horary.getNombre().toUpperCase());
+            else                            tvName.setVisibility(View.GONE);
+
+            String startTime = DateTools.dateFormat(horary.getHora_ini());
+            String finalTime = DateTools.dateFormat(horary.getHora_fin());
+            if(startTime!=null && finalTime!=null) tvHorary.setText(startTime + " - " + finalTime);
+            else tvHorary.setVisibility(View.GONE);
+
+            if(horary.foto_movil != null)  ;
 
             lyParent.setOnClickListener(new View.OnClickListener() {
                 @Override
