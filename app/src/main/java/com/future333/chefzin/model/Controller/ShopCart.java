@@ -2,6 +2,7 @@ package com.future333.chefzin.model.Controller;
 
 import com.future333.chefzin.model.Horary;
 import com.future333.chefzin.model.Product;
+import com.future333.chefzin.tools.ViewTools;
 
 import java.util.ArrayList;
 
@@ -12,15 +13,19 @@ public class ShopCart {
 
     private ArrayList<Product> products = new ArrayList<>();
 
-    public ArrayList<Product> getProducts() {
-        return products;
-    }
-
-    public void setProducts(ArrayList<Product> products) {
-        this.products = products;
-    }
-
     //----------------------------------------------------------------------------------------------
+
+    public void addProduct(Product product){
+        products.add(product);
+    }
+
+    public String quantityProducts(){
+        return String.valueOf(products.size());
+    }
+
+    public void clear(){
+        products.clear();
+    }
 
 
 }

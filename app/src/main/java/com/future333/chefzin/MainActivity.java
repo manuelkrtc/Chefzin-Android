@@ -10,9 +10,8 @@ import android.widget.RelativeLayout;
 import com.future333.chefzin.Fragment.FragmentChef;
 import com.future333.chefzin.Fragment.FragmentHorary;
 import com.future333.chefzin.Fragment.FragmentLogin;
-import com.future333.chefzin.Fragment.FragmentMain;
+import com.future333.chefzin.Fragment.FragmentProduct;
 import com.future333.chefzin.Fragment.FragmentProfile;
-import com.future333.chefzin.model.Controller.HoraryCtr;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ViewTools;
@@ -107,7 +106,7 @@ public class MainActivity extends Activity {
 
     public void goFragmentMenu(){
         fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.rlFragment, new FragmentMain());
+        fragmentTransaction.add(R.id.rlFragment, new FragmentProduct());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

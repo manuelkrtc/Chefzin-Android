@@ -1,20 +1,22 @@
 
 package com.future333.chefzin.Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
+import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
-import com.future333.chefzin.model.Chef;
 import com.future333.chefzin.model.Product;
+import com.future333.chefzin.tools.ViewTools;
 
 import java.util.ArrayList;
 
@@ -23,16 +25,31 @@ import java.util.ArrayList;
  */
 public class FragmentProduct extends Fragment {
 
+    Activity ctx;
+    AppHandler app;
+
+    Button btnAdd;
+    TextView tvQuantity;
     SliderLayout slider;
+
+    ArrayList<Product> products;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ctx         = getActivity();
+        products    = new ArrayList<>();
+        app         = ((AppHandler)getActivity().getApplication());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_product, container, false);
+
+        tvQuantity = (TextView)view.findViewById(R.id.tvQuantity);
 
         inicializate(view);
-
-        ArrayList<Product> products = new ArrayList<>();
         products.add(new Product("Papas", 500, R.drawable.img_dinner, "So la papas mas ricas del mercado con slasa rosa y aji"));
         products.add(new Product("Limonada", 9500, R.drawable.img_lunch, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ"));
         products.add(new Product("Torta Banano", 98000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es"));
@@ -40,10 +57,19 @@ public class FragmentProduct extends Fragment {
 
         initSlider(products);
 
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                app.shopCart.addProduct(products.get(slider.getCurrentPosition()));
+                updateView();
+            }
+        });
+
         return view;
     }
 
     private void inicializate(View v){
+        btnAdd = (Button) v.findViewById(R.id.btnAdd);
         slider = (SliderLayout)v.findViewById(R.id.slider);
     }
 
@@ -87,9 +113,15 @@ public class FragmentProduct extends Fragment {
 
             return v;
         }
-
-
     }
 
+    public void updateView(){
+        tvQuantity.setText(app.shopCart.quantityProducts());
+    }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        app.shopCart.clear();
+    }
 }

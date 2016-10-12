@@ -96,7 +96,7 @@
                         android:id="@+id/tvQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
+                        android:text="0"
                         android:textSize="@dimen/sizeText_xxx"
                         android:textColor="@color/white"
                         custom:fontName="raleway_semiBold.ttf"/>
