@@ -8,7 +8,7 @@ import java.util.ArrayList;
 /**
  * Created by manuel on 11/10/16.
  */
-public class Cart {
+public class ShopCart {
 
     private ArrayList<Product> products = new ArrayList<>();
 

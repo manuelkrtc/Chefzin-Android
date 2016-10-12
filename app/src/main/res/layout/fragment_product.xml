@@ -35,14 +35,15 @@
             android:gravity="center"
             >
             <com.future333.chefzin.view.FontButton
+                android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
-                android:background="@drawable/background_btn_green"
                 android:text="Agregar"
                 android:textSize="@dimen/sizeText_xxx"
-                custom:fontName="raleway_bold.ttf"
                 android:textColor="@color/white"
                 android:textAllCaps="false"
+                custom:fontName="raleway_bold.ttf"
+                android:background="@drawable/background_btn_green"
                 />
         </RelativeLayout>
 
@@ -68,11 +69,11 @@
                 android:elevation="8dp"
                 >
 
-            <ImageView
-                android:layout_width="@dimen/icon_size"
-                android:layout_height="@dimen/icon_size"
-                android:src="@mipmap/ic_chefzin_white"
-                />
+                <ImageView
+                    android:layout_width="@dimen/icon_size"
+                    android:layout_height="@dimen/icon_size"
+                    android:src="@mipmap/ic_chefzin_white"
+                    />
                 <LinearLayout
                     android:layout_width="42dp"
                     android:layout_height="wrap_content"
@@ -92,7 +93,7 @@
                         custom:fontName="raleway_semiBold.ttf"/>
 
                     <com.future333.chefzin.view.FontTextView
-                        android:id="@+id/quantity"
+                        android:id="@+id/tvQuantity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="1"

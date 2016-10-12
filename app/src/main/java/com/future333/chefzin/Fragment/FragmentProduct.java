@@ -21,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by manuel on 12/09/16.
  */
-public class FragmentMain extends Fragment {
+public class FragmentProduct extends Fragment {
 
     SliderLayout slider;
 
@@ -54,6 +54,8 @@ public class FragmentMain extends Fragment {
         }
     }
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------------------------------------------------------------
     public class CustomSliderView extends BaseSliderView {
 
         private Product product;
