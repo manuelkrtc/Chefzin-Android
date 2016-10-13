@@ -24,5 +24,10 @@
     <dimen name="icon_margin">      4dp</dimen>
     <dimen name="icon_size">        24dp</dimen>
 
+    <dimen name="icon_touchable_s">   24dp</dimen>
+    <dimen name="icon_padding_s">     6dp</dimen>
+    <dimen name="icon_margin_s">      2dp</dimen>
+    <dimen name="icon_size_s">        12dp</dimen>
+
 
 </resources>

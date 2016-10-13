@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.future333.chefzin.Fragment.FragmentCheckout;
 import com.future333.chefzin.Fragment.FragmentChef;
 import com.future333.chefzin.Fragment.FragmentHorary;
 import com.future333.chefzin.Fragment.FragmentLogin;
@@ -31,6 +32,7 @@ public class MainActivity extends Activity {
     FragmentLogin fragmentLogin;
     FragmentHorary fragmentHorary;
     FragmentProfile fragmentProfile;
+    FragmentCheckout fragmentCheckout;
 
     FragmentTransaction fragmentTransaction;
 
@@ -107,6 +109,13 @@ public class MainActivity extends Activity {
     public void goFragmentMenu(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, new FragmentProduct());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    public void goFragmentCheckout(){
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.rlFragment, new FragmentCheckout());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }

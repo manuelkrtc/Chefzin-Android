@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:background="@color/white"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.future333.chefzin.view.FontTextView
+            style="text_"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:text="Nombre"
+            android:textColor="@color/black"/>
+
+        <com.future333.chefzin.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="$50.000"
+            android:textColor="@color/black"/>
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="7dp"
+            android:scaleType="fitCenter"
+            android:id="@+id/btnProfile"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/icon_margin_s"
+            android:src="@mipmap/ic_less_blue"
+            android:background="@drawable/background_ic"/>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

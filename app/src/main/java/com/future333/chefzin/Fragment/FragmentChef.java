@@ -44,12 +44,10 @@ public class FragmentChef extends Fragment {
         inicializate(view);
 
         ArrayList<Chef> chefs = new ArrayList<>();
-        chefs.add(new Chef("manuel","Vergetariano","super mega play", null));
-        chefs.add(new Chef("man Paez","Vergetariano","supe play", null));
+        chefs.add(new Chef("manuel","Vegetariano","Comida saludable, acopañada con moluscos ", null));
+        chefs.add(new Chef("Paez","Oriental","En la cocina oriental podemos encontrar platos exóticos y fáciles de preparar para sorprender a nuestra familia o deleitar a nuestros invitados. Se trata de una de las cocinas más antiguas, con más de 3.000 años de antigüedad.", null));
         chefs.add(new Chef("Jose Vernicio","Carnivoro","super mega  dss play", null));
-        chefs.add(new Chef("Davis loquis","Vergetariano","super mega sdsac play", null));
-        chefs.add(new Chef("linis oillis","Cervecina","super mega play", null));
-        chefs.add(new Chef("ivan tardiusl","Vergetariano","super mega play", null));
+        chefs.add(new Chef("Davis loquen","Marina","Sudado de tramboyo, sabroso plato en donde el pescado se cocina en su propio jugo\n" , null));
 
         initSlider(chefs);
 

@@ -14,9 +14,9 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.future333.chefzin.AppHandler;
+import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Product;
-import com.future333.chefzin.tools.ViewTools;
 
 import java.util.ArrayList;
 
@@ -28,8 +28,9 @@ public class FragmentProduct extends Fragment {
     Activity ctx;
     AppHandler app;
 
-    Button btnAdd;
-    TextView tvQuantity;
+    Button      btnAdd;
+    Button      btnCheckout;
+    TextView    tvQuantity;
     SliderLayout slider;
 
     ArrayList<Product> products;
@@ -45,18 +46,30 @@ public class FragmentProduct extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_product, container, false);
+        View v = inflater.inflate(R.layout.fragment_product, container, false);
 
-        tvQuantity = (TextView)view.findViewById(R.id.tvQuantity);
+        btnAdd      = (Button) v.findViewById(R.id.btnAdd);
+        btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
+        tvQuantity  = (TextView)v.findViewById(R.id.tvQuantity);
+        slider      = (SliderLayout)v.findViewById(R.id.slider);
 
-        inicializate(view);
         products.add(new Product("Papas", 500, R.drawable.img_dinner, "So la papas mas ricas del mercado con slasa rosa y aji"));
         products.add(new Product("Limonada", 9500, R.drawable.img_lunch, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ"));
         products.add(new Product("Torta Banano", 98000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es"));
         products.add(new Product("Mango biche", 808000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es, So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es"));
 
-        initSlider(products);
+        return v;
+    }
 
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        liste();
+        initSlider(products);
+    }
+
+    //----------------------------------------------------------------------------------------------
+    private void liste(){
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,12 +78,12 @@ public class FragmentProduct extends Fragment {
             }
         });
 
-        return view;
-    }
-
-    private void inicializate(View v){
-        btnAdd = (Button) v.findViewById(R.id.btnAdd);
-        slider = (SliderLayout)v.findViewById(R.id.slider);
+        btnCheckout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MainActivity)getActivity()).goFragmentCheckout();
+            }
+        });
     }
 
     private void initSlider(ArrayList<Product> products) {
@@ -93,7 +106,7 @@ public class FragmentProduct extends Fragment {
 
         @Override
         public View getView() {
-            View v = LayoutInflater.from(getContext()).inflate(R.layout.row_main, null);
+            View v = LayoutInflater.from(getContext()).inflate(R.layout.row_product, null);
 
             ImageView   ivProduct               = (ImageView)v.findViewById(R.id.ivProduct);
             TextView    tvNameProduct           = (TextView) v.findViewById(R.id.tvNameProduct);
