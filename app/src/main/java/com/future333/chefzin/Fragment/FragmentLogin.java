@@ -192,6 +192,48 @@ public class FragmentLogin extends Fragment {
                 });
             }
         });
+
+        btnFacebook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = "prueba2@gmail.com";
+                String password = "123456";
+
+                app.userCtr.logIn(ctx, email, password, new ApiTools.OnLogInListener() {
+                    @Override
+                    public void onSuccessful() {
+                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        getActivity().onBackPressed();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        ViewTools.msj(ctx,error);
+                    }
+                });
+            }
+        });
+
+        btnGmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = "prueba1@gmail.com";
+                String password = "123456";
+
+                app.userCtr.logIn(ctx, email, password, new ApiTools.OnLogInListener() {
+                    @Override
+                    public void onSuccessful() {
+                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        getActivity().onBackPressed();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        ViewTools.msj(ctx,error);
+                    }
+                });
+            }
+        });
     }
 
     //----------------------------------- METHODS --------------------------------------------------

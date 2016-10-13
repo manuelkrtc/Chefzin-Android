@@ -9,41 +9,71 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
+    <!--zone name product-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <com.future333.chefzin.view.FontTextView
-            style="text_"
+            style="@style/textBold"
+            android:id="@+id/tvName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:text="Nombre"
-            android:textColor="@color/black"/>
+            android:textSize="@dimen/sizeText_xx"
+            android:gravity="start"
+            />
 
         <com.future333.chefzin.view.FontTextView
+            style="@style/textBold"
+            android:id="@+id/tvPrice"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:text="$50.000"
-            android:textColor="@color/black"/>
+            android:textSize="@dimen/sizeText_x"
+            />
 
         <ImageButton
+            android:id="@+id/btnProfile"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:padding="7dp"
+            android:padding="5dp"
             android:scaleType="fitCenter"
-            android:id="@+id/btnProfile"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/icon_margin_s"
             android:src="@mipmap/ic_less_blue"
             android:background="@drawable/background_ic"/>
-
     </LinearLayout>
 
+    <!--zone additions-->
+    <LinearLayout
+        android:id="@+id/zoneAdditions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.future333.chefzin.view.FontTextView
+            style="text_"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Adiciones"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:id="@+id/lyAdditions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 
 </LinearLayout>

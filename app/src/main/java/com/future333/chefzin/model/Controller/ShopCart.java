@@ -13,6 +13,10 @@ public class ShopCart {
 
     private ArrayList<Product> products = new ArrayList<>();
 
+    public ArrayList<Product> getProducts() {
+        return products;
+    }
+
     //----------------------------------------------------------------------------------------------
 
     public void addProduct(Product product){

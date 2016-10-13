@@ -183,14 +183,16 @@
                 >
 
                 <Button
+                    android:id="@+id/btnFacebook"
                     style="@style/button_social_network"
                     android:background="@drawable/background_btn_facebook"
-                    android:id="@+id/btnFacebook" />
+                    />
 
                 <Button
+                    android:id="@+id/btnGmail"
                     style="@style/button_social_network"
                     android:background="@drawable/background_btn_gmail"
-                    android:id="@+id/btnGmail" />
+                    />
 
             </LinearLayout>
 
