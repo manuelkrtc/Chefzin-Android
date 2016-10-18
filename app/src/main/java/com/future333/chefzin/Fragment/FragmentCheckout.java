@@ -2,6 +2,7 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -57,19 +58,25 @@ public class FragmentCheckout extends Fragment {
 
         //Inicialización RecyclerView
         rvProduct.setHasFixedSize(true);
-        AdaptadorProducts adaptador = new AdaptadorProducts(app.shopCart.getProducts());
+        AdaptadorProducts adaptador = new AdaptadorProducts(app.shopCart.getProducts(),ctx);
 
         rvProduct.setAdapter(adaptador);
 
         rvProduct.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false));
     }
 
-    public class AdaptadorProducts extends RecyclerView.Adapter<AdaptadorProducts.ProductsViewHolder> {
 
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------- Adapter --------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public static class AdaptadorProducts extends RecyclerView.Adapter<AdaptadorProducts.ProductsViewHolder> {
+
+        private Activity ctxAdap;
         private ArrayList<Product> products;
 
-        public AdaptadorProducts(ArrayList<Product> products) {
+        public AdaptadorProducts(ArrayList<Product> products, Activity ctx) {
             this.products = products;
+            this.ctxAdap = ctx;
         }
 
         @Override
@@ -86,7 +93,19 @@ public class FragmentCheckout extends Fragment {
         public void onBindViewHolder(ProductsViewHolder holder, int position) {
             Product product = products.get(position);
 
-            holder.bindProduct(product);
+                holder.tvName.setText(product.name);
+                holder.tvPrice.setText("$"+String.valueOf(product.price));
+
+                if(!holder.iscreateIngredientes){
+                    for(Addition addition: product.additions){
+                        FontTextView textView = new FontTextView(ctxAdap);
+                        textView.setText(" -" + addition.name);
+                        holder.lyAdditions.addView(textView);
+                    }
+                    holder.iscreateIngredientes = true;
+                }
+
+                if(product.additions.size()==0) holder.zoneAdditions.setVisibility(View.GONE);
         }
 
         @Override
@@ -94,8 +113,9 @@ public class FragmentCheckout extends Fragment {
             return products.size();
         }
 
-        public class ProductsViewHolder
-                extends RecyclerView.ViewHolder {
+        public static class ProductsViewHolder extends RecyclerView.ViewHolder {
+
+            private boolean iscreateIngredientes;//Esta variable se crea para verificar si ya se pintaron los ingredientes y no repintarlos.
 
             private TextView tvName;
             private TextView tvPrice;
@@ -103,25 +123,16 @@ public class FragmentCheckout extends Fragment {
             private ViewGroup lyAdditions;
             private ViewGroup zoneAdditions;
 
+
             public ProductsViewHolder(View itemView) {
                 super(itemView);
+
+                iscreateIngredientes = false;
+
                 tvName          = (TextView)itemView.findViewById(R.id.tvName);
                 tvPrice         = (TextView)itemView.findViewById(R.id.tvPrice);
                 lyAdditions     = (ViewGroup) itemView.findViewById(R.id.lyAdditions);
                 zoneAdditions   = (ViewGroup) itemView.findViewById(R.id.zoneAdditions);
-            }
-
-            public void bindProduct(Product product) {
-                tvName.setText(product.name);
-                tvPrice.setText("$"+String.valueOf(product.price));
-
-                for(Addition addition: product.additions){
-                    FontTextView textView = new FontTextView(ctx);
-                    textView.setText(" -" + addition.name);
-                    lyAdditions.addView(textView);
-                }
-
-                if(product.additions.size()==0) zoneAdditions.setVisibility(View.GONE);
             }
         }
     }
