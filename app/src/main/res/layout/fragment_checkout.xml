@@ -36,13 +36,29 @@
         </RelativeLayout>
 
 
-        <com.daimajia.slider.library.SliderLayout
-            android:id="@+id/slider"
+        <!--<com.daimajia.slider.library.SliderLayout-->
+            <!--android:id="@+id/slider"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_below="@+id/tvChefs"-->
+            <!--android:layout_above="@+id/strip"-->
+            <!--/>-->
+
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/viewPager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_below="@+id/tvChefs"-->
+            <!--android:layout_above="@+id/strip"-->
+            <!--/>-->
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewPager"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/tvChefs"
-            android:layout_above="@+id/strip"
-            />
+            android:layout_height="200dp">
+
+        </android.support.v4.view.ViewPager>
+
 
         <ImageView
             style="@style/stripRhombus"

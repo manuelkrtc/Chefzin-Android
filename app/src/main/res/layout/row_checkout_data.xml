@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:gravity="center"
+    android:background="@color/white"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <!--zone Name-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:gravity="left"
+            android:text="Nombre"/>
+
+        <com.future333.chefzin.view.FontEditText
+            style="@style/form"
+            android:id="@+id/etName"
+            android:layout_width="200dp"
+            />
+    </LinearLayout>
+
+    <!--zone Phone-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:gravity="left"
+            android:text="Telefono"/>
+
+        <com.future333.chefzin.view.FontEditText
+            style="@style/form"
+            android:id="@+id/etPhone"
+            android:layout_width="200dp"
+            />
+    </LinearLayout>
+
+    <!--zone Document-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:gravity="left"
+            android:text="Cedula"/>
+
+        <com.future333.chefzin.view.FontEditText
+            style="@style/form"
+            android:id="@+id/etDocument"
+            android:layout_width="200dp"
+            />
+    </LinearLayout>
+
+    <!--zone Address-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:gravity="left"
+            android:text="Direccion"/>
+
+        <com.future333.chefzin.view.FontEditText
+            style="@style/form"
+            android:id="@+id/etAddress"
+            android:layout_width="200dp"
+            />
+    </LinearLayout>
+
+</LinearLayout>

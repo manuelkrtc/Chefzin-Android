@@ -2,6 +2,7 @@ package com.future333.chefzin.tools;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.text.NumberFormat;
 
 /**
  * Created by manuel on 5/10/16.
@@ -24,5 +25,10 @@ public class FormatTools {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    public static String int_to_price(int number){
+        return NumberFormat.getIntegerInstance().format(number);
     }
 }

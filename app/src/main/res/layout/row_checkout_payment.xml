@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    android:gravity="center"
+    android:background="@color/white"
+    android:paddingLeft="@dimen/margin"
+    android:paddingRight="@dimen/margin"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <!--zone Subtotal-->
+   <Spinner
+       android:id="@+id/spinner"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content">
+
+   </Spinner>
+
+
+</LinearLayout>

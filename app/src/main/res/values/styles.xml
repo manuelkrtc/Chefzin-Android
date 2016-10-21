@@ -115,4 +115,13 @@
         <item name="android:maxHeight">24dip</item>
     </style>
 
+    //----------------------------------------------------------------------------------------------
+    <style name="textCheckout">
+        <item name="android:layout_width">  80dp</item>
+        <item name="android:layout_height"> wrap_content</item>
+        <item name="android:textColor">     @color/colorPrimary</item>
+        <item name="android:textSize">      @dimen/sizeText_xx</item>
+        <item name="fontName">              raleway_medium.ttf</item>
+    </style>
+
 </resources>

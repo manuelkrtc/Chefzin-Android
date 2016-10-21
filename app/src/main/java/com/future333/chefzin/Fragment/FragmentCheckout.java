@@ -2,19 +2,21 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.daimajia.slider.library.SliderLayout;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Addition;
+import com.future333.chefzin.model.Controller.ShopCart;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.view.FontTextView;
@@ -26,12 +28,19 @@ import java.util.ArrayList;
  */
 public class FragmentCheckout extends Fragment {
 
-    Activity ctx;
-    AppHandler app;
-    ToolsNotif toolsNotif;
+    Activity    ctx;
+    AppHandler  app;
+    ToolsNotif  toolsNotif;
 
     RecyclerView rvProduct;
+    ViewPager    viewPager;
 
+    CheckoutPageAdapter     checkoutAdapter;
+    RecyclerView.Adapter    adapaterRecicler;
+
+    public static FragmentCheckout newInstance() {
+        return new FragmentCheckout();
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +56,8 @@ public class FragmentCheckout extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_checkout, container, false);
 
-        rvProduct = (RecyclerView)v.findViewById(R.id.rvProduct);
+        rvProduct   = (RecyclerView)v.findViewById(R.id.rvProduct);
+        viewPager   = (ViewPager)v.findViewById(R.id.viewPager);
 
         return v;
     }
@@ -56,15 +66,20 @@ public class FragmentCheckout extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        //Inicialización RecyclerView
+        //ViewPager
+        checkoutAdapter = new CheckoutPageAdapter(ctx, app.shopCart);
+        viewPager.setAdapter(checkoutAdapter);
+
+        //RecyclerView
         rvProduct.setHasFixedSize(true);
-        AdaptadorProducts adaptador = new AdaptadorProducts(app.shopCart.getProducts(),ctx);
-
-        rvProduct.setAdapter(adaptador);
-
+        adapaterRecicler = new AdaptadorProducts(app.shopCart.getProducts(), checkoutAdapter, ctx);
+        rvProduct.setAdapter(adapaterRecicler);
         rvProduct.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false));
-    }
 
+
+
+//        checkoutAdapter.notifyDataSetChanged();
+    }
 
     //----------------------------------------------------------------------------------------------
     //----------------------------------------- Adapter --------------------------------------------
@@ -73,39 +88,49 @@ public class FragmentCheckout extends Fragment {
 
         private Activity ctxAdap;
         private ArrayList<Product> products;
+        private AdaptadorProducts thisAdatpter;
+        private CheckoutPageAdapter checkoutAdapter;
 
-        public AdaptadorProducts(ArrayList<Product> products, Activity ctx) {
-            this.products = products;
+        public AdaptadorProducts(ArrayList<Product> products, CheckoutPageAdapter checkoutAdapter, Activity ctx) {
             this.ctxAdap = ctx;
+            this.products = products;
+            this.thisAdatpter = this;
+            this.checkoutAdapter = checkoutAdapter;
         }
 
         @Override
         public ProductsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View itemView = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.row_product_checkout, parent, false);
-
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_product_checkout, parent, false);
             ProductsViewHolder productsViewHolder = new ProductsViewHolder(itemView);
-
             return productsViewHolder;
         }
 
         @Override
         public void onBindViewHolder(ProductsViewHolder holder, int position) {
-            Product product = products.get(position);
+            final Product product = products.get(position);
 
-                holder.tvName.setText(product.name);
-                holder.tvPrice.setText("$"+String.valueOf(product.price));
+            holder.tvName.setText(product.name);
+            holder.tvPrice.setText("$"+String.valueOf(product.price));
 
-                if(!holder.iscreateIngredientes){
-                    for(Addition addition: product.additions){
-                        FontTextView textView = new FontTextView(ctxAdap);
-                        textView.setText(" -" + addition.name);
-                        holder.lyAdditions.addView(textView);
-                    }
-                    holder.iscreateIngredientes = true;
+            if(!holder.iscreateIngredientes){
+                for(Addition addition: product.additions){
+                    FontTextView textView = new FontTextView(ctxAdap);
+                    textView.setText(" -" + addition.name);
+                    holder.lyAdditions.addView(textView);
                 }
+                holder.iscreateIngredientes = true;
+            }
 
-                if(product.additions.size()==0) holder.zoneAdditions.setVisibility(View.GONE);
+            if(product.additions.size()==0) holder.zoneAdditions.setVisibility(View.GONE);
+
+            holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((AppHandler)ctxAdap.getApplication()).shopCart.deleteProduct(product);
+                    thisAdatpter.notifyDataSetChanged();
+                    checkoutAdapter.updatePriceView();
+                }
+            });
         }
 
         @Override
@@ -120,21 +145,98 @@ public class FragmentCheckout extends Fragment {
             private TextView tvName;
             private TextView tvPrice;
 
-            private ViewGroup lyAdditions;
-            private ViewGroup zoneAdditions;
-
+            private ViewGroup   lyAdditions;
+            private ViewGroup   zoneAdditions;
+            private ImageButton btnDeleteProduct;
 
             public ProductsViewHolder(View itemView) {
                 super(itemView);
 
                 iscreateIngredientes = false;
 
-                tvName          = (TextView)itemView.findViewById(R.id.tvName);
-                tvPrice         = (TextView)itemView.findViewById(R.id.tvPrice);
-                lyAdditions     = (ViewGroup) itemView.findViewById(R.id.lyAdditions);
-                zoneAdditions   = (ViewGroup) itemView.findViewById(R.id.zoneAdditions);
+                tvName              = (TextView)    itemView.findViewById(R.id.tvName);
+                tvPrice             = (TextView)    itemView.findViewById(R.id.tvPrice);
+                lyAdditions         = (ViewGroup)   itemView.findViewById(R.id.lyAdditions);
+                zoneAdditions       = (ViewGroup)   itemView.findViewById(R.id.zoneAdditions);
+                btnDeleteProduct    = (ImageButton) itemView.findViewById(R.id.btnDeleteProduct);
             }
         }
     }
+
+    //----------------------------------------------------------------------------------------------
+    //----------------------------------------- Adapter --------------------------------------------
+    //----------------------------------------------------------------------------------------------
+    public static class CheckoutPageAdapter extends PagerAdapter{
+
+        Activity ctx;
+
+        View dataView   = null;
+        View priceView  = null;
+        View paymentView= null;
+
+        ShopCart _shopCart;
+
+        public CheckoutPageAdapter(Activity ctx, ShopCart shopCart){
+            this.ctx = ctx;
+            this._shopCart = shopCart;
+        }
+
+        @Override
+        public int getCount() {
+            return 3;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+
+            if(position==0 && priceView==null){
+                priceView = LayoutInflater.from(ctx).inflate(R.layout.row_checkout_price, container,false);
+                updatePriceView();
+                container.addView(priceView);
+                return priceView;
+            }
+
+            if(position==1 && dataView==null){
+                dataView = LayoutInflater.from(ctx).inflate(R.layout.row_checkout_data, container,false);
+                container.addView(dataView);
+                return dataView;
+            }
+
+            if(position==2 && paymentView==null){
+                paymentView = LayoutInflater.from(ctx).inflate(R.layout.row_checkout_payment, container,false);
+                container.addView(paymentView);
+                return paymentView;
+            }
+
+            return null;
+        }
+
+        // Removes the page from the container for the given position.
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+//            container.removeView((View) object);
+        }
+
+
+
+        public void updatePriceView(){
+            TextView tvIva      = (TextView)priceView.findViewById(R.id.tvIva);
+            TextView tvTotal    = (TextView)priceView.findViewById(R.id.tvTotal);
+            TextView tvDomicile = (TextView)priceView.findViewById(R.id.tvDomicile);
+            TextView tvSubtotal = (TextView)priceView.findViewById(R.id.tvSubtotal);
+
+            tvIva       .setText(_shopCart.getIva());
+            tvTotal     .setText(_shopCart.getTotal());
+            tvDomicile  .setText(_shopCart.getDomicile());
+            tvSubtotal  .setText(_shopCart.getSubTotal());
+        }
+
+    }
+
 
 }

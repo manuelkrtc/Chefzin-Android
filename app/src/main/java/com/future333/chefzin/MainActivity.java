@@ -3,6 +3,7 @@ package com.future333.chefzin;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -17,7 +18,8 @@ import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ViewTools;
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends FragmentActivity {
 
     Activity    ctx;
     AppHandler  app;
@@ -32,9 +34,10 @@ public class MainActivity extends Activity {
     FragmentLogin fragmentLogin;
     FragmentHorary fragmentHorary;
     FragmentProfile fragmentProfile;
-    FragmentCheckout fragmentCheckout;
 
     FragmentTransaction fragmentTransaction;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +118,7 @@ public class MainActivity extends Activity {
 
     public void goFragmentCheckout(){
         fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.rlFragment, new FragmentCheckout());
+        fragmentTransaction.add(R.id.rlFragment, FragmentCheckout.newInstance());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
