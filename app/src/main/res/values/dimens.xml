@@ -29,5 +29,7 @@
     <dimen name="icon_margin_s">      2dp</dimen>
     <dimen name="icon_size_s">        12dp</dimen>
 
+    <dimen name="height_text_checkout">        40dp</dimen>
+
 
 </resources>

@@ -4,7 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="200dp"
     android:gravity="center"
-    android:background="@color/white"
+    android:background="@null"
+    android:paddingLeft="@dimen/margin"
+    android:paddingRight="@dimen/margin"
     xmlns:custom  = "http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
@@ -12,7 +14,7 @@
     <!--zone Name-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_text_checkout"
         android:gravity="center_vertical"
         >
         <com.future333.chefzin.view.FontTextView
@@ -23,14 +25,15 @@
         <com.future333.chefzin.view.FontEditText
             style="@style/form"
             android:id="@+id/etName"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
             />
     </LinearLayout>
 
     <!--zone Phone-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_text_checkout"
         android:gravity="center_vertical"
         >
         <com.future333.chefzin.view.FontTextView
@@ -41,14 +44,16 @@
         <com.future333.chefzin.view.FontEditText
             style="@style/form"
             android:id="@+id/etPhone"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+
             />
     </LinearLayout>
 
     <!--zone Document-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_text_checkout"
         android:gravity="center_vertical"
         >
         <com.future333.chefzin.view.FontTextView
@@ -59,14 +64,16 @@
         <com.future333.chefzin.view.FontEditText
             style="@style/form"
             android:id="@+id/etDocument"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+
             />
     </LinearLayout>
 
     <!--zone Address-->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/height_text_checkout"
         android:gravity="center_vertical"
         >
         <com.future333.chefzin.view.FontTextView
@@ -77,7 +84,9 @@
         <com.future333.chefzin.view.FontEditText
             style="@style/form"
             android:id="@+id/etAddress"
-            android:layout_width="200dp"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+
             />
     </LinearLayout>
 

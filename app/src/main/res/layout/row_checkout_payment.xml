@@ -3,15 +3,24 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="200dp"
-    android:gravity="center"
-    android:background="@color/white"
+    android:background="@null"
     android:paddingLeft="@dimen/margin"
     android:paddingRight="@dimen/margin"
+    android:gravity="center"
     xmlns:custom  = "http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <!--zone Subtotal-->
+    <com.future333.chefzin.view.FontTextView
+        style="@style/textBold"
+        android:id="@+id/tvName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Método de pago"
+        android:gravity="start"
+        android:textSize="@dimen/sizeText_xx"
+        />
+    <!---->
    <Spinner
        android:id="@+id/spinner"
        android:layout_width="match_parent"
