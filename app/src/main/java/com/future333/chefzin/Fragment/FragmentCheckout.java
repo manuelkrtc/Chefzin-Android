@@ -10,7 +10,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.future333.chefzin.AppHandler;
@@ -38,6 +41,10 @@ public class FragmentCheckout extends Fragment {
     CheckoutPageAdapter     checkoutAdapter;
     RecyclerView.Adapter    adapaterRecicler;
 
+    Button viewController1;
+    Button viewController2;
+    Button viewController3;
+
     public static FragmentCheckout newInstance() {
         return new FragmentCheckout();
     }
@@ -59,6 +66,10 @@ public class FragmentCheckout extends Fragment {
         rvProduct   = (RecyclerView)v.findViewById(R.id.rvProduct);
         viewPager   = (ViewPager)v.findViewById(R.id.viewPager);
 
+        viewController1 = (Button) v.findViewById(R.id.viewController1);
+        viewController2 = (Button) v.findViewById(R.id.viewController2);
+        viewController3 = (Button) v.findViewById(R.id.viewController3);
+
         return v;
     }
 
@@ -76,9 +87,41 @@ public class FragmentCheckout extends Fragment {
         rvProduct.setAdapter(adapaterRecicler);
         rvProduct.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false));
 
+        viewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                updateViewController(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
 
 //        checkoutAdapter.notifyDataSetChanged();
+    }
+
+    private void updateViewController(int position){
+
+        viewController1.setBackgroundResource(R.drawable.shape_circle_stroke_blue);
+        viewController2.setBackgroundResource(R.drawable.shape_circle_stroke_blue);
+        viewController3.setBackgroundResource(R.drawable.shape_circle_stroke_blue);
+
+        switch (position){
+            case 0: viewController1.setBackgroundResource(R.drawable.shape_circle_blue);
+                break;
+            case 1: viewController2.setBackgroundResource(R.drawable.shape_circle_blue);
+                break;
+            case 2: viewController3.setBackgroundResource(R.drawable.shape_circle_blue);
+                break;
+        }
     }
 
     //----------------------------------------------------------------------------------------------
@@ -210,6 +253,7 @@ public class FragmentCheckout extends Fragment {
             if(position==2 && paymentView==null){
                 paymentView = LayoutInflater.from(ctx).inflate(R.layout.row_checkout_payment, container,false);
                 container.addView(paymentView);
+                updatePaymentView();
                 return paymentView;
             }
 
@@ -222,8 +266,6 @@ public class FragmentCheckout extends Fragment {
 //            container.removeView((View) object);
         }
 
-
-
         public void updatePriceView(){
             TextView tvIva      = (TextView)priceView.findViewById(R.id.tvIva);
             TextView tvTotal    = (TextView)priceView.findViewById(R.id.tvTotal);
@@ -234,6 +276,22 @@ public class FragmentCheckout extends Fragment {
             tvTotal     .setText(_shopCart.getTotal());
             tvDomicile  .setText(_shopCart.getDomicile());
             tvSubtotal  .setText(_shopCart.getSubTotal());
+        }
+
+        public void updatePaymentView(){
+            Spinner spinner      = (Spinner) paymentView.findViewById(R.id.spinner);
+
+//            ArrayAdapter<CharSequence> adapter =
+//                            ArrayAdapter.createFromResource(ctx,
+//                            R.array.payment_method,
+//                            android.R.layout.simple_spinner_item);
+
+            ArrayAdapter<CharSequence> adapter =
+                    ArrayAdapter.createFromResource(ctx,
+                            R.array.payment_method,
+                            android.R.layout.simple_list_item_1);
+
+            spinner.setAdapter(adapter);
         }
 
     }

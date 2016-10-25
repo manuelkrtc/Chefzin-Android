@@ -15,7 +15,7 @@
     <View
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:background="@drawable/shape_circle_blue"/>
+        android:background="@drawable/shape_circle_stroke_blue"/>
 
     <TextView
         style="@style/title"

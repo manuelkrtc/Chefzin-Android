@@ -6,7 +6,6 @@
     android:background="@null"
     android:paddingLeft="@dimen/margin"
     android:paddingRight="@dimen/margin"
-    android:gravity="center"
     xmlns:custom  = "http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
@@ -16,6 +15,8 @@
         android:id="@+id/tvName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin"
+        android:layout_marginBottom="@dimen/margin"
         android:text="Método de pago"
         android:gravity="start"
         android:textSize="@dimen/sizeText_xx"
@@ -24,9 +25,43 @@
    <Spinner
        android:id="@+id/spinner"
        android:layout_width="match_parent"
-       android:layout_height="wrap_content">
-
+       android:layout_height="30dp"
+       android:layout_marginBottom="@dimen/margin_s"
+       android:background="@drawable/shape_rectangle_stroke_corner_blue"
+       >
    </Spinner>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_text_checkout"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/margin_s"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:layout_width="wrap_content"
+            android:gravity="left"
+            android:layout_marginRight="@dimen/margin_ss"
+            android:text="¿Con cuánto pagas?"/>
+
+        <com.future333.chefzin.view.FontEditText
+            style="@style/form"
+            android:id="@+id/etDocument"
+            android:layout_width="match_parent"
+
+            />
+    </LinearLayout>
+
+    <com.future333.chefzin.view.FontButton
+        android:id="@+id/btnConfirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="Confirmar Pedido"
+        android:textSize="@dimen/sizeText_xxx"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        custom:fontName="raleway_bold.ttf"
+        android:background="@drawable/background_btn_green"
+        />
 
 </LinearLayout>
