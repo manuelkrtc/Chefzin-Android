@@ -22,8 +22,6 @@ import java.util.HashMap;
  */
 public class User {
 
-    User este = this;
-
     private String id;
     private String nombres;
     private String apellidos;
@@ -36,94 +34,57 @@ public class User {
     private String api_token;
     private String email;
 
+    public void setUserFacebook(UserFacebook userFacebook){
+        email       = userFacebook.getEmail();
+        id_facebook = userFacebook.getId();
+        apellidos   = userFacebook.getLast_name();
+        nombres     = userFacebook.getFirst_name();
+        foto        = "https://graph.facebook.com/v2.6/"+userFacebook.getId()+"/picture?width=200";
+    }
     //----------------------------------------------------------------------------------------------
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getNombres() {
         return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
     }
 
     public String getApellidos() {
         return apellidos;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
     public String getDocumento() {
         return documento;
-    }
-
-    public void setDocumento(String documento) {
-        this.documento = documento;
     }
 
     public String getTipo_documento() {
         return tipo_documento;
     }
 
-    public void setTipo_documento(String tipo_documento) {
-        this.tipo_documento = tipo_documento;
-    }
-
     public String getTelefono() {
         return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public String getFoto() {
         return foto;
     }
 
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
     public String getId_facebook() {
         return id_facebook;
-    }
-
-    public void setId_facebook(String id_facebook) {
-        this.id_facebook = id_facebook;
     }
 
     public String getId_google() {
         return id_google;
     }
 
-    public void setId_google(String id_google) {
-        this.id_google = id_google;
-    }
-
     public String getApi_token() {
         return api_token;
     }
 
-    public void setApi_token(String api_token) {
-        this.api_token = api_token;
-    }
-
     public String getEmail() {
         return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     //----------------------------------------------------------------------------------------------

@@ -2,9 +2,8 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,31 +12,29 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
 import com.future333.chefzin.AppHandler;
-import com.future333.chefzin.MainActivity;
-import com.future333.chefzin.model.Controller.UserCtr;
 import com.future333.chefzin.R;
-import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.User;
+import com.future333.chefzin.model.UserFacebook;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ViewTools;
 import com.google.gson.Gson;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by manuel on 6/09/16.
@@ -47,6 +44,7 @@ public class FragmentLogin extends Fragment {
     Activity    ctx;
     AppHandler  app;
     ToolsNotif  toolsNotif;
+    Fragment    thisFragment;
 
     //View
     EditText etName;
@@ -64,8 +62,8 @@ public class FragmentLogin extends Fragment {
     Button btnGmail;
     Button btnRegister;
     Button btnFacebook;
-
     TextView tvLogIn;
+
     TextView tvRegister;
     TextView tvRecoverPassword;
 
@@ -75,6 +73,8 @@ public class FragmentLogin extends Fragment {
     //Variables
     ArrayList<EditText> editTextsLogin;
     ArrayList<EditText> editTextsRegister;
+
+    CallbackManager callbackManager;
 
     public static FragmentLogin newInstance() {
         return new FragmentLogin();
@@ -86,8 +86,13 @@ public class FragmentLogin extends Fragment {
 
         ctx = getActivity();
         app = ((AppHandler)getActivity().getApplication());
+        thisFragment = this;
+
+        FacebookSdk.sdkInitialize(ctx);
+        callbackManager = CallbackManager.Factory.create();
 
         toolsNotif = new ToolsNotif(ctx);
+
     }
 
     @Override
@@ -130,7 +135,16 @@ public class FragmentLogin extends Fragment {
         isViewRegister(true);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
     private void listen(){
+
+        facebookCallback();
+
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -196,21 +210,8 @@ public class FragmentLogin extends Fragment {
         btnFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = "prueba2@gmail.com";
-                String password = "123456";
+                LoginManager.getInstance().logInWithReadPermissions(thisFragment, Arrays.asList("public_profile", "user_friends"));
 
-                app.userCtr.logIn(ctx, email, password, new ApiTools.OnLogInListener() {
-                    @Override
-                    public void onSuccessful() {
-                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
-                        getActivity().onBackPressed();
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        ViewTools.msj(ctx,error);
-                    }
-                });
             }
         });
 
@@ -234,6 +235,49 @@ public class FragmentLogin extends Fragment {
                 });
             }
         });
+    }
+
+    private void facebookCallback(){
+
+        LoginManager.getInstance().registerCallback(callbackManager,
+                new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        GraphRequest graphRequest = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
+                            @Override
+                            public void onCompleted(JSONObject object, GraphResponse response) {
+
+                                User user = new User();
+                                user.setUserFacebook(new Gson().fromJson(object.toString(), UserFacebook.class));
+
+                                app.userCtr.registerFacebook(ctx, user, new ApiTools.OnLogInListener() {
+                                    @Override
+                                    public void onSuccessful() {
+                                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                                        getActivity().onBackPressed();
+                                    }
+
+                                    @Override
+                                    public void onError(String error) {
+                                        ViewTools.msj(ctx,error);
+                                    }
+                                });
+                            }
+                        });
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id, first_name, last_name, email");
+                        graphRequest.setParameters(parameters);
+                        graphRequest.executeAsync();
+                    }
+
+                    @Override
+                    public void onCancel() {
+                    }
+
+                    @Override
+                    public void onError(FacebookException exception) {
+                    }
+                });
     }
 
     //----------------------------------- METHODS --------------------------------------------------

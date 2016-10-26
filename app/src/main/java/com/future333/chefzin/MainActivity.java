@@ -16,6 +16,7 @@ import com.future333.chefzin.Fragment.FragmentProduct;
 import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.SystemTools;
 import com.future333.chefzin.tools.ViewTools;
 
 
@@ -45,6 +46,9 @@ public class MainActivity extends FragmentActivity {
         setContentView(R.layout.activity_main);
 
         inicializate();
+
+        SystemTools.getHash(ctx);
+
         app.userCtr.getUserLocal(ctx);
 
         app.horaryCtr.getApiHorary(ctx, new ApiTools.OnLogInListener() {

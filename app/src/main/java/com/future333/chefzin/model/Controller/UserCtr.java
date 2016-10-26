@@ -12,6 +12,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.User;
+import com.future333.chefzin.model.UserFacebook;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.FormatTools;
 import com.google.gson.Gson;
@@ -30,10 +31,6 @@ public class UserCtr {
 
     public User getUser() {
         return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     //-------------------------------- public methods--------------------------------------------------------------
@@ -66,6 +63,21 @@ public class UserCtr {
                 Log.e("errorChefzin","error registro");
             }
         }else {
+            logInListener.onError(validationRegister);
+        }
+    }
+
+    public void registerFacebook(Activity ctx, User _user, ApiTools.OnLogInListener logInListener){
+        String validationRegister = validationRegister(_user);
+        if(validationRegister==null){
+            try {
+                apiRegisterFacebook(ctx,_user,logInListener );
+            } catch (JSONException e) {
+                e.printStackTrace();
+                Log.e("errorChefzin","error registro");
+            }
+        }
+    else {
             logInListener.onError(validationRegister);
         }
     }
@@ -109,6 +121,34 @@ public class UserCtr {
         JSONObject jsonParam = new JSONObject(parametros);
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_REGISTER, jsonParam,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getBoolean("response")){
+                                getApiInfoUser(ctx, response.getJSONObject("data").getString("token"),logInListener);
+                            }else {
+                                logInListener.onError(response.getJSONObject("data").getString("mensaje"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.i("responseLog", error.toString());
+                logInListener.onError("Error de conexión.");
+            }
+        });
+        SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+    }
+
+    private void apiRegisterFacebook(final Activity ctx, User _user, final ApiTools.OnLogInListener logInListener) throws JSONException {
+        String parametros = new Gson().toJson(_user);
+        JSONObject jsonParam = new JSONObject(parametros);
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_REGISTER_FACEBOOK, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -195,6 +235,18 @@ public class UserCtr {
             return "Telefono invalido.";
         if(!formRegister.isCheckTerm())
             return "No has aceptado términos y condiciones.";
+        return null;
+    }
+
+    private String validationRegister(User _user){
+        if(_user.getId_facebook() == null)
+            return "Error de la aplicacion de facebook.";
+        if(_user.getEmail() == null)
+            return "Su cuenta de Facebook no tiene habilitado los permisos para acceder al correo.";
+        if(_user.getNombres() == null)
+            return "Su cuenta de Facebook no tiene habilitado los permisos para acceder al nombre.";
+        if(_user.getApellidos() == null)
+            return "Su cuenta de Facebook no tiene habilitado los permisos para acceder al apellido.";
         return null;
     }
 

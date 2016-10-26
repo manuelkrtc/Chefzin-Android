@@ -196,6 +196,7 @@
 
             </LinearLayout>
 
+
             <com.future333.chefzin.view.FontTextView
                 style="@style/text"
                 android:layout_marginBottom="@dimen/margin"
