@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +30,12 @@ import com.future333.chefzin.model.UserFacebook;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ViewTools;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
@@ -39,7 +47,10 @@ import java.util.List;
 /**
  * Created by manuel on 6/09/16.
  */
-public class FragmentLogin extends Fragment {
+public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
+
+    final static int RC_SIGN_IN_GMAIL    = 10;
+    final static int RC_SIGN_IN_FACEBOOK = 20;
 
     Activity    ctx;
     AppHandler  app;
@@ -76,6 +87,8 @@ public class FragmentLogin extends Fragment {
 
     CallbackManager callbackManager;
 
+    private GoogleApiClient mGoogleApiClient;
+
     public static FragmentLogin newInstance() {
         return new FragmentLogin();
     }
@@ -86,13 +99,14 @@ public class FragmentLogin extends Fragment {
 
         ctx = getActivity();
         app = ((AppHandler)getActivity().getApplication());
-        thisFragment = this;
+        thisFragment    = this;
+        toolsNotif      = new ToolsNotif(ctx);
 
-        FacebookSdk.sdkInitialize(ctx);
-        callbackManager = CallbackManager.Factory.create();
+        //facebook
+        initApiFacebook();
 
-        toolsNotif = new ToolsNotif(ctx);
-
+        //gmail
+       initApiGmail();
     }
 
     @Override
@@ -138,12 +152,24 @@ public class FragmentLogin extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == RC_SIGN_IN_FACEBOOK)
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == RC_SIGN_IN_GMAIL) {
+            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mGoogleApiClient.stopAutoManage((FragmentActivity) ctx);
+        mGoogleApiClient.disconnect();
     }
 
     private void listen(){
-
-        facebookCallback();
 
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -218,26 +244,16 @@ public class FragmentLogin extends Fragment {
         btnGmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = "prueba1@gmail.com";
-                String password = "123456";
-
-                app.userCtr.logIn(ctx, email, password, new ApiTools.OnLogInListener() {
-                    @Override
-                    public void onSuccessful() {
-                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
-                        getActivity().onBackPressed();
-                    }
-
-                    @Override
-                    public void onError(String error) {
-                        ViewTools.msj(ctx,error);
-                    }
-                });
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN_GMAIL);
             }
         });
     }
 
-    private void facebookCallback(){
+    //----------------------------------- social networks --------------------------------------------------
+    private void initApiFacebook(){
+        FacebookSdk.sdkInitialize(ctx, RC_SIGN_IN_FACEBOOK);
+        callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager,
                 new FacebookCallback<LoginResult>() {
@@ -280,6 +296,17 @@ public class FragmentLogin extends Fragment {
                 });
     }
 
+    private void initApiGmail(){
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestEmail()
+                .build();
+
+        mGoogleApiClient = new GoogleApiClient.Builder(ctx)
+                .enableAutoManage((FragmentActivity) ctx /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+    }
+
     //----------------------------------- METHODS --------------------------------------------------
 
     /** determina si la vista es de registro o login */
@@ -309,4 +336,8 @@ public class FragmentLogin extends Fragment {
         editTextsLogin.add(etPasswordLog);
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
 }

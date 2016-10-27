@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "303188047279",
+    "project_id": "chefzin-dc86c"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:303188047279:android:fbb71ef88a034801",
+        "android_client_info": {
+          "package_name": "com.future333.chefzin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "303188047279-2acnt7iqlk31ntu5o02bqi88h53hd6m5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.future333.chefzin",
+            "certificate_hash": "4E461BD3767754C825C5620B13C0AECFAD717F01"
+          }
+        },
+        {
+          "client_id": "303188047279-543e73c1fiiitv0fb7fbg4tcqtmg1ivg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS6l4YKorDEt36xpdOctuyjnpeat_mT90"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
