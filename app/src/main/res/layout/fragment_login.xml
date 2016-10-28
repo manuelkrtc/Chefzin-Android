@@ -189,7 +189,7 @@
                     />
 
                 <Button
-                    android:id="@+id/btnGmail"
+                    android:id="@+id/btnGoogle"
                     style="@style/button_social_network"
                     android:background="@drawable/background_btn_gmail"
                     />

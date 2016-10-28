@@ -11,6 +11,7 @@ public class ApiTools {
     public final static String URL_REGISTER             = "register";
     public final static String URL_HORARIOS             = "gethorariosfranjas/all";
     public final static String URL_INFO_USER            = "getuser?api_token=";
+    public final static String URL_REGISTER_GOOGLE      = "register/google";
     public final static String URL_REGISTER_FACEBOOK    = "register/facebook";
 
     public interface OnLogInListener {

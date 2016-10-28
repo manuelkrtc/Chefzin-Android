@@ -31,10 +31,10 @@ import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ViewTools;
 import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.gson.Gson;
 
@@ -42,7 +42,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by manuel on 6/09/16.
@@ -70,7 +69,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
     CheckBox checkTerm;
 
     Button btnLogIn;
-    Button btnGmail;
+    Button btnGoogle;
     Button btnRegister;
     Button btnFacebook;
     TextView tvLogIn;
@@ -124,7 +123,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
         tvRecoverPassword   = (TextView) v.findViewById(R.id.tvRecoverPassword);
 
         btnLogIn            = (Button) v.findViewById(R.id.btnLogIn);
-        btnGmail            = (Button) v.findViewById(R.id.btnGmail);
+        btnGoogle           = (Button) v.findViewById(R.id.btnGoogle);
         btnRegister         = (Button) v.findViewById(R.id.btnRegister);
         btnFacebook         = (Button) v.findViewById(R.id.btnFacebook);
 
@@ -158,6 +157,29 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
 
         if (requestCode == RC_SIGN_IN_GMAIL) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
+
+            if (result.isSuccess()) {
+                // Signed in successfully, show authenticated UI.
+                GoogleSignInAccount acct = result.getSignInAccount();
+
+                User user = new User();
+                user.setUserGoogle(acct);
+
+                app.userCtr.registerGoogle(ctx, user, new ApiTools.OnLogInListener() {
+                    @Override
+                    public void onSuccessful() {
+                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        getActivity().onBackPressed();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        ViewTools.msj(ctx,error);
+                    }
+                });
+
+            }
+
         }
 
     }
@@ -241,7 +263,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
             }
         });
 
-        btnGmail.setOnClickListener(new View.OnClickListener() {
+        btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);

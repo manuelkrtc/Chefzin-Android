@@ -1,21 +1,6 @@
 package com.future333.chefzin.model;
 
-import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.future333.chefzin.SingletonVolley;
-import com.future333.chefzin.tools.ApiTools;
-import com.google.gson.Gson;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 /**
  * Created by manuel on 3/10/16.
@@ -40,6 +25,16 @@ public class User {
         apellidos   = userFacebook.getLast_name();
         nombres     = userFacebook.getFirst_name();
         foto        = "https://graph.facebook.com/v2.6/"+userFacebook.getId()+"/picture?width=200";
+    }
+
+    public void setUserGoogle(GoogleSignInAccount acct){
+        email       = acct.getEmail();
+        id_google   = acct.getId();
+        apellidos   = acct.getFamilyName();
+        nombres     = acct.getGivenName();
+
+        if(acct.getPhotoUrl() != null)
+            foto = acct.getPhotoUrl().toString();
     }
     //----------------------------------------------------------------------------------------------
 
