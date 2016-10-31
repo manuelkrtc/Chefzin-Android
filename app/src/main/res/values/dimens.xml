@@ -30,6 +30,7 @@
     <dimen name="icon_size_s">        12dp</dimen>
 
     <dimen name="height_text_checkout">        40dp</dimen>
+    <dimen name="height_sliderlayout_record">  350dp</dimen>
 
 
 </resources>

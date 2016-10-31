@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:custom  = "http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <com.future333.chefzin.view.FontTextView
+            style="@style/title"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_s"
+            android:text="!Hola¡"
+            />
+
+        <com.future333.chefzin.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_x"
+            android:text="Este es tu historial \n de pedidos."
+            android:gravity="center"
+            />
+
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_sliderlayout_record"
+            android:layout_below="@+id/tvChefs"
+            android:layout_above="@+id/strip"
+            />
+
+        <ImageView
+            style="@style/stripRhombus"
+            android:id="@+id/strip"
+            android:layout_alignParentBottom="true"
+            />
+
+    </LinearLayout>
+
+</ScrollView>

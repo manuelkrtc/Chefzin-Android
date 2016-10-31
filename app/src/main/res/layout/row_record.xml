@@ -1,85 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+
+
+<LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@mipmap/background_kitchen"
+    android:layout_height="@dimen/height_sliderlayout_record"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:paddingLeft="@dimen/margin"
+    android:paddingRight="@dimen/margin"
     xmlns:custom  = "http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--zona Product_list-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:orientation="vertical"
+        android:background="@drawable/shape_rectangle_stroke_corner_blue">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_ss"
+            android:gravity="end">
+
+            <com.future333.chefzin.view.FontTextView
+                style="@style/textBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Orden: "
+                android:textSize="@dimen/sizeText_xx"
+                />
+
+            <com.future333.chefzin.view.FontTextView
+                android:id="@+id/tvOrder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="301975"
+                android:textSize="@dimen/sizeText_xx"
+                />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvProduct"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/margin_ss"/>
+
+    </LinearLayout>
+
+    <!--zone total-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_text_checkout"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:id="@+id/textTotal"
+            android:gravity="left"
+            android:text="Total"/>
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="15dp"
+            android:background="@drawable/shape_line_buttom_blue"/>
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:id="@+id/tvTotal"
+            android:gravity="right"
+            android:text="$3.500"/>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center_horizontal"
-        android:layout_marginLeft="@dimen/margin"
-        android:layout_marginRight="@dimen/margin">
+        android:layout_height="100dp"></LinearLayout>
 
-        <com.future333.chefzin.view.FontTextView
-            style="@style/title"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_s"
-            android:text="!Hola¡"
-            />
-
-        <com.future333.chefzin.view.FontTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/margin_x"
-            android:text="Este es tu historial \n de pedidos."
-            android:gravity="center"
-            />
-
-        <!--zona Product_list-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:orientation="vertical"
-            android:background="@drawable/shape_rectangle_stroke_corner_blue">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/margin_ss"
-                android:gravity="end">
-
-                <com.future333.chefzin.view.FontTextView
-                    style="@style/textBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Orden: "
-                    android:textSize="@dimen/sizeText_xx"
-                    />
-
-                <com.future333.chefzin.view.FontTextView
-                    android:id="@+id/tvOrder"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="301975"
-                    android:textSize="@dimen/sizeText_xx"
-                    />
-            </LinearLayout>
-            
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvProduct"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="@dimen/margin_ss"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="100dp"></LinearLayout>
-
-        <ImageView
-            style="@style/stripRhombus"
-            android:id="@+id/strip"
-            android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp"
-            android:layout_alignParentBottom="true"
-            />
-    </LinearLayout>
-
-</ScrollView>
+</LinearLayout>

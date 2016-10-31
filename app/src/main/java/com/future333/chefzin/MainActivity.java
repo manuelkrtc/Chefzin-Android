@@ -14,6 +14,7 @@ import com.future333.chefzin.Fragment.FragmentHorary;
 import com.future333.chefzin.Fragment.FragmentLogin;
 import com.future333.chefzin.Fragment.FragmentProduct;
 import com.future333.chefzin.Fragment.FragmentProfile;
+import com.future333.chefzin.Fragment.FragmentRecord;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.SystemTools;
@@ -127,6 +128,15 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.commit();
     }
 
+    private void goFragmentRecord(){
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.rlFragment, FragmentRecord.newInstance());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        setToolbartEmpty();
+    }
+
     @Override
     public void onBackPressed() {
         setToolbartFull();
@@ -138,6 +148,10 @@ public class MainActivity extends FragmentActivity {
         User user = app.userCtr.getUser();
         if(user == null)    goFragmentLogin();
         else                goFragmentProfile();
+    }
+
+    public void btnReload(View view){
+        goFragmentRecord();
     }
 
     private void setToolbartEmpty(){

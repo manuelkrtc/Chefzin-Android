@@ -26,7 +26,8 @@
         android:id="@+id/btnUpdate"
         android:layout_toLeftOf="@+id/btnMenu"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_update"/>
+        android:src="@mipmap/ic_update"
+        android:onClick="btnReload"/>
 
     <ImageButton
         style="@style/icon"
