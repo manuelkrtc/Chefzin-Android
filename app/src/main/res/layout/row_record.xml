@@ -17,69 +17,61 @@
 
         <com.future333.chefzin.view.FontTextView
             style="@style/title"
-            android:id="@+id/tvChefs"
             android:layout_centerHorizontal="true"
-            android:text="TU ORDEN"
+            android:layout_marginBottom="@dimen/margin_s"
+            android:text="!Hola¡"
             />
 
-        <RelativeLayout
+        <com.future333.chefzin.view.FontTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_x"
+            android:text="Este es tu historial \n de pedidos."
+            android:gravity="center"
+            />
+
+        <!--zona Product_list-->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:orientation="vertical"
             android:background="@drawable/shape_rectangle_stroke_corner_blue">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_ss"
+                android:gravity="end">
+
+                <com.future333.chefzin.view.FontTextView
+                    style="@style/textBold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Orden: "
+                    android:textSize="@dimen/sizeText_xx"
+                    />
+
+                <com.future333.chefzin.view.FontTextView
+                    android:id="@+id/tvOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="301975"
+                    android:textSize="@dimen/sizeText_xx"
+                    />
+            </LinearLayout>
+            
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rvProduct"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/margin_ss"/>
 
-        </RelativeLayout>
+        </LinearLayout>
 
-
-
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/viewPager"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="200dp">
-
-        </android.support.v4.view.ViewPager>
-
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_s"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            >
-
-            <Button
-                android:id="@+id/viewController1"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/shape_circle_blue"
-                android:layout_margin="2dp"
-                />
-
-            <Button
-                android:id="@+id/viewController2"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/shape_circle_stroke_blue"
-                android:layout_toRightOf="@+id/viewController1"
-                android:layout_margin="2dp"/>
-
-            <Button
-                android:id="@+id/viewController3"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:background="@drawable/shape_circle_stroke_blue"
-                android:layout_toRightOf="@+id/viewController2"
-                android:layout_margin="2dp"/>
-
-        </RelativeLayout>
-
+            android:layout_height="100dp"></LinearLayout>
 
         <ImageView
             style="@style/stripRhombus"
