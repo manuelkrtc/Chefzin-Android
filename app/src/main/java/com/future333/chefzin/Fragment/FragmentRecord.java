@@ -1,11 +1,13 @@
 package com.future333.chefzin.Fragment;
 
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -16,6 +18,7 @@ import com.future333.chefzin.R;
 import com.future333.chefzin.model.Chef;
 
 import java.util.ArrayList;
+import java.util.zip.Inflater;
 
 /**
  * Created by manuel on 12/09/16.
@@ -31,9 +34,9 @@ public class FragmentRecord extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_record, container, false);
+        View v = inflater.inflate(R.layout.fragment_record, container, false);
 
-        inicializate(view);
+         slider = (SliderLayout)v.findViewById(R.id.slider);
 
         ArrayList<Chef> chefs = new ArrayList<>();
         chefs.add(new Chef("manuel","Vegetariano","Comida saludable, acopañada con moluscos ", null));
@@ -43,11 +46,14 @@ public class FragmentRecord extends Fragment {
 
         initSlider(chefs);
 
-        return view;
+        return v;
     }
 
-    private void inicializate(View v){
-        slider = (SliderLayout)v.findViewById(R.id.slider);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
     }
 
     private void initSlider(ArrayList<Chef> chefs) {
@@ -66,35 +72,37 @@ public class FragmentRecord extends Fragment {
 
         @Override
         public View getView() {
-            View v = LayoutInflater.from(getContext()).inflate(R.layout.row_record , null);
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.row_record , null);
 
-//            ViewGroup   lyParent           = (ViewGroup)v.findViewById(R.id.lyParent);
-//            ImageView   ivChef             = (ImageView)v.findViewById(R.id.ivChef);
-//            TextView    tvNameChef         = (TextView) v.findViewById(R.id.tvNameChef);
-//            TextView    tvDescription      = (TextView) v.findViewById(R.id.tvDescription);
-//            TextView    tvSpecialtyChef    = (TextView) v.findViewById(R.id.tvSpecialtyChef);
-//
-//            RatingBar       ratingBar       = (RatingBar) v.findViewById(R.id.ratingBar);
-//
-//            ratingBar.setRating(3.2F);
-//
-//            if(chef.name != null)  tvNameChef.setText(chef.name);
-//            else                    tvNameChef.setVisibility(View.GONE);
-//
-//            if(chef.description != null)   tvDescription.setText(chef.description);
-//            else                        tvDescription.setVisibility(View.GONE);
-//
-//            if(chef.specialty != null) tvSpecialtyChef.setText(chef.specialty);
-//            else                        tvSpecialtyChef.setVisibility(View.GONE);
-//
-//            lyParent.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    ((MainActivity)getActivity()).goFragmentMenu();
-//                }
-//            });
+            LinearLayout zoneSteps = (LinearLayout) view.findViewById(R.id.zoneSteps);
 
-            return v;
+            zoneSteps.addView(initSteps(1, "Recibido y cocinando",false));
+            zoneSteps.addView(initSteps(2, "Listo para entregar",false));
+            zoneSteps.addView(initSteps(3, "En camino",true));
+            zoneSteps.addView(initSteps(4, "Entregado",false));
+
+
+            return view;
+        }
+
+        private View initSteps(int number, String nameStep, boolean isSelect){
+            View stepView = LayoutInflater.from(getActivity()).inflate(R.layout.row_record_step, null);
+            stepView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT,1));
+
+            TextView tvNumber       = (TextView)stepView.findViewById(R.id.tvNumber);
+            TextView tvNameStep     = (TextView)stepView.findViewById(R.id.tvNameStep);
+            ViewGroup zoneStroke    = (ViewGroup) stepView.findViewById(R.id.zoneStroke);
+
+            tvNumber.setText(String.valueOf(number));
+            tvNameStep.setText(String.valueOf(nameStep));
+
+            if(!isSelect){
+                zoneStroke.setBackgroundResource(R.drawable.shape_rectangle_corner_green);
+                tvNameStep.setVisibility(View.INVISIBLE);
+                tvNumber.setTextColor(Color.WHITE);
+            }
+
+            return stepView;
         }
     }
 
