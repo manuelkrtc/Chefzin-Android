@@ -1,48 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:id="@+id/lyParent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:paddingTop="@dimen/margin_x"
-    android:paddingBottom="@dimen/margin_x"
     android:clickable="true"
     android:background="@color/white"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <View
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:background="@drawable/shape_circle_stroke_blue"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/margin_x"
+        android:paddingBottom="@dimen/margin_x"
+        android:clickable="true"
+        android:background="@color/white"
+        >
 
-    <TextView
-        style="@style/title"
-        android:id="@+id/tvName"
-        android:layout_marginTop="@dimen/margin_s"
-        android:layout_marginBottom="@dimen/margin_x"
-        android:text="Manuel Páez"
-        />
+        <ImageView
+            android:id="@+id/ivProfile"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@drawable/shape_circle_stroke_blue"/>
 
-    <Button
-        style="@style/form"
-        android:id="@+id/btnSettingData"
-        android:hint="Configurar mis datos"/>
+        <TextView
+            style="@style/title"
+            android:id="@+id/tvName"
+            android:layout_marginTop="@dimen/margin_s"
+            android:layout_marginBottom="@dimen/margin_x"
+            android:text="Manuel Páez"
+            />
 
-    <Button
-        style="@style/form"
-        android:id="@+id/btnConditions"
-        android:hint="Condiciones y politicas"/>
+        <Button
+            style="@style/form"
+            android:id="@+id/btnSettingData"
+            android:hint="Configurar mis datos"/>
 
-    <Button
-        style="@style/form"
-        android:id="@+id/btnFrequentQuestions"
-        android:hint="preguntas frecuentes "/>
+        <Button
+            style="@style/form"
+            android:id="@+id/btnConditions"
+            android:hint="Condiciones y politicas"/>
 
-    <Button
-        style="@style/form"
-        android:id="@+id/btnLogOut"
-        android:hint="cerrar sesión"/>
+        <Button
+            style="@style/form"
+            android:id="@+id/btnFrequentQuestions"
+            android:hint="preguntas frecuentes "/>
 
-</LinearLayout>
+        <Button
+            style="@style/form"
+            android:id="@+id/btnLogOut"
+            android:hint="cerrar sesión"/>
+
+    </LinearLayout>
+</ScrollView>

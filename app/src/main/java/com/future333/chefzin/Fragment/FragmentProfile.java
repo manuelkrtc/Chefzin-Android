@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.future333.chefzin.AppHandler;
@@ -15,7 +16,10 @@ import com.future333.chefzin.R;
 import com.future333.chefzin.model.Controller.UserCtr;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.ImageLoader;
 import com.future333.chefzin.tools.ViewTools;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by manuel on 12/09/16.
@@ -31,6 +35,10 @@ public class FragmentProfile extends Fragment {
     Button      btnSettingData;
     Button      btnFrequentQuestions;
     TextView    tvName;
+
+    ImageView   ivProfile;
+
+    ImageLoader _imageL;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -50,12 +58,18 @@ public class FragmentProfile extends Fragment {
         btnFrequentQuestions = (Button)v.findViewById(R.id.btnFrequentQuestions);
         tvName               = (TextView)v.findViewById(R.id.tvName);
 
+        ivProfile = (ImageView)v.findViewById(R.id.ivProfile);
         return v;
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
+        _imageL = new ImageLoader(ctx);
+
+        _imageL.loadAndDisplayCircledImage(app.userCtr.getUser().getFoto(), ivProfile);
 
         listen();
         setInfo();
