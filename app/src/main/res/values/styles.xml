@@ -116,6 +116,21 @@
     </style>
 
     //----------------------------------------------------------------------------------------------
+
+    <style name="optionsProfile" >
+        <!-- Customize your theme here. -->
+        <item name="android:layout_width">          200dp</item>
+        <item name="android:layout_height">         25dp</item>
+        <item name="android:layout_marginBottom">   @dimen/margin_ss</item>
+        <item name="android:padding">               2dp</item>
+        <item name="android:textSize">              @dimen/sizeText_x</item>
+        <item name="android:textColor">             @color/grey</item>
+        <item name="android:gravity">               center</item>
+        <item name="android:textAllCaps">           false</item>
+        <item name="fontName">                      raleway_light.ttf</item>
+        <item name="android:background">            @drawable/shape_line_buttom_blue</item>
+    </style>
+    //----------------------------------------------------------------------------------------------
     <style name="textCheckout">
         <item name="android:layout_width">  80dp</item>
         <item name="android:layout_height"> wrap_content</item>

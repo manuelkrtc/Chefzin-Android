@@ -32,25 +32,25 @@
             android:text="Manuel Páez"
             />
 
-        <Button
-            style="@style/form"
+        <com.future333.chefzin.view.FontButton
+            style="@style/optionsProfile"
             android:id="@+id/btnSettingData"
-            android:hint="Configurar mis datos"/>
+            android:text="Configurar mis datos"/>
 
-        <Button
-            style="@style/form"
+        <com.future333.chefzin.view.FontButton
+            style="@style/optionsProfile"
             android:id="@+id/btnConditions"
-            android:hint="Condiciones y politicas"/>
+            android:text="Condiciones y politicas"/>
 
-        <Button
-            style="@style/form"
+        <com.future333.chefzin.view.FontButton
+            style="@style/optionsProfile"
             android:id="@+id/btnFrequentQuestions"
-            android:hint="preguntas frecuentes "/>
+            android:text="preguntas frecuentes "/>
 
-        <Button
-            style="@style/form"
+        <com.future333.chefzin.view.FontButton
+            style="@style/optionsProfile"
             android:id="@+id/btnLogOut"
-            android:hint="cerrar sesión"/>
+            android:text="Cerrar sesión"/>
 
     </LinearLayout>
 </ScrollView>
