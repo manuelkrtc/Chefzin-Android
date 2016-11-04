@@ -119,7 +119,7 @@
 
     <style name="optionsProfile" >
         <!-- Customize your theme here. -->
-        <item name="android:layout_width">          200dp</item>
+        <item name="android:layout_width">          250dp</item>
         <item name="android:layout_height">         25dp</item>
         <item name="android:layout_marginBottom">   @dimen/margin_ss</item>
         <item name="android:padding">               2dp</item>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:background="@drawable/shape_line_buttom_blue_s"
+    >
+
+<ImageView
+    android:id="@+id/imageView"
+    android:layout_width="15dp"
+    android:layout_height="15dp"
+    android:padding="2dp"
+    android:src="@mipmap/ic_faceboook"/>
+
+<TextView
+    android:id="@+id/textVIew"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="15dp"
+    android:text="manuelkrtc@hotmail.com"
+    android:gravity="center"
+    android:textSize="@dimen/sizeText_s"/>
+</LinearLayout>

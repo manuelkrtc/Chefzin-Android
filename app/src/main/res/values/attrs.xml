@@ -3,4 +3,9 @@
     <declare-styleable name="FontTextView">
 		<attr name="fontName" format="string" />
    	</declare-styleable>
+
+
+	<declare-styleable name="TextViewImage">
+		<attr name="text" format="string" />
+	</declare-styleable>
 </resources>

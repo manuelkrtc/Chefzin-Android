@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
@@ -18,6 +19,7 @@ import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.ImageLoader;
 import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.view.TextViewImage;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -59,6 +61,17 @@ public class FragmentProfile extends Fragment {
         tvName               = (TextView)v.findViewById(R.id.tvName);
 
         ivProfile = (ImageView)v.findViewById(R.id.ivProfile);
+
+        TextViewImage textViewImage = (TextViewImage)v.findViewById(R.id.papa);
+        textViewImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewTools.msj(ctx,"papa");
+            }
+        });
+
+        textViewImage.setText("manuel");
+
         return v;
     }
 
