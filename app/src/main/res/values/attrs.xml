@@ -6,6 +6,7 @@
 
 
 	<declare-styleable name="TextViewImage">
-		<attr name="text" format="string" />
+		<attr name="text" 	format="string" />
+		<attr name="image" 	format="integer" />
 	</declare-styleable>
 </resources>

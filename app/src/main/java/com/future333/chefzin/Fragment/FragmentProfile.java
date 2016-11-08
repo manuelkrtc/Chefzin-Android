@@ -37,9 +37,13 @@ public class FragmentProfile extends Fragment {
     Button      btnSettingData;
     Button      btnFrequentQuestions;
     TextView    tvName;
-
     ImageView   ivProfile;
+    ViewGroup   zoneInfoUser;
 
+    TextViewImage tviEmail;
+    TextViewImage tviPhone;
+
+    //instance
     ImageLoader _imageL;
 
     @Override
@@ -47,6 +51,8 @@ public class FragmentProfile extends Fragment {
         super.onCreate(savedInstanceState);
         ctx = getActivity();
         app = ((AppHandler)getActivity().getApplication());
+
+        _imageL = new ImageLoader(ctx);
     }
 
     @Override
@@ -58,19 +64,11 @@ public class FragmentProfile extends Fragment {
         btnConditions        = (Button)v.findViewById(R.id.btnConditions);
         btnSettingData       = (Button)v.findViewById(R.id.btnSettingData);
         btnFrequentQuestions = (Button)v.findViewById(R.id.btnFrequentQuestions);
-        tvName               = (TextView)v.findViewById(R.id.tvName);
-
-        ivProfile = (ImageView)v.findViewById(R.id.ivProfile);
-
-        TextViewImage textViewImage = (TextViewImage)v.findViewById(R.id.papa);
-        textViewImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ViewTools.msj(ctx,"papa");
-            }
-        });
-
-        textViewImage.setText("manuel");
+        tvName               = (TextView)   v.findViewById(R.id.tvName);
+        ivProfile            = (ImageView)  v.findViewById(R.id.ivProfile);
+        zoneInfoUser         = (ViewGroup)  v.findViewById(R.id.zoneInfoUser);
+        tviEmail             = (TextViewImage)v.findViewById(R.id.tviEmail);
+        tviPhone             = (TextViewImage)v.findViewById(R.id.tviPhone);
 
         return v;
     }
@@ -78,9 +76,6 @@ public class FragmentProfile extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
-        _imageL = new ImageLoader(ctx);
 
         _imageL.loadAndDisplayCircledImage(app.userCtr.getUser().getFoto(), ivProfile);
 
@@ -101,6 +96,13 @@ public class FragmentProfile extends Fragment {
                 });
             }
         });
+
+        btnSettingData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ViewTools.switchVisibisilite(zoneInfoUser);
+            }
+        });
     }
 
     //----------------------------------- METHODS --------------------------------------------------
@@ -109,6 +111,12 @@ public class FragmentProfile extends Fragment {
         if(user != null){
             if(user.getNombres() == null && user.getNombres() == null) tvName.setVisibility(View.GONE);
             else tvName.setText(user.getNombres() + " " + user.getApellidos() );
+
+            if(user.getEmail() == null) tviEmail.setVisibility(View.GONE);
+            else tviEmail.setText(user.getEmail());
+
+            if(user.getTelefono() == null) tviPhone.setVisibility(View.GONE);
+            else tviPhone.setText(user.getTelefono());
         }
     }
 }

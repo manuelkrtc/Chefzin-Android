@@ -2,6 +2,7 @@ package com.future333.chefzin.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -32,5 +33,17 @@ public class ViewTools {
 
     public static void msj(Context ctx, String msj){
         Toast.makeText(ctx,msj,Toast.LENGTH_SHORT).show();
+    }
+
+    /**Este metodo toma un view y lo esconde o lo muestra dependiendo del estado actual.*/
+    public static void switchVisibisilite(View view){
+        if(view.getVisibility() == View.VISIBLE){
+            view.setVisibility(View.GONE);
+            return;
+        }
+        if(view.getVisibility() == View.GONE){
+            view.setVisibility(View.VISIBLE);
+            return;
+        }
     }
 }

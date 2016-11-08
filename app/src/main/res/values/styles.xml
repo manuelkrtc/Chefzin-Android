@@ -139,4 +139,9 @@
         <item name="fontName">              raleway_medium.ttf</item>
     </style>
 
+    <style name="tviProfie">
+        <item name="android:layout_width">  200dp</item>
+        <item name="android:layout_height"> wrap_content</item>
+    </style>
+
 </resources>
