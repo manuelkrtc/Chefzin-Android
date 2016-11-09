@@ -77,7 +77,8 @@ public class FragmentProfile extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        _imageL.loadAndDisplayCircledImage(app.userCtr.getUser().getFoto(), ivProfile);
+        if(app.userCtr.getUser().getFoto() != null)
+            _imageL.loadAndDisplayCircledImage(app.userCtr.getUser().getFoto(), ivProfile);
 
         listen();
         setInfo();

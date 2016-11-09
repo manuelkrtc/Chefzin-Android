@@ -54,15 +54,15 @@ public class FragmentProduct extends Fragment {
         tvQuantity  = (TextView)v.findViewById(R.id.tvQuantity);
         slider      = (SliderLayout)v.findViewById(R.id.slider);
 
-        ArrayList<Addition> additions = new ArrayList<>();
-        additions.add(new Addition("sal",1000));
-        additions.add(new Addition("azucar",100));
-        additions.add(new Addition("salsa",1500));
+//        ArrayList<Addition> additions = new ArrayList<>();
+//        additions.add(new Addition("sal",1000));
+//        additions.add(new Addition("azucar",100));
+//        additions.add(new Addition("salsa",1500));
 
-        products.add(new Product("Papas", 500, R.drawable.img_dinner, "So la papas mas ricas del mercado con slasa rosa y aji",additions));
-        products.add(new Product("Limonada", 9500, R.drawable.img_lunch, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ",additions));
-        products.add(new Product("Torta Banano", 98000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es",additions));
-        products.add(new Product("Mango biche", 808000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es, So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es",additions));
+//        products.add(new Product("Papas", 500, R.drawable.img_dinner, "So la papas mas ricas del mercado con slasa rosa y aji",additions));
+//        products.add(new Product("Limonada", 9500, R.drawable.img_lunch, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ",additions));
+//        products.add(new Product("Torta Banano", 98000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es",additions));
+//        products.add(new Product("Mango biche", 808000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es, So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es",additions));
 
         return v;
     }
@@ -119,16 +119,16 @@ public class FragmentProduct extends Fragment {
             TextView    tvPriceProduct          = (TextView) v.findViewById(R.id.tvPriceProduct);
             TextView    tvDescriptionProduct    = (TextView) v.findViewById(R.id.tvDescriptionProduct);
 
-            if(product.image != 0)      ivProduct.setImageResource(product.image);
-
-            if(product.name != null)    tvNameProduct.setText(product.name);
-            else                        tvNameProduct.setVisibility(View.GONE);
-
-            if(product.price != 0)      tvPriceProduct.setText("$" + String.valueOf(product.price));
-            else                        tvPriceProduct.setVisibility(View.GONE);
-
-            if(product.description != null)    tvDescriptionProduct.setText(product.description);
-            else                                tvDescriptionProduct.setVisibility(View.GONE);
+//            if(product.image != 0)      ivProduct.setImageResource(product.image);
+//
+//            if(product.name != null)    tvNameProduct.setText(product.name);
+//            else                        tvNameProduct.setVisibility(View.GONE);
+//
+//            if(product.precio != 0)      tvPriceProduct.setText("$" + String.valueOf(product.precio));
+//            else                        tvPriceProduct.setVisibility(View.GONE);
+//
+//            if(product.description != null)    tvDescriptionProduct.setText(product.description);
+//            else                                tvDescriptionProduct.setVisibility(View.GONE);
 
             return v;
         }

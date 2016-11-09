@@ -1,9 +1,7 @@
 package com.future333.chefzin.model.Controller;
 
-import com.future333.chefzin.model.Horary;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.FormatTools;
-import com.future333.chefzin.tools.ViewTools;
 
 import java.util.ArrayList;
 
@@ -42,7 +40,7 @@ public class ShopCart {
     private int priceProducts(){
         int total = 0;
         for(Product product:products){
-            total = total + product.price;
+            total = total + product.precio;
         }
         return total;
     }

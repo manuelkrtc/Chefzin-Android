@@ -106,7 +106,7 @@ public class UserCtr {
             parametros.put("email", email);
             parametros.put("password", FormatTools.string_to_md5(password));
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_LOGIN, new JSONObject(parametros),
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_LOGIN, new JSONObject(parametros),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -134,7 +134,7 @@ public class UserCtr {
         String parametros = new Gson().toJson(formRegister);
         JSONObject jsonParam = new JSONObject(parametros);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_REGISTER, jsonParam,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_REGISTER, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -162,7 +162,7 @@ public class UserCtr {
         String parametros = new Gson().toJson(_user);
         JSONObject jsonParam = new JSONObject(parametros);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_REGISTER_FACEBOOK, jsonParam,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_REGISTER_FACEBOOK, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -190,7 +190,7 @@ public class UserCtr {
         String parametros = new Gson().toJson(_user);
         JSONObject jsonParam = new JSONObject(parametros);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_BASE + ApiTools.URL_REGISTER_GOOGLE, jsonParam,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_REGISTER_GOOGLE, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -215,7 +215,7 @@ public class UserCtr {
     }
 
     private void getApiInfoUser(final Activity ctx, String token, final ApiTools.OnLogInListener logInListener){
-        JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ApiTools.URL_BASE + ApiTools.URL_INFO_USER + token,
+        JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ApiTools.URL_INFO_USER + token,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

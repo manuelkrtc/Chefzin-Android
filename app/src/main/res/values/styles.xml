@@ -109,10 +109,17 @@
 
     </style>
 
-    <style name="foodRatingBar" parent="@android:style/Widget.RatingBar">
-        <item name="android:progressDrawable">@drawable/food_rating_bar_full</item>
+
+    <style name="hatRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/hat_rating_bar</item>
         <item name="android:minHeight">24dip</item>
         <item name="android:maxHeight">24dip</item>
+    </style>
+
+    <style name="spoonRatingBar" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/spoon_rating_bar</item>
+        <item name="android:minHeight">70dip</item>
+        <item name="android:maxHeight">70dip</item>
     </style>
 
     //----------------------------------------------------------------------------------------------

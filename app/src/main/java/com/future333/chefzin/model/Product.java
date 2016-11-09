@@ -7,18 +7,13 @@ import java.util.ArrayList;
  */
 public class Product {
 
-    public String name;
-    public int price;
-    public int image;
-    public String description;
-    public ArrayList<Addition> additions = new ArrayList<>();
+    public String id_plato;
+    public String imagen;
+    public String nombre;
+    public int precio;
+    public int impuesto;
+    public int unidad_cocina;
+    public int tiempo_preparacion;
 
-
-    public Product(String name, int price, int image, String description, ArrayList<Addition> additions) {
-        this.name   = name;
-        this.price  = price;
-        this.image  = image;
-        this.description = description;
-        this.additions = additions;
-    }
+    public ArrayList<Ingredient> ingredientes = new ArrayList<>();
 }

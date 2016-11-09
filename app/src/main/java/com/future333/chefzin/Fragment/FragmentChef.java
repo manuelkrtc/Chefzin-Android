@@ -1,5 +1,6 @@
 package com.future333.chefzin.Fragment;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Context;
 import android.content.res.Resources;
@@ -10,6 +11,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
+import android.text.method.NumberKeyListener;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,9 +24,12 @@ import android.widget.TextView;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.daimajia.slider.library.Tricks.ViewPagerEx;
+import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Chef;
+import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.ImageLoader;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -34,28 +39,36 @@ import java.util.ArrayList;
  */
 public class FragmentChef extends Fragment {
 
+    Activity    ctx;
+    AppHandler  app;
+
     SliderLayout slider;
+    ImageLoader  _imageL;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        ctx = getActivity();
+        app = ((AppHandler)getActivity().getApplication());
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_chef, container, false);
+        View v = inflater.inflate(R.layout.fragment_chef, container, false);
 
-        inicializate(view);
+        slider = (SliderLayout)v.findViewById(R.id.slider);
+        _imageL = new ImageLoader(ctx);
 
-        ArrayList<Chef> chefs = new ArrayList<>();
-        chefs.add(new Chef("manuel","Vegetariano","Comida saludable, acopañada con moluscos ", null));
-        chefs.add(new Chef("Paez","Oriental","En la cocina oriental podemos encontrar platos exóticos y fáciles de preparar para sorprender a nuestra familia o deleitar a nuestros invitados.", null));
-        chefs.add(new Chef("Jose Vernicio","Carnivoro","super mega  dss play", null));
-        chefs.add(new Chef("Davis loquen","Marina","Sudado de tramboyo, sabroso plato en donde el pescado se cocina en su propio jugo\n" , null));
-
-        initSlider(chefs);
-
-        return view;
+        return v;
     }
 
-    private void inicializate(View v){
-        slider = (SliderLayout)v.findViewById(R.id.slider);
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        initSlider(app.chefCtr.getChefs());
     }
 
     private void initSlider(ArrayList<Chef> chefs) {
@@ -86,16 +99,21 @@ public class FragmentChef extends Fragment {
 
             RatingBar       ratingBar       = (RatingBar) v.findViewById(R.id.ratingBar);
 
-            ratingBar.setRating(3.2F);
+//            ratingBar.setRating(3.2F);
+//            ratingBar.setRating(chef.get);
 
-            if(chef.name != null)  tvNameChef.setText(chef.name);
+            if(chef.getNombres() != null)  tvNameChef.setText(chef.getNombres());
             else                    tvNameChef.setVisibility(View.GONE);
 
-            if(chef.description != null)   tvDescription.setText(chef.description);
+            if(chef.getDescripcion() != null)   tvDescription.setText(chef.getDescripcion());
             else                        tvDescription.setVisibility(View.GONE);
 
-            if(chef.specialty != null) tvSpecialtyChef.setText(chef.specialty);
+            if(chef.getEspecializacion() != null) tvSpecialtyChef.setText(chef.getEspecializacion());
             else                        tvSpecialtyChef.setVisibility(View.GONE);
+
+            if(chef.getFoto() != null)
+                _imageL.loadAndDisplayImage(ApiTools.URL_IMG_CHEF + chef.getFoto(), ivChef);
+            else ivChef.setVisibility(View.GONE);
 
             lyParent.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -107,6 +125,4 @@ public class FragmentChef extends Fragment {
             return v;
         }
     }
-
-
 }

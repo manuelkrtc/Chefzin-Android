@@ -152,19 +152,19 @@ public class FragmentCheckout extends Fragment {
         public void onBindViewHolder(ProductsViewHolder holder, int position) {
             final Product product = products.get(position);
 
-            holder.tvName.setText(product.name);
-            holder.tvPrice.setText("$"+String.valueOf(product.price));
+//            holder.tvName.setText(product.name);
+            holder.tvPrice.setText("$"+String.valueOf(product.precio));
 
-            if(!holder.iscreateIngredientes){
-                for(Addition addition: product.additions){
-                    FontTextView textView = new FontTextView(ctxAdap);
-                    textView.setText(" -" + addition.name);
-                    holder.lyAdditions.addView(textView);
-                }
-                holder.iscreateIngredientes = true;
-            }
-
-            if(product.additions.size()==0) holder.zoneAdditions.setVisibility(View.GONE);
+//            if(!holder.iscreateIngredientes){
+//                for(Addition addition: product.additions){
+//                    FontTextView textView = new FontTextView(ctxAdap);
+//                    textView.setText(" -" + addition.name);
+//                    holder.lyAdditions.addView(textView);
+//                }
+//                holder.iscreateIngredientes = true;
+//            }
+//
+//            if(product.additions.size()==0) holder.zoneAdditions.setVisibility(View.GONE);
 
             holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override

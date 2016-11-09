@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
@@ -7,25 +7,32 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <com.future333.chefzin.view.FontTextView
-        style="@style/title"
-        android:id="@+id/tvChefs"
-        android:layout_centerHorizontal="true"
-        android:text="CHEFS"
-        />
-
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/slider"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tvChefs"
-        android:layout_above="@+id/strip"
-        />
+        android:orientation="vertical">
 
-    <ImageView
-        style="@style/stripRhombus"
-        android:id="@+id/strip"
-        android:layout_alignParentBottom="true"
-        />
+        <com.future333.chefzin.view.FontTextView
+            style="@style/title"
+            android:id="@+id/tvChefs"
+            android:layout_gravity="center_horizontal"
+            android:text="CHEFS"
+            />
 
-</RelativeLayout>
+        <com.daimajia.slider.library.SliderLayout
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            />
+
+        <ImageView
+            style="@style/stripRhombus"
+            android:id="@+id/strip"
+            android:layout_alignParentBottom="true"
+            />
+
+    </LinearLayout>
+
+
+
+</ScrollView>
