@@ -40,7 +40,7 @@ public class ShopCart {
     private int priceProducts(){
         int total = 0;
         for(Product product:products){
-            total = total + product.precio;
+            total = total + product.getPrecio();
         }
         return total;
     }
@@ -51,11 +51,11 @@ public class ShopCart {
 
     //----------------------------------------------------------------------------------------------
     public String getSubTotal(){
-        return "$" + FormatTools.int_to_price(priceProducts());
+        return FormatTools.int_to_price(priceProducts());
     }
 
     public String getIva(){
-        return "$" + FormatTools.int_to_price(priceIva());
+        return FormatTools.int_to_price(priceIva());
     }
 
     public String getDomicile(){
@@ -63,7 +63,7 @@ public class ShopCart {
     }
 
     public String getTotal(){
-        return "$" + FormatTools.int_to_price( priceProducts() + priceIva() + priceDomicile);
+        return FormatTools.int_to_price( priceProducts() + priceIva() + priceDomicile);
     }
 
 }

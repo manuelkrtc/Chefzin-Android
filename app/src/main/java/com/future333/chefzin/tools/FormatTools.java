@@ -29,6 +29,6 @@ public class FormatTools {
 
 
     public static String int_to_price(int number){
-        return NumberFormat.getIntegerInstance().format(number);
+        return "$" + NumberFormat.getIntegerInstance().format(number);
     }
 }

@@ -153,7 +153,7 @@ public class FragmentCheckout extends Fragment {
             final Product product = products.get(position);
 
 //            holder.tvName.setText(product.name);
-            holder.tvPrice.setText("$"+String.valueOf(product.precio));
+            holder.tvPrice.setText("$"+String.valueOf(product.getPrecio()));
 
 //            if(!holder.iscreateIngredientes){
 //                for(Addition addition: product.additions){

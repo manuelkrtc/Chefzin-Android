@@ -5,6 +5,7 @@
     android:background="@color/white"
     android:orientation="vertical"
     android:gravity="center"
+    android:clickable="true"
     xmlns:custom  = "http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     >

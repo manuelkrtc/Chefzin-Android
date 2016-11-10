@@ -51,6 +51,9 @@ public class FragmentChef extends Fragment {
 
         ctx = getActivity();
         app = ((AppHandler)getActivity().getApplication());
+
+        _imageL = new ImageLoader(ctx);
+
     }
 
     @Override
@@ -59,7 +62,6 @@ public class FragmentChef extends Fragment {
         View v = inflater.inflate(R.layout.fragment_chef, container, false);
 
         slider = (SliderLayout)v.findViewById(R.id.slider);
-        _imageL = new ImageLoader(ctx);
 
         return v;
     }
@@ -99,6 +101,7 @@ public class FragmentChef extends Fragment {
             ViewGroup   lyParent            = (ViewGroup)v.findViewById(R.id.lyParent);
 
             ratingBar.setRating(chef.getCalificacion());
+            _imageL.loadAndDisplayImage(ApiTools.URL_IMG_CHEF + chef.getFoto(), ivChef);
 
             if(chef.getNombres() != null)   tvNameChef.setText(chef.getNombres());
             else                            tvNameChef.setVisibility(View.GONE);
@@ -109,13 +112,11 @@ public class FragmentChef extends Fragment {
             if(chef.getEspecializacion() != null)   tvSpecialtyChef.setText(chef.getEspecializacion());
             else                                    tvSpecialtyChef.setVisibility(View.GONE);
 
-            if(chef.getFoto() != null)
-                _imageL.loadAndDisplayImage(ApiTools.URL_IMG_CHEF + chef.getFoto(), ivChef);
-            else ivChef.setVisibility(View.GONE);
 
             lyParent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    app.chefSelect = chef;
                     ((MainActivity)getActivity()).goFragmentMenu();
                 }
             });

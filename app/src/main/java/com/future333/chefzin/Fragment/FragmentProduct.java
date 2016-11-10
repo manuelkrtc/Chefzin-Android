@@ -17,7 +17,11 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Addition;
+import com.future333.chefzin.model.Chef;
 import com.future333.chefzin.model.Product;
+import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ImageLoader;
 
 import java.util.ArrayList;
 
@@ -28,6 +32,8 @@ public class FragmentProduct extends Fragment {
 
     Activity ctx;
     AppHandler app;
+    ImageLoader _imageL;
+
 
     Button      btnAdd;
     Button      btnCheckout;
@@ -35,13 +41,16 @@ public class FragmentProduct extends Fragment {
     SliderLayout slider;
 
     ArrayList<Product> products;
+//    Chef chef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ctx         = getActivity();
-        products    = new ArrayList<>();
         app         = ((AppHandler)getActivity().getApplication());
+
+        _imageL     = new ImageLoader(ctx);
+        products    = app.chefSelect.getPlatos();
     }
 
     @Override
@@ -53,16 +62,6 @@ public class FragmentProduct extends Fragment {
         btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
         tvQuantity  = (TextView)v.findViewById(R.id.tvQuantity);
         slider      = (SliderLayout)v.findViewById(R.id.slider);
-
-//        ArrayList<Addition> additions = new ArrayList<>();
-//        additions.add(new Addition("sal",1000));
-//        additions.add(new Addition("azucar",100));
-//        additions.add(new Addition("salsa",1500));
-
-//        products.add(new Product("Papas", 500, R.drawable.img_dinner, "So la papas mas ricas del mercado con slasa rosa y aji",additions));
-//        products.add(new Product("Limonada", 9500, R.drawable.img_lunch, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ",additions));
-//        products.add(new Product("Torta Banano", 98000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es",additions));
-//        products.add(new Product("Mango biche", 808000, R.drawable.img_breakfast, "So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es, So la papas mas ricas del mercado con slasa rosa y aji  ad4mas de una suculemta limosna con carast esperciales de diferente tipṕ y abana del alpes suizos comelona natuarl e indigesta segura. topor por tan como lo es",additions));
 
         return v;
     }
@@ -119,16 +118,16 @@ public class FragmentProduct extends Fragment {
             TextView    tvPriceProduct          = (TextView) v.findViewById(R.id.tvPriceProduct);
             TextView    tvDescriptionProduct    = (TextView) v.findViewById(R.id.tvDescriptionProduct);
 
-//            if(product.image != 0)      ivProduct.setImageResource(product.image);
-//
-//            if(product.name != null)    tvNameProduct.setText(product.name);
-//            else                        tvNameProduct.setVisibility(View.GONE);
-//
-//            if(product.precio != 0)      tvPriceProduct.setText("$" + String.valueOf(product.precio));
-//            else                        tvPriceProduct.setVisibility(View.GONE);
-//
-//            if(product.description != null)    tvDescriptionProduct.setText(product.description);
-//            else                                tvDescriptionProduct.setVisibility(View.GONE);
+            _imageL.loadAndDisplayImage(ApiTools.URL_IMG_PLATO + product.getImagen(), ivProduct);
+
+            if(product.getNombre() != null)     tvNameProduct.setText(product.getNombre());
+            else                                tvNameProduct.setVisibility(View.GONE);
+
+            if(product.getPrecio() != 0)        tvPriceProduct.setText(FormatTools.int_to_price(product.getPrecio()));
+            else                                tvPriceProduct.setVisibility(View.GONE);
+
+            if(product.getInfo_adicional() != null)     tvDescriptionProduct.setText(product.getInfo_adicional());
+            else                                        tvDescriptionProduct.setVisibility(View.GONE);
 
             return v;
         }
