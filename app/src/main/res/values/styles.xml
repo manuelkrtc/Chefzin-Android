@@ -118,8 +118,8 @@
 
     <style name="spoonRatingBar" parent="@android:style/Widget.RatingBar">
         <item name="android:progressDrawable">@drawable/spoon_rating_bar</item>
-        <item name="android:minHeight">70dip</item>
-        <item name="android:maxHeight">70dip</item>
+        <item name="android:minHeight">27dp</item>
+        <item name="android:maxHeight">27dp</item>
     </style>
 
     //----------------------------------------------------------------------------------------------

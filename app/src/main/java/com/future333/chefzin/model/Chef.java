@@ -16,6 +16,7 @@ public class Chef {
     String especializacion;
     String foto;
     String frase_especialidad;
+    float  calificacion;
     ArrayList<Product> platos = new ArrayList<>();
 
 
@@ -53,6 +54,10 @@ public class Chef {
 
     public String getFrase_especialidad() {
         return frase_especialidad;
+    }
+
+    public float getCalificacion() {
+        return calificacion;
     }
 
     public ArrayList<Product> getPlatos() {

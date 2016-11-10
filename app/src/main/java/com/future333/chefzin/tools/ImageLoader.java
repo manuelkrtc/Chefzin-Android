@@ -27,7 +27,7 @@ public class ImageLoader {
 	
 	public void loadAndDisplayImage(String url, ImageView viewHolder){
 		if(picasso != null && !url.equals("")){
-			picasso.load(url).placeholder(R.mipmap.ic_twitter_dark).into(viewHolder);
+			picasso.load(url).placeholder(R.mipmap.img_chef).into(viewHolder);
 		}
 	}
 	

@@ -91,25 +91,23 @@ public class FragmentChef extends Fragment {
         public View getView() {
             View v = LayoutInflater.from(getContext()).inflate(R.layout.row_chef, null);
 
-            ViewGroup   lyParent           = (ViewGroup)v.findViewById(R.id.lyParent);
-            ImageView   ivChef             = (ImageView)v.findViewById(R.id.ivChef);
-            TextView    tvNameChef         = (TextView) v.findViewById(R.id.tvNameChef);
-            TextView    tvDescription      = (TextView) v.findViewById(R.id.tvDescription);
-            TextView    tvSpecialtyChef    = (TextView) v.findViewById(R.id.tvSpecialtyChef);
+            TextView    tvNameChef          = (TextView) v.findViewById(R.id.tvNameChef);
+            TextView    tvDescription       = (TextView) v.findViewById(R.id.tvDescription);
+            TextView    tvSpecialtyChef     = (TextView) v.findViewById(R.id.tvSpecialtyChef);
+            RatingBar   ratingBar           = (RatingBar)v.findViewById(R.id.ratingBar);
+            ImageView   ivChef              = (ImageView)v.findViewById(R.id.ivChef);
+            ViewGroup   lyParent            = (ViewGroup)v.findViewById(R.id.lyParent);
 
-            RatingBar       ratingBar       = (RatingBar) v.findViewById(R.id.ratingBar);
+            ratingBar.setRating(chef.getCalificacion());
 
-//            ratingBar.setRating(3.2F);
-//            ratingBar.setRating(chef.get);
-
-            if(chef.getNombres() != null)  tvNameChef.setText(chef.getNombres());
-            else                    tvNameChef.setVisibility(View.GONE);
+            if(chef.getNombres() != null)   tvNameChef.setText(chef.getNombres());
+            else                            tvNameChef.setVisibility(View.GONE);
 
             if(chef.getDescripcion() != null)   tvDescription.setText(chef.getDescripcion());
-            else                        tvDescription.setVisibility(View.GONE);
+            else                                tvDescription.setVisibility(View.GONE);
 
-            if(chef.getEspecializacion() != null) tvSpecialtyChef.setText(chef.getEspecializacion());
-            else                        tvSpecialtyChef.setVisibility(View.GONE);
+            if(chef.getEspecializacion() != null)   tvSpecialtyChef.setText(chef.getEspecializacion());
+            else                                    tvSpecialtyChef.setVisibility(View.GONE);
 
             if(chef.getFoto() != null)
                 _imageL.loadAndDisplayImage(ApiTools.URL_IMG_CHEF + chef.getFoto(), ivChef);
