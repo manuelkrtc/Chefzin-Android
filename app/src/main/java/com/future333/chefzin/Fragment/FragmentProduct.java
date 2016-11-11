@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +19,13 @@ import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Addition;
 import com.future333.chefzin.model.Chef;
+import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ApiTools;
 import com.future333.chefzin.tools.FormatTools;
 import com.future333.chefzin.tools.ImageLoader;
+import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.view.CheckProductPrice;
 
 import java.util.ArrayList;
 
@@ -117,6 +121,13 @@ public class FragmentProduct extends Fragment {
             TextView    tvNameProduct           = (TextView) v.findViewById(R.id.tvNameProduct);
             TextView    tvPriceProduct          = (TextView) v.findViewById(R.id.tvPriceProduct);
             TextView    tvDescriptionProduct    = (TextView) v.findViewById(R.id.tvDescriptionProduct);
+            Button      btnIngredients          = (Button) v.findViewById(R.id.btnIngredients);
+            ImageButton btnCloseIngredients     = (ImageButton) v.findViewById(R.id.btnCloseIngredients);
+            final ViewGroup   zoneIngredients   = (ViewGroup)v.findViewById(R.id.zoneIngredients);
+            final ViewGroup   zoneListIngredients   = (ViewGroup)v.findViewById(R.id.zoneListIngredients);
+            final ViewGroup   zoneDescription   = (ViewGroup)v.findViewById(R.id.zoneDescription);
+
+            zoneIngredients.setVisibility(View.GONE);
 
             _imageL.loadAndDisplayImage(ApiTools.URL_IMG_PLATO + product.getImagen(), ivProduct);
 
@@ -128,6 +139,31 @@ public class FragmentProduct extends Fragment {
 
             if(product.getInfo_adicional() != null)     tvDescriptionProduct.setText(product.getInfo_adicional());
             else                                        tvDescriptionProduct.setVisibility(View.GONE);
+
+            for(Ingredient ingredient:product.getIngredientes()){
+                CheckProductPrice checkIngredient = new CheckProductPrice(ctx);
+                checkIngredient.setName(ingredient.getNombre());
+                checkIngredient.setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
+
+                zoneListIngredients.addView(checkIngredient);
+            }
+
+            btnIngredients.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ViewTools.switchVisibisilite(zoneDescription);
+                    ViewTools.switchVisibisilite(zoneIngredients);
+                }
+            });
+
+            btnCloseIngredients.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ViewTools.switchVisibisilite(zoneDescription);
+                    ViewTools.switchVisibisilite(zoneIngredients);
+                }
+            });
+
 
             return v;
         }
