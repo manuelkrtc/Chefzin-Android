@@ -20,6 +20,7 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Addition;
 import com.future333.chefzin.model.Controller.ShopCart;
+import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.view.FontTextView;
@@ -155,16 +156,16 @@ public class FragmentCheckout extends Fragment {
 //            holder.tvName.setText(product.name);
             holder.tvPrice.setText("$"+String.valueOf(product.getPrecio()));
 
-//            if(!holder.iscreateIngredientes){
-//                for(Addition addition: product.additions){
-//                    FontTextView textView = new FontTextView(ctxAdap);
-//                    textView.setText(" -" + addition.name);
-//                    holder.lyAdditions.addView(textView);
-//                }
-//                holder.iscreateIngredientes = true;
-//            }
-//
-//            if(product.additions.size()==0) holder.zoneAdditions.setVisibility(View.GONE);
+            if(!holder.iscreateIngredientes){
+                for(Ingredient ingredient: product.getIngredientes()){
+                    FontTextView textView = new FontTextView(ctxAdap);
+                    textView.setText(" -" + ingredient.getNombre());
+                    holder.lyAdditions.addView(textView);
+                }
+                holder.iscreateIngredientes = true;
+            }
+
+            if(product.getIngredientes().size()==0) holder.zoneAdditions.setVisibility(View.GONE);
 
             holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override

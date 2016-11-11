@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Created by manuel on 15/09/16.
  */
-public class Product {
+public class Product implements Cloneable {
 
     String id_plato;
     String imagen;
@@ -15,8 +15,30 @@ public class Product {
     int impuesto;
     int unidad_cocina;
     int tiempo_preparacion;
+    ArrayList<Ingredient> ingredientes = new ArrayList<>();
 
-    public ArrayList<Ingredient> ingredientes = new ArrayList<>();
+    public Object clone(){
+        Product obj=null;
+        try{
+            obj=(Product)super.clone();
+        }catch(CloneNotSupportedException ex){
+            System.out.println(" no se puede duplicar");
+        }
+        obj.ingredientes = (ArrayList<Ingredient>) obj.ingredientes.clone();
+        return obj;
+    }
+
+    public Product(Product product){
+        id_plato        = product.getId_plato();
+        imagen          = product.getImagen();
+        nombre          = product.getNombre();
+        info_adicional  = product.getInfo_adicional();
+        precio          = product.getPrecio();
+        impuesto        = product.getImpuesto();
+        unidad_cocina   = product.getUnidad_cocina();
+        tiempo_preparacion  = product.getTiempo_preparacion();
+        ingredientes        = product.getIngredientes();
+    }
 
     public String getId_plato() {
         return id_plato;

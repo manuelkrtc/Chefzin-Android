@@ -50,8 +50,10 @@ public class FragmentHorary extends Fragment {
     Activity    ctx;
     AppHandler  app;
 
-    SliderLayout slider;
-    PagerIndicator pagerIndicator;
+    ToolsNotif      toolsNotif;
+
+    SliderLayout    slider;
+    PagerIndicator  pagerIndicator;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,8 @@ public class FragmentHorary extends Fragment {
 
         ctx = getActivity();
         app = ((AppHandler)getActivity().getApplication());
+
+        toolsNotif = new ToolsNotif(ctx);
     }
 
     @Override
@@ -67,8 +71,6 @@ public class FragmentHorary extends Fragment {
         View view = inflater.inflate(R.layout.fragment_horary, container, false);
 
         inicializate(view);
-
-
 
         initSlider(app.horaryCtr.getHoraries());
 
@@ -119,14 +121,17 @@ public class FragmentHorary extends Fragment {
             lyParent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    toolsNotif.showDialogProgress();
                     app.chefCtr.getApiChefs(ctx, horary.getId(), new ApiTools.OnLogInListener() {
                         @Override
                         public void onSuccessful() {
                             ((MainActivity)getActivity()).goFragmentChef();
+                            toolsNotif.cancelDialogProgress();
                         }
                         @Override
                         public void onError(String error) {
                             ViewTools.msj(ctx,error);
+                            toolsNotif.cancelDialogProgress();
                         }
                     });
 

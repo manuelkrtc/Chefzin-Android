@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,6 +46,7 @@ public class FragmentProduct extends Fragment {
     SliderLayout slider;
 
     ArrayList<Product> products;
+    ArrayList<CustomSliderView> arraySliderView;
 //    Chef chef;
 
     @Override
@@ -53,8 +55,9 @@ public class FragmentProduct extends Fragment {
         ctx         = getActivity();
         app         = ((AppHandler)getActivity().getApplication());
 
-        _imageL     = new ImageLoader(ctx);
-        products    = app.chefSelect.getPlatos();
+        _imageL         = new ImageLoader(ctx);
+        products        = app.chefSelect.getPlatos();
+        arraySliderView = new ArrayList<>();
     }
 
     @Override
@@ -82,7 +85,11 @@ public class FragmentProduct extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                app.shopCart.addProduct(products.get(slider.getCurrentPosition()));
+//                Product product = (Product) products.get(slider.getCurrentPosition()).clone();
+//                product.getIngredientes().clear();
+
+                
+                app.shopCart.addProduct(arraySliderView.get(slider.getCurrentPosition()).productSelect);
                 updateView();
             }
         });
@@ -97,9 +104,13 @@ public class FragmentProduct extends Fragment {
 
     private void initSlider(ArrayList<Product> products) {
         slider.stopAutoCycle();
+
         for(Product product: products){
-            slider.addSlider(new CustomSliderView(product));
+            CustomSliderView customSliderView = new CustomSliderView(product);
+            slider.addSlider(customSliderView);
+            arraySliderView.add(customSliderView);
         }
+
     }
 
     //----------------------------------------------------------------------------------------------
@@ -107,6 +118,8 @@ public class FragmentProduct extends Fragment {
     public class CustomSliderView extends BaseSliderView {
 
         private Product product;
+        public  Product productSelect;
+
 
         public CustomSliderView(Product product) {
             super(getActivity());
@@ -127,6 +140,9 @@ public class FragmentProduct extends Fragment {
             final ViewGroup   zoneListIngredients   = (ViewGroup)v.findViewById(R.id.zoneListIngredients);
             final ViewGroup   zoneDescription   = (ViewGroup)v.findViewById(R.id.zoneDescription);
 
+            productSelect = (Product) product.clone();
+            productSelect.getIngredientes().clear();
+
             zoneIngredients.setVisibility(View.GONE);
 
             _imageL.loadAndDisplayImage(ApiTools.URL_IMG_PLATO + product.getImagen(), ivProduct);
@@ -140,12 +156,23 @@ public class FragmentProduct extends Fragment {
             if(product.getInfo_adicional() != null)     tvDescriptionProduct.setText(product.getInfo_adicional());
             else                                        tvDescriptionProduct.setVisibility(View.GONE);
 
-            for(Ingredient ingredient:product.getIngredientes()){
+            for(final Ingredient ingredient:product.getIngredientes()){
                 CheckProductPrice checkIngredient = new CheckProductPrice(ctx);
                 checkIngredient.setName(ingredient.getNombre());
                 checkIngredient.setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
 
                 zoneListIngredients.addView(checkIngredient);
+
+                checkIngredient.getCheck().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                        if(b == true){
+                            productSelect.getIngredientes().add((Ingredient) ingredient.clone());
+                        }else {
+                            productSelect.getIngredientes().remove(ingredient);
+                        }
+                    }
+                });
             }
 
             btnIngredients.setOnClickListener(new View.OnClickListener() {
@@ -167,6 +194,8 @@ public class FragmentProduct extends Fragment {
 
             return v;
         }
+
+
     }
 
     public void updateView(){

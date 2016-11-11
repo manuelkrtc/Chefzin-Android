@@ -55,8 +55,8 @@ public class CheckProductPrice extends LinearLayout {
         tvPrice.setText(text);
     }
 
-    public void setCheck(boolean isCheck){
-        check.setChecked(isCheck);
+    public CheckBox getCheck(){
+        return check;
     }
 
     /*Notice that setShowText calls invalidate() and requestLayout(). These calls are crucial
