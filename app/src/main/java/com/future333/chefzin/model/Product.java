@@ -15,7 +15,7 @@ public class Product implements Cloneable {
     int impuesto;
     int unidad_cocina;
     int tiempo_preparacion;
-    ArrayList<Ingredient> ingredientes = new ArrayList<>();
+    ArrayList<Ingredient> ingredientes;
 
     public Object clone(){
         Product obj=null;
@@ -24,7 +24,7 @@ public class Product implements Cloneable {
         }catch(CloneNotSupportedException ex){
             System.out.println(" no se puede duplicar");
         }
-        obj.ingredientes = (ArrayList<Ingredient>) obj.ingredientes.clone();
+//        if(ingredientes != null) obj.ingredientes = (ArrayList<Ingredient>) obj.ingredientes.clone();
         return obj;
     }
 

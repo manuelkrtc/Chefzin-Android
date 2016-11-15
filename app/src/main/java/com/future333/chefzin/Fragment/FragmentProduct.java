@@ -141,7 +141,7 @@ public class FragmentProduct extends Fragment {
             final ViewGroup   zoneDescription   = (ViewGroup)v.findViewById(R.id.zoneDescription);
 
             productSelect = (Product) product.clone();
-            productSelect.getIngredientes().clear();
+            if(productSelect.getIngredientes() != null) productSelect.getIngredientes().clear();
 
             zoneIngredients.setVisibility(View.GONE);
 
@@ -156,23 +156,28 @@ public class FragmentProduct extends Fragment {
             if(product.getInfo_adicional() != null)     tvDescriptionProduct.setText(product.getInfo_adicional());
             else                                        tvDescriptionProduct.setVisibility(View.GONE);
 
-            for(final Ingredient ingredient:product.getIngredientes()){
-                CheckProductPrice checkIngredient = new CheckProductPrice(ctx);
-                checkIngredient.setName(ingredient.getNombre());
-                checkIngredient.setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
+            if(product.getIngredientes() != null){
+                for(final Ingredient ingredient : product.getIngredientes()){
+                    CheckProductPrice checkIngredient = new CheckProductPrice(ctx);
+                    checkIngredient.setName(ingredient.getNombre());
+                    checkIngredient.setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
 
-                zoneListIngredients.addView(checkIngredient);
+                    zoneListIngredients.addView(checkIngredient);
 
-                checkIngredient.getCheck().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                        if(b == true){
-                            productSelect.getIngredientes().add((Ingredient) ingredient.clone());
-                        }else {
-                            productSelect.getIngredientes().remove(ingredient);
+                    checkIngredient.getCheck().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                            if(b == true){
+//                            productSelect.getIngredientes().add((Ingredient) ingredient.clone());
+                            }else {
+                                productSelect.getIngredientes().remove(ingredient);
+                            }
                         }
-                    }
-                });
+                    });
+                }
+            }
+            else{
+                btnIngredients.setVisibility(View.GONE);
             }
 
             btnIngredients.setOnClickListener(new View.OnClickListener() {
@@ -194,8 +199,6 @@ public class FragmentProduct extends Fragment {
 
             return v;
         }
-
-
     }
 
     public void updateView(){
