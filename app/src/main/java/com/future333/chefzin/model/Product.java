@@ -24,7 +24,7 @@ public class Product implements Cloneable {
         }catch(CloneNotSupportedException ex){
             System.out.println(" no se puede duplicar");
         }
-//        if(ingredientes != null) obj.ingredientes = (ArrayList<Ingredient>) obj.ingredientes.clone();
+        if(ingredientes != null) obj.ingredientes = (ArrayList<Ingredient>) obj.ingredientes.clone();
         return obj;
     }
 
@@ -74,5 +74,12 @@ public class Product implements Cloneable {
 
     public ArrayList<Ingredient> getIngredientes() {
         return ingredientes;
+    }
+
+    public void deleteIngredient(Ingredient ingre){
+        for(Ingredient ingredient : ingredientes){
+            if(ingredient.getId_ingrediente() == ingre.getId_ingrediente())
+                ingredientes.remove(ingredient);
+        }
     }
 }

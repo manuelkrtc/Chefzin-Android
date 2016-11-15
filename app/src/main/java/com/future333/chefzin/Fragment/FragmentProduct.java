@@ -35,19 +35,17 @@ import java.util.ArrayList;
  */
 public class FragmentProduct extends Fragment {
 
-    Activity ctx;
-    AppHandler app;
-    ImageLoader _imageL;
+    Activity        ctx;
+    AppHandler      app;
+    ImageLoader     _imageL;
 
-
-    Button      btnAdd;
-    Button      btnCheckout;
-    TextView    tvQuantity;
-    SliderLayout slider;
+    Button          btnAdd;
+    Button          btnCheckout;
+    TextView        tvQuantity;
+    SliderLayout    slider;
 
     ArrayList<Product> products;
     ArrayList<CustomSliderView> arraySliderView;
-//    Chef chef;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -76,20 +74,17 @@ public class FragmentProduct extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        liste();
+        listen();
         initSlider(products);
     }
 
     //----------------------------------------------------------------------------------------------
-    private void liste(){
+    private void listen(){
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Product product = (Product) products.get(slider.getCurrentPosition()).clone();
-//                product.getIngredientes().clear();
-
-                
-                app.shopCart.addProduct(arraySliderView.get(slider.getCurrentPosition()).productSelect);
+                Product product = (Product) arraySliderView.get(slider.getCurrentPosition()).productSelect.clone();
+                app.shopCart.addProduct(product);
                 updateView();
             }
         });
@@ -118,8 +113,7 @@ public class FragmentProduct extends Fragment {
     public class CustomSliderView extends BaseSliderView {
 
         private Product product;
-        public  Product productSelect;
-
+        private Product productSelect;
 
         public CustomSliderView(Product product) {
             super(getActivity());
@@ -130,15 +124,16 @@ public class FragmentProduct extends Fragment {
         public View getView() {
             View v = LayoutInflater.from(getContext()).inflate(R.layout.row_product, null);
 
+            Button      btnIngredients          = (Button)   v.findViewById(R.id.btnIngredients);
             ImageView   ivProduct               = (ImageView)v.findViewById(R.id.ivProduct);
             TextView    tvNameProduct           = (TextView) v.findViewById(R.id.tvNameProduct);
             TextView    tvPriceProduct          = (TextView) v.findViewById(R.id.tvPriceProduct);
             TextView    tvDescriptionProduct    = (TextView) v.findViewById(R.id.tvDescriptionProduct);
-            Button      btnIngredients          = (Button) v.findViewById(R.id.btnIngredients);
             ImageButton btnCloseIngredients     = (ImageButton) v.findViewById(R.id.btnCloseIngredients);
-            final ViewGroup   zoneIngredients   = (ViewGroup)v.findViewById(R.id.zoneIngredients);
+
+            final ViewGroup   zoneIngredients       = (ViewGroup)v.findViewById(R.id.zoneIngredients);
             final ViewGroup   zoneListIngredients   = (ViewGroup)v.findViewById(R.id.zoneListIngredients);
-            final ViewGroup   zoneDescription   = (ViewGroup)v.findViewById(R.id.zoneDescription);
+            final ViewGroup   zoneDescription       = (ViewGroup)v.findViewById(R.id.zoneDescription);
 
             productSelect = (Product) product.clone();
             if(productSelect.getIngredientes() != null) productSelect.getIngredientes().clear();
@@ -157,28 +152,24 @@ public class FragmentProduct extends Fragment {
             else                                        tvDescriptionProduct.setVisibility(View.GONE);
 
             if(product.getIngredientes() != null){
+                if(product.getIngredientes().size() == 0)btnIngredients.setVisibility(View.GONE);
                 for(final Ingredient ingredient : product.getIngredientes()){
-                    CheckProductPrice checkIngredient = new CheckProductPrice(ctx);
-                    checkIngredient.setName(ingredient.getNombre());
-                    checkIngredient.setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
-
+                    CheckProductPrice checkIngredient = new CheckProductPrice(ctx, ingredient);
                     zoneListIngredients.addView(checkIngredient);
 
                     checkIngredient.getCheck().setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                         @Override
                         public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                             if(b == true){
-//                            productSelect.getIngredientes().add((Ingredient) ingredient.clone());
+                                productSelect.getIngredientes().add((Ingredient) ingredient.clone());
                             }else {
-                                productSelect.getIngredientes().remove(ingredient);
+                                productSelect.deleteIngredient(ingredient);
                             }
                         }
                     });
                 }
             }
-            else{
-                btnIngredients.setVisibility(View.GONE);
-            }
+            else btnIngredients.setVisibility(View.GONE);
 
             btnIngredients.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -195,7 +186,6 @@ public class FragmentProduct extends Fragment {
                     ViewTools.switchVisibisilite(zoneIngredients);
                 }
             });
-
 
             return v;
         }

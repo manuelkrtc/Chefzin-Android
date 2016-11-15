@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future333.chefzin.R;
+import com.future333.chefzin.model.Ingredient;
+import com.future333.chefzin.tools.FormatTools;
 
 /**
  * Created by manuel on 4/11/16.
@@ -32,13 +34,15 @@ public class CheckProductPrice extends LinearLayout {
         inicializate(v);
     }
 
-    public CheckProductPrice(Context context) {
+    public CheckProductPrice(Context context, Ingredient ingredient) {
         super(context);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflater.inflate(R.layout.view_check_product_price, this, true);
 
         inicializate(v);
+        setName(ingredient.getNombre());
+        setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
     }
 
     private void inicializate(View v){
