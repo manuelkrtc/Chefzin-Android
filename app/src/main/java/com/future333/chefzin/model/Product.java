@@ -77,9 +77,11 @@ public class Product implements Cloneable {
     }
 
     public void deleteIngredient(Ingredient ingre){
-        for(Ingredient ingredient : ingredientes){
-            if(ingredient.getId_ingrediente() == ingre.getId_ingrediente())
-                ingredientes.remove(ingredient);
+
+        for(int i=0; i<ingredientes.size(); i++){
+            if(ingre.getId_ingrediente().equals(ingredientes.get(i).getId_ingrediente())){
+                ingredientes.remove(i);
+            }
         }
     }
 }
