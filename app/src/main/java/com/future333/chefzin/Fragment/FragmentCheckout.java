@@ -153,16 +153,14 @@ public class FragmentCheckout extends Fragment {
         public void onBindViewHolder(ProductsViewHolder holder, int position) {
             final Product product = products.get(position);
 
-//            holder.tvName.setText(product.name);
+            holder.tvName.setText(product.getNombre());
             holder.tvPrice.setText("$"+String.valueOf(product.getPrecio()));
 
-            if(!holder.iscreateIngredientes){
-                for(Ingredient ingredient: product.getIngredientes()){
-                    FontTextView textView = new FontTextView(ctxAdap);
-                    textView.setText(" -" + ingredient.getNombre());
-                    holder.lyAdditions.addView(textView);
-                }
-                holder.iscreateIngredientes = true;
+            holder.lyAdditions.removeAllViews();
+            for(Ingredient ingredient: product.getIngredientes()){
+                FontTextView textView = new FontTextView(ctxAdap);
+                textView.setText(" -" + ingredient.getNombre());
+                holder.lyAdditions.addView(textView);
             }
 
             if(product.getIngredientes().size()==0) holder.zoneAdditions.setVisibility(View.GONE);
@@ -184,8 +182,6 @@ public class FragmentCheckout extends Fragment {
 
         public static class ProductsViewHolder extends RecyclerView.ViewHolder {
 
-            private boolean iscreateIngredientes;//Esta variable se crea para verificar si ya se pintaron los ingredientes y no repintarlos.
-
             private TextView tvName;
             private TextView tvPrice;
 
@@ -195,8 +191,6 @@ public class FragmentCheckout extends Fragment {
 
             public ProductsViewHolder(View itemView) {
                 super(itemView);
-
-                iscreateIngredientes = false;
 
                 tvName              = (TextView)    itemView.findViewById(R.id.tvName);
                 tvPrice             = (TextView)    itemView.findViewById(R.id.tvPrice);
