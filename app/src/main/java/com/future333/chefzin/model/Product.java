@@ -15,7 +15,7 @@ public class Product implements Cloneable {
     int impuesto;
     int unidad_cocina;
     int tiempo_preparacion;
-    ArrayList<Ingredient> ingredientes;
+    ArrayList<Ingredient> ingredientes = new ArrayList<>();
 
     public Object clone(){
         Product obj=null;
@@ -26,18 +26,6 @@ public class Product implements Cloneable {
         }
         if(ingredientes != null) obj.ingredientes = (ArrayList<Ingredient>) obj.ingredientes.clone();
         return obj;
-    }
-
-    public Product(Product product){
-        id_plato        = product.getId_plato();
-        imagen          = product.getImagen();
-        nombre          = product.getNombre();
-        info_adicional  = product.getInfo_adicional();
-        precio          = product.getPrecio();
-        impuesto        = product.getImpuesto();
-        unidad_cocina   = product.getUnidad_cocina();
-        tiempo_preparacion  = product.getTiempo_preparacion();
-        ingredientes        = product.getIngredientes();
     }
 
     public String getId_plato() {

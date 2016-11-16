@@ -2,6 +2,7 @@ package com.future333.chefzin.tools;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.TypedValue;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -45,5 +46,9 @@ public class ViewTools {
             view.setVisibility(View.VISIBLE);
             return;
         }
+    }
+
+    public static int dpToPx(Context ctx, int dp) {
+        return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, ctx.getResources().getDisplayMetrics());
     }
 }
