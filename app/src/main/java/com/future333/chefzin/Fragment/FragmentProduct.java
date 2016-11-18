@@ -18,14 +18,12 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
-import com.future333.chefzin.model.Addition;
-import com.future333.chefzin.model.Chef;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
-import com.future333.chefzin.tools.ApiTools;
-import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsFormat;
 import com.future333.chefzin.tools.ImageLoader;
-import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.tools.ToolsView;
 import com.future333.chefzin.view.CheckProductPrice;
 
 import java.util.ArrayList;
@@ -140,12 +138,12 @@ public class FragmentProduct extends Fragment {
 
             zoneIngredients.setVisibility(View.GONE);
 
-            _imageL.loadAndDisplayImage(ApiTools.URL_IMG_PLATO + product.getImagen(), ivProduct);
+            _imageL.loadAndDisplayImage(ToolsApi.URL_IMG_PLATO + product.getImagen(), ivProduct);
 
             if(product.getNombre() != null)     tvNameProduct.setText(product.getNombre());
             else                                tvNameProduct.setVisibility(View.GONE);
 
-            if(product.getPrecio() != 0)        tvPriceProduct.setText(FormatTools.int_to_price(product.getPrecio()));
+            if(product.getPrecio() != 0)        tvPriceProduct.setText(ToolsFormat.int_to_price(product.getPrecio()));
             else                                tvPriceProduct.setVisibility(View.GONE);
 
             if(product.getInfo_adicional() != null)     tvDescriptionProduct.setText(product.getInfo_adicional());
@@ -174,16 +172,16 @@ public class FragmentProduct extends Fragment {
             btnIngredients.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ViewTools.switchVisibisilite(zoneDescription);
-                    ViewTools.switchVisibisilite(zoneIngredients);
+                    ToolsView.switchVisibisilite(zoneDescription);
+                    ToolsView.switchVisibisilite(zoneIngredients);
                 }
             });
 
             btnCloseIngredients.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ViewTools.switchVisibisilite(zoneDescription);
-                    ViewTools.switchVisibisilite(zoneIngredients);
+                    ToolsView.switchVisibisilite(zoneDescription);
+                    ToolsView.switchVisibisilite(zoneIngredients);
                 }
             });
 

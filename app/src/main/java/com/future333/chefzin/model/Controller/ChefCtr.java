@@ -9,8 +9,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.Chef;
-import com.future333.chefzin.model.Horary;
-import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.ToolsApi;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -32,8 +31,8 @@ public class ChefCtr {
     }
 
     //-------------------------------- public methods--------------------------------------------------------------
-    public void getApiChefs(Activity ctx, String idHorary, final ApiTools.OnLogInListener logInListener){
-        JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ApiTools.URL_GET_CHEFZ + idHorary ,
+    public void getApiChefs(Activity ctx, String idHorary, final ToolsApi.OnLogInListener logInListener){
+        JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_GET_CHEFZ + idHorary ,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

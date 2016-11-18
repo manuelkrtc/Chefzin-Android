@@ -2,21 +2,27 @@ package com.future333.chefzin.Fragment;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
-import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.tools.ToolsPermissions;
+import com.future333.chefzin.tools.ToolsView;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
@@ -63,29 +69,88 @@ public class FragmentMap extends Fragment {
 
 
 
+
+
+
+
+
+
+
+//        LocationManager lm = (LocationManager)ctx.getSystemService(Context.LOCATION_SERVICE);
+//        boolean gps_enabled = false;
+//        boolean network_enabled = false;
+//
+//        try {
+//            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+//            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+//        } catch(Exception ex) {}
+//
+//        if(!gps_enabled && !network_enabled) {
+//            // notify user
+//            AlertDialog.Builder dialog = new AlertDialog.Builder(ctx);
+//            dialog.setMessage("gps_network_not_enabled");
+//            dialog.setPositiveButton("open_location_settings", new DialogInterface.OnClickListener() {
+//                @Override
+//                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+//                    // TODO Auto-generated method stub
+//                    Intent myIntent = new Intent( Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+//                    ctx.startActivity(myIntent);
+//                    //get gps
+//                }
+//            });
+//            dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+//
+//                @Override
+//                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+//                    // TODO Auto-generated method stub
+//
+//                }
+//            });
+//            dialog.show();
+//        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
 
 
-                if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ToolsPermissions.checkPermissionsLocation(ctx);
 
-
-                    if (ActivityCompat.shouldShowRequestPermissionRationale(ctx, Manifest.permission.ACCESS_FINE_LOCATION)) {
-                        ActivityCompat.requestPermissions(ctx, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-
-                    } else {
-
-                        ViewTools.msj(ctx,"La cago tiene q activar esta mierda manualkmenet");
-//                        ActivityCompat.requestPermissions(ctx,
-//                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-//                                MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-
-                    }
-                }else{
-                    map.setMyLocationEnabled(true);
-                }
+//                if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//
+//
+//                    if (ActivityCompat.shouldShowRequestPermissionRationale(ctx, Manifest.permission.ACCESS_FINE_LOCATION)) {
+//                        ActivityCompat.requestPermissions(ctx, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+//
+//                    } else {
+//
+//                        ToolsView.msj(ctx,"La cago tiene q activar esta mierda manualkmenet");
+////                        ActivityCompat.requestPermissions(ctx,
+////                                new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+////                                MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+//
+//                    }
+//                }else{
+//                    map.setMyLocationEnabled(true);
+//                }
 
 //                if (ContextCompat.checkSelfPermission(this,
 //                        Manifest.permission.WRITE_EXTERNAL_STORAGE)
@@ -172,9 +237,9 @@ public class FragmentMap extends Fragment {
             case MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ViewTools.msj(ctx,"Cago1");
+                    ToolsView.msj(ctx,"Cago1");
                 } else {
-                    ViewTools.msj(ctx,"cago2");
+                    ToolsView.msj(ctx,"cago2");
                 }
                 return;
             }

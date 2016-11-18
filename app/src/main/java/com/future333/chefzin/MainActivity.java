@@ -17,9 +17,9 @@ import com.future333.chefzin.Fragment.FragmentProduct;
 import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.Fragment.FragmentRecord;
 import com.future333.chefzin.model.User;
-import com.future333.chefzin.tools.ApiTools;
-import com.future333.chefzin.tools.SystemTools;
-import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsSystem;
+import com.future333.chefzin.tools.ToolsView;
 
 
 public class MainActivity extends FragmentActivity {
@@ -47,11 +47,11 @@ public class MainActivity extends FragmentActivity {
 
         inicializate();
 
-        SystemTools.getHash(ctx);
+        ToolsSystem.getHash(ctx);
 
         app.userCtr.getUserLocal(ctx);
 
-        app.horaryCtr.getApiHorary(ctx, new ApiTools.OnLogInListener() {
+        app.horaryCtr.getApiHorary(ctx, new ToolsApi.OnLogInListener() {
             @Override
             public void onSuccessful() {
                 goFragmentHorary();
@@ -59,7 +59,7 @@ public class MainActivity extends FragmentActivity {
 
             @Override
             public void onError(String error) {
-                ViewTools.msj(ctx,error);
+                ToolsView.msj(ctx,error);
             }
         });
     }

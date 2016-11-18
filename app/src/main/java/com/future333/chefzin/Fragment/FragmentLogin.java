@@ -27,9 +27,9 @@ import com.future333.chefzin.R;
 import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.model.UserFacebook;
-import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsNotif;
-import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.tools.ToolsView;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
@@ -165,16 +165,16 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 User user = new User();
                 user.setUserGoogle(acct);
 
-                app.userCtr.registerGoogle(ctx, user, new ApiTools.OnLogInListener() {
+                app.userCtr.registerGoogle(ctx, user, new ToolsApi.OnLogInListener() {
                     @Override
                     public void onSuccessful() {
-                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        ToolsView.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
                         getActivity().onBackPressed();
                     }
 
                     @Override
                     public void onError(String error) {
-                        ViewTools.msj(ctx,error);
+                        ToolsView.msj(ctx,error);
                     }
                 });
 
@@ -213,16 +213,16 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 String email = etEmailLog.getText().toString();
                 String password = etPasswordLog.getText().toString();
 
-                app.userCtr.logIn(ctx, email, password, new ApiTools.OnLogInListener() {
+                app.userCtr.logIn(ctx, email, password, new ToolsApi.OnLogInListener() {
                     @Override
                     public void onSuccessful() {
-                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        ToolsView.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
                         getActivity().onBackPressed();
                     }
 
                     @Override
                     public void onError(String error) {
-                        ViewTools.msj(ctx,error);
+                        ToolsView.msj(ctx,error);
                     }
                 });
             }
@@ -240,16 +240,16 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 formRegister.setTelefono(etTelephone.getText().toString());
                 formRegister.setCheckTerm(checkTerm.isChecked());
 
-                app.userCtr.register(ctx, formRegister, new ApiTools.OnLogInListener() {
+                app.userCtr.register(ctx, formRegister, new ToolsApi.OnLogInListener() {
                     @Override
                     public void onSuccessful() {
-                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                        ToolsView.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
                         getActivity().onBackPressed();
                     }
 
                     @Override
                     public void onError(String error) {
-                        ViewTools.msj(ctx,error);
+                        ToolsView.msj(ctx,error);
                     }
                 });
             }
@@ -288,16 +288,16 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                                 User user = new User();
                                 user.setUserFacebook(new Gson().fromJson(object.toString(), UserFacebook.class));
 
-                                app.userCtr.registerFacebook(ctx, user, new ApiTools.OnLogInListener() {
+                                app.userCtr.registerFacebook(ctx, user, new ToolsApi.OnLogInListener() {
                                     @Override
                                     public void onSuccessful() {
-                                        ViewTools.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
+                                        ToolsView.msj(ctx,"Bienvenido " + app.userCtr.getUser().getNombres());
                                         getActivity().onBackPressed();
                                     }
 
                                     @Override
                                     public void onError(String error) {
-                                        ViewTools.msj(ctx,error);
+                                        ToolsView.msj(ctx,error);
                                     }
                                 });
                             }
@@ -336,11 +336,11 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
         if(isViewRegister){
             zoneLogIn.setVisibility(View.GONE);
             zoneRegister.setVisibility(View.VISIBLE);
-            ViewTools.focusableForm(getActivity(),editTextsRegister);
+            ToolsView.focusableForm(getActivity(),editTextsRegister);
         }else {
             zoneLogIn.setVisibility(View.VISIBLE);
             zoneRegister.setVisibility(View.GONE);
-            ViewTools.focusableForm(getActivity(),editTextsLogin);
+            ToolsView.focusableForm(getActivity(),editTextsLogin);
         }
     }
 

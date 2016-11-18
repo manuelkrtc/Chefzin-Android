@@ -1,19 +1,16 @@
 package com.future333.chefzin.view;
 
 import android.content.Context;
-import android.content.res.TypedArray;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Ingredient;
-import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ToolsFormat;
 
 /**
  * Created by manuel on 4/11/16.
@@ -42,7 +39,7 @@ public class CheckProductPrice extends LinearLayout {
 
         inicializate(v);
         setName(ingredient.getNombre());
-        setPrice(FormatTools.int_to_price(ingredient.getPrecio()));
+        setPrice(ToolsFormat.int_to_price(ingredient.getPrecio()));
     }
 
     private void inicializate(View v){

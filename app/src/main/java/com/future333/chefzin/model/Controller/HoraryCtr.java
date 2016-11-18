@@ -1,8 +1,6 @@
 package com.future333.chefzin.model.Controller;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.android.volley.Request;
@@ -10,11 +8,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
-import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.Horary;
-import com.future333.chefzin.model.User;
-import com.future333.chefzin.tools.ApiTools;
-import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ToolsApi;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -22,7 +17,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -41,9 +35,9 @@ public class HoraryCtr {
     }
 
     //-------------------------------- public methods--------------------------------------------------------------
-    public void getApiHorary(final Activity ctx, final ApiTools.OnLogInListener logInListener){
+    public void getApiHorary(final Activity ctx, final ToolsApi.OnLogInListener logInListener){
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ApiTools.URL_HORARIOS,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_HORARIOS,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

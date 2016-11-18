@@ -18,15 +18,13 @@ import android.widget.TextView;
 
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
-import com.future333.chefzin.model.Addition;
 import com.future333.chefzin.model.Controller.ShopCart;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
-import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ToolsFormat;
 import com.future333.chefzin.tools.ToolsNotif;
-import com.future333.chefzin.tools.ViewTools;
+import com.future333.chefzin.tools.ToolsView;
 import com.future333.chefzin.view.CheckProductPrice;
-import com.future333.chefzin.view.FontTextView;
 
 import java.util.ArrayList;
 
@@ -157,14 +155,14 @@ public class FragmentCheckout extends Fragment {
             final Product product = products.get(position);
 
             holder.tvName.setText(product.getNombre());
-            holder.tvPrice.setText(FormatTools.int_to_price(product.getPrecio()));
+            holder.tvPrice.setText(ToolsFormat.int_to_price(product.getPrecio()));
 
             holder.lyAdditions.removeAllViews();
             for(Ingredient ingredient: product.getIngredientes()){
                 CheckProductPrice viewIngredient = new CheckProductPrice(ctxAdap, ingredient);
                 viewIngredient.setName(" - " + ingredient.getNombre());
                 viewIngredient.getCheck().setVisibility(View.GONE);
-                viewIngredient.setPadding(0,0, ViewTools.dpToPx(ctxAdap,20),0);
+                viewIngredient.setPadding(0,0, ToolsView.dpToPx(ctxAdap,20),0);
 
                 holder.lyAdditions.addView(viewIngredient);
             }

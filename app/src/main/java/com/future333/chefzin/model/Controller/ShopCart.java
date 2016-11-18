@@ -2,7 +2,7 @@ package com.future333.chefzin.model.Controller;
 
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
-import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ToolsFormat;
 
 import java.util.ArrayList;
 
@@ -58,19 +58,19 @@ public class ShopCart {
 
     //----------------------------------------------------------------------------------------------
     public String getSubTotal(){
-        return FormatTools.int_to_price(priceProductsIngredients());
+        return ToolsFormat.int_to_price(priceProductsIngredients());
     }
 
     public String getIva(){
-        return FormatTools.int_to_price(priceIva());
+        return ToolsFormat.int_to_price(priceIva());
     }
 
     public String getDomicile(){
-        return FormatTools.int_to_price(priceDomicile);
+        return ToolsFormat.int_to_price(priceDomicile);
     }
 
     public String getTotal(){
-        return FormatTools.int_to_price( priceProductsIngredients() + priceIva() + priceDomicile);
+        return ToolsFormat.int_to_price( priceProductsIngredients() + priceIva() + priceDomicile);
     }
 
 }

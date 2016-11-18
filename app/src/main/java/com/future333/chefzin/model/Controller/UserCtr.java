@@ -12,8 +12,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.User;
-import com.future333.chefzin.tools.ApiTools;
-import com.future333.chefzin.tools.FormatTools;
+import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsFormat;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -34,7 +34,7 @@ public class UserCtr {
 
     //-------------------------------- public methods--------------------------------------------------------------
 
-    public void logIn(Activity ctx, String email, String password, ApiTools.OnLogInListener logInListener){
+    public void logIn(Activity ctx, String email, String password, ToolsApi.OnLogInListener logInListener){
         String validationLogin = validationLogin(email, password);
         if(validationLogin==null){
             apiLogin(ctx,email,password,logInListener);
@@ -43,7 +43,7 @@ public class UserCtr {
         }
     }
 
-    public void logOut(Activity ctx, ApiTools.OnLogOutListener logOutListener){
+    public void logOut(Activity ctx, ToolsApi.OnLogOutListener logOutListener){
         if(this.user == null){
             Log.e("ErrorChefIn","NO hay una sesion activa");
             return;
@@ -52,7 +52,7 @@ public class UserCtr {
         logOutListener.onSuccessful();
     }
 
-    public void register(Activity ctx, FormRegister formRegister, ApiTools.OnLogInListener logInListener){
+    public void register(Activity ctx, FormRegister formRegister, ToolsApi.OnLogInListener logInListener){
         String validationRegister = validationRegister(formRegister);
         if(validationRegister==null){
             try {
@@ -66,7 +66,7 @@ public class UserCtr {
         }
     }
 
-    public void registerFacebook(Activity ctx, User _user, ApiTools.OnLogInListener logInListener){
+    public void registerFacebook(Activity ctx, User _user, ToolsApi.OnLogInListener logInListener){
         String validationRegister = validationRegisterFacebook(_user);
         if(validationRegister==null){
             try {
@@ -81,7 +81,7 @@ public class UserCtr {
         }
     }
 
-    public void registerGoogle(Activity ctx, User _user, ApiTools.OnLogInListener logInListener){
+    public void registerGoogle(Activity ctx, User _user, ToolsApi.OnLogInListener logInListener){
         String validationRegister = validationRegisterGoogle(_user);
         if(validationRegister==null){
             try {
@@ -101,12 +101,12 @@ public class UserCtr {
     }
 
     //----------------------------------------------------------------------------------------------
-    private void apiLogin(final Activity ctx, String email, String password, final ApiTools.OnLogInListener logInListener){
+    private void apiLogin(final Activity ctx, String email, String password, final ToolsApi.OnLogInListener logInListener){
             HashMap<String, String> parametros = new HashMap();
             parametros.put("email", email);
-            parametros.put("password", FormatTools.string_to_md5(password));
+            parametros.put("password", ToolsFormat.string_to_md5(password));
 
-            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_LOGIN, new JSONObject(parametros),
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_LOGIN, new JSONObject(parametros),
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
@@ -130,11 +130,11 @@ public class UserCtr {
             SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegister(final Activity ctx, FormRegister formRegister, final ApiTools.OnLogInListener logInListener) throws JSONException {
+    private void apiRegister(final Activity ctx, FormRegister formRegister, final ToolsApi.OnLogInListener logInListener) throws JSONException {
         String parametros = new Gson().toJson(formRegister);
         JSONObject jsonParam = new JSONObject(parametros);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_REGISTER, jsonParam,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_REGISTER, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -158,11 +158,11 @@ public class UserCtr {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegisterFacebook(final Activity ctx, User _user, final ApiTools.OnLogInListener logInListener) throws JSONException {
+    private void apiRegisterFacebook(final Activity ctx, User _user, final ToolsApi.OnLogInListener logInListener) throws JSONException {
         String parametros = new Gson().toJson(_user);
         JSONObject jsonParam = new JSONObject(parametros);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_REGISTER_FACEBOOK, jsonParam,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_REGISTER_FACEBOOK, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -186,11 +186,11 @@ public class UserCtr {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegisterGoogle(final Activity ctx, User _user, final ApiTools.OnLogInListener logInListener) throws JSONException {
+    private void apiRegisterGoogle(final Activity ctx, User _user, final ToolsApi.OnLogInListener logInListener) throws JSONException {
         String parametros = new Gson().toJson(_user);
         JSONObject jsonParam = new JSONObject(parametros);
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ApiTools.URL_REGISTER_GOOGLE, jsonParam,
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_REGISTER_GOOGLE, jsonParam,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -214,8 +214,8 @@ public class UserCtr {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void getApiInfoUser(final Activity ctx, String token, final ApiTools.OnLogInListener logInListener){
-        JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ApiTools.URL_INFO_USER + token,
+    private void getApiInfoUser(final Activity ctx, String token, final ToolsApi.OnLogInListener logInListener){
+        JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_INFO_USER + token,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

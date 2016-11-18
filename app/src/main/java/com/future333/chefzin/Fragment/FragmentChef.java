@@ -2,35 +2,22 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.text.method.NumberKeyListener;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
-import com.daimajia.slider.library.Tricks.ViewPagerEx;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Chef;
-import com.future333.chefzin.tools.ApiTools;
+import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ImageLoader;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -101,7 +88,7 @@ public class FragmentChef extends Fragment {
             ViewGroup   lyParent            = (ViewGroup)v.findViewById(R.id.lyParent);
 
             ratingBar.setRating(chef.getCalificacion());
-            _imageL.loadAndDisplayImage(ApiTools.URL_IMG_CHEF + chef.getFoto(), ivChef);
+            _imageL.loadAndDisplayImage(ToolsApi.URL_IMG_CHEF + chef.getFoto(), ivChef);
 
             if(chef.getNombres() != null)   tvNameChef.setText(chef.getNombres());
             else                            tvNameChef.setVisibility(View.GONE);

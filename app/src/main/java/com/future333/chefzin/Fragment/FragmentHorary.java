@@ -3,44 +3,25 @@ package com.future333.chefzin.Fragment;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.daimajia.slider.library.Indicators.PagerIndicator;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
-import com.future333.chefzin.SingletonVolley;
-import com.future333.chefzin.model.Chef;
-import com.future333.chefzin.model.Controller.HoraryCtr;
 import com.future333.chefzin.model.Horary;
-import com.future333.chefzin.model.User;
-import com.future333.chefzin.tools.ApiTools;
-import com.future333.chefzin.tools.DateTools;
+import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsDate;
 import com.future333.chefzin.tools.ToolsNotif;
-import com.future333.chefzin.tools.ViewTools;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.future333.chefzin.tools.ToolsView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * Created by manuel on 12/09/16.
@@ -111,8 +92,8 @@ public class FragmentHorary extends Fragment {
             if(horary.getNombre() != null)  tvName.setText(horary.getNombre().toUpperCase());
             else                            tvName.setVisibility(View.GONE);
 
-            String startTime = DateTools.dateFormat(horary.getHora_ini());
-            String finalTime = DateTools.dateFormat(horary.getHora_fin());
+            String startTime = ToolsDate.dateFormat(horary.getHora_ini());
+            String finalTime = ToolsDate.dateFormat(horary.getHora_fin());
             if(startTime!=null && finalTime!=null) tvHorary.setText(startTime + " - " + finalTime);
             else tvHorary.setVisibility(View.GONE);
 
@@ -122,7 +103,7 @@ public class FragmentHorary extends Fragment {
                 @Override
                 public void onClick(View view) {
                     toolsNotif.showDialogProgress();
-                    app.chefCtr.getApiChefs(ctx, horary.getId(), new ApiTools.OnLogInListener() {
+                    app.chefCtr.getApiChefs(ctx, horary.getId(), new ToolsApi.OnLogInListener() {
                         @Override
                         public void onSuccessful() {
                             ((MainActivity)getActivity()).goFragmentChef();
@@ -130,7 +111,7 @@ public class FragmentHorary extends Fragment {
                         }
                         @Override
                         public void onError(String error) {
-                            ViewTools.msj(ctx,error);
+                            ToolsView.msj(ctx,error);
                             toolsNotif.cancelDialogProgress();
                         }
                     });
