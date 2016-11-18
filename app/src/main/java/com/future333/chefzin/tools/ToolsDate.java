@@ -7,7 +7,7 @@ import java.util.Date;
 /**
  * Created by manuel on 4/10/16.
  */
-public class DateTools {
+public class ToolsDate {
 
     public static String dateFormat(String dateInit){
         try {

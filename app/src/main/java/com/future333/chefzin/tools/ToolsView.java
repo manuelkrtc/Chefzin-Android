@@ -13,7 +13,7 @@ import java.util.ArrayList;
 /**
  * Created by manuel on 9/4/16.
  */
-public class ViewTools {
+public class ToolsView {
 
     /** this method setFocusable a EditText and activate keyboard. */
     public static void focusableEditText(Activity activity, EditText editText){

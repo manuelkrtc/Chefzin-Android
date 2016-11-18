@@ -13,7 +13,7 @@ import java.security.NoSuchAlgorithmException;
 /**
  * Created by manuel on 10/26/16.
  */
-public class SystemTools {
+public class ToolsSystem {
 
     public static void getHash(Activity ctx){
         try {

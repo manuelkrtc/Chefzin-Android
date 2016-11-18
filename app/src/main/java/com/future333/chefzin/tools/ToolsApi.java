@@ -3,7 +3,7 @@ package com.future333.chefzin.tools;
 /**
  * Created by manuel on 4/10/16.
  */
-public class ApiTools {
+public class ToolsApi {
 
     final static String URL_BASE = "http://23.251.149.115/chefzin/";
 

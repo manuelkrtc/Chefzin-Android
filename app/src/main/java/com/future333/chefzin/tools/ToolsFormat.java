@@ -7,7 +7,7 @@ import java.text.NumberFormat;
 /**
  * Created by manuel on 5/10/16.
  */
-public class FormatTools {
+public class ToolsFormat {
 
     public static String string_to_md5(String password){
         try {
