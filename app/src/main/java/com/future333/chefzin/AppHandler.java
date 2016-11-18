@@ -1,6 +1,8 @@
 package com.future333.chefzin;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
 
 import com.future333.chefzin.model.Chef;
 import com.future333.chefzin.model.Controller.ChefCtr;
@@ -19,5 +21,10 @@ public class AppHandler extends Application {
     public HoraryCtr    horaryCtr   = new HoraryCtr();
 
     public Chef chefSelect   = new Chef();
+
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
 }
