@@ -6,4 +6,8 @@
     <string name="server_client_id">303188047279-vkcaag2nfs4b6flgpg04c61hl1qp9b3c.apps.googleusercontent.com</string>
     <string name="secreto_de_cliente">h3r6lgpV_8GlsdwIntzjU4PF</string>
 
+    //maps
+    <string name="key_maps">AIzaSyC_NgbCJMmKZnndBg9A-9Ir-u5XWSU-08s</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

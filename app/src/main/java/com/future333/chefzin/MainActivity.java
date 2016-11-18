@@ -12,6 +12,7 @@ import com.future333.chefzin.Fragment.FragmentCheckout;
 import com.future333.chefzin.Fragment.FragmentChef;
 import com.future333.chefzin.Fragment.FragmentHorary;
 import com.future333.chefzin.Fragment.FragmentLogin;
+import com.future333.chefzin.Fragment.FragmentMap;
 import com.future333.chefzin.Fragment.FragmentProduct;
 import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.Fragment.FragmentRecord;
@@ -38,8 +39,6 @@ public class MainActivity extends FragmentActivity {
     FragmentProfile fragmentProfile;
 
     FragmentTransaction fragmentTransaction;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +136,15 @@ public class MainActivity extends FragmentActivity {
         setToolbartEmpty();
     }
 
+    private void goFragmentMap(){
+        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.rlFragment, FragmentMap.newInstance());
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+
+        setToolbartEmpty();
+    }
+
     @Override
     public void onBackPressed() {
         setToolbartFull();
@@ -151,6 +159,11 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void btnReload(View view){
+        goFragmentMap();
+
+    }
+
+    public void btnRecord(View view){
         goFragmentRecord();
     }
 
