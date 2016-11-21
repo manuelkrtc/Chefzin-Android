@@ -2,7 +2,9 @@ package com.future333.chefzin;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
 import android.widget.ImageView;
@@ -18,6 +20,7 @@ import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.Fragment.FragmentRecord;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsPermissions;
 import com.future333.chefzin.tools.ToolsSystem;
 import com.future333.chefzin.tools.ToolsView;
 
@@ -177,5 +180,22 @@ public class MainActivity extends FragmentActivity {
         btnMenu.setVisibility(View.VISIBLE);
         btnUpdate.setVisibility(View.VISIBLE);
         btnProfile.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        switch (requestCode) {
+//            case ToolsPermissions.MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
+//                // If request is cancelled, the result arrays are empty.
+//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+//                    ToolsView.msj(ctx,"Cago1");
+//                } else {
+//                    ToolsView.msj(ctx,"cago2");
+//                }
+//                return;
+//            }
+//
+//        }
     }
 }

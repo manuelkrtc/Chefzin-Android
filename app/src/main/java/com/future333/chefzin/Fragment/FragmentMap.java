@@ -35,11 +35,10 @@ public class FragmentMap extends Fragment {
 
     Activity    ctx;
     AppHandler  app;
+    Fragment    ctxFrag;
 
     MapView mapView;
     GoogleMap map;
-
-   static final int MY_PERMISSIONS_REQUEST_FINE_LOCATION = 1;
 
     public static FragmentMap newInstance() {
         return new FragmentMap();
@@ -49,8 +48,9 @@ public class FragmentMap extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ctx = getActivity();
-        app = ((AppHandler)getActivity().getApplication());
+        ctx     = getActivity();
+        ctxFrag = this;
+        app     = ((AppHandler)getActivity().getApplication());
 
     }
 
@@ -60,44 +60,51 @@ public class FragmentMap extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_maps, container, false);
 
-        // Gets the MapView from the XML layout and creates it
         mapView = (MapView) v.findViewById(R.id.map);
+
+        return v;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        inicializateMap(savedInstanceState);
+    }
+
+    private void inicializateMap(Bundle savedInstanceState){
         mapView.onCreate(savedInstanceState);
 
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 map = googleMap;
-
-                if(ToolsPermissions.enabledPermissionsLocation(ctx)){
-                    map.setMyLocationEnabled(true);
-                    ToolsPermissions.enableLocation(ctx);
+                if(ToolsPermissions.enabledPermissionsLocation(ctx,ctxFrag)){
+                    secondConfMap();
                 }
             }
         });
-
-        return v;
     }
 
+    public void secondConfMap(){
+        map.setMyLocationEnabled(true);
+        ToolsPermissions.enableLocation(ctx);
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
 
         switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
+            case ToolsPermissions.MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    ToolsView.msj(ctx,"Cago1");
-                } else {
-                    ToolsView.msj(ctx,"cago2");
+                    secondConfMap();
                 }
                 return;
             }
-
         }
     }
 
-        @Override
+    @Override
     public void onResume() {
         mapView.onResume();
         super.onResume();
@@ -119,22 +126,5 @@ public class FragmentMap extends Fragment {
     public void onLowMemory() {
         super.onLowMemory();
         mapView.onLowMemory();
-    }
-
-    private MapFragment getMapFragment() {
-        FragmentManager fm = null;
-
-//        Log.d("sdk: ",  Build.VERSION.SDK_INT);
-//        Log.d("release: ",  Build.VERSION.RELEASE);
-
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
-//            Log.d(TAG, "using getFragmentManager");
-            fm = getFragmentManager();
-        } else {
-//            Log.d(TAG, "using getChildFragmentManager");
-            fm = getChildFragmentManager();
-        }
-
-        return (MapFragment) fm.findFragmentById(R.id.map);
     }
 }
