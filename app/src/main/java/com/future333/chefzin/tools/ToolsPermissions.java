@@ -9,6 +9,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.os.Build;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -44,8 +45,10 @@ public class ToolsPermissions {
     public static boolean enabledPermissionsLocation(Activity ctx, Fragment fragment){
         if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(ctx, Manifest.permission.ACCESS_FINE_LOCATION)){
-                fragment.requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    fragment.requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+                }
 
             } else {
                 ToolsView.msj(ctx,"Si desea activar los permisos de localización debes acceder a la configuración del dispositivo.");

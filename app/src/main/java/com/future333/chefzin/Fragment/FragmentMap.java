@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
@@ -29,8 +31,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
@@ -45,6 +50,8 @@ public class FragmentMap extends Fragment {
 
     MapView mapView;
     GoogleMap map;
+
+    Marker now;
 
     public static FragmentMap newInstance() {
         return new FragmentMap();
@@ -110,13 +117,18 @@ public class FragmentMap extends Fragment {
         map.addPolygon(rectOptions);
 
 
-        LatLngBounds AUSTRALIA = new LatLngBounds(
-                new LatLng(4.687373, -74.056782),
+        final LatLngBounds positionCam = new LatLngBounds(
+                new LatLng(4.686768, -74.059861),
                 new LatLng(4.702076, -74.028608)
         );
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(positionCam.getCenter(), 14.5F));
 
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(AUSTRALIA.getCenter(), 10));
+
     }
+
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode,String permissions[], int[] grantResults) {
