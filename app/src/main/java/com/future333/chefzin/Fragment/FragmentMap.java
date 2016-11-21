@@ -9,6 +9,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,10 +24,15 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.tools.ToolsPermissions;
 import com.future333.chefzin.tools.ToolsView;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
 
 /**
  * Created by manuel on 12/09/16.
@@ -89,6 +95,27 @@ public class FragmentMap extends Fragment {
     public void secondConfMap(){
         map.setMyLocationEnabled(true);
         ToolsPermissions.enableLocation(ctx);
+
+        // Instantiates a new Polygon object and adds points to define a rectangle
+        PolygonOptions rectOptions = new PolygonOptions()
+                .strokeColor(Color.RED)
+                .fillColor(R.color.colorPrimaryBlur)
+                .add(new LatLng(4.706559, -74.053683),
+                        new LatLng(4.686884, -74.056966),
+                        new LatLng(4.685077, -74.048054),
+                        new LatLng(4.679826, -74.038126),
+                        new LatLng(4.702046, -74.028577));
+
+        // Get back the mutable Polygon
+        map.addPolygon(rectOptions);
+
+
+        LatLngBounds AUSTRALIA = new LatLngBounds(
+                new LatLng(4.687373, -74.056782),
+                new LatLng(4.702076, -74.028608)
+        );
+
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(AUSTRALIA.getCenter(), 10));
     }
 
     @Override

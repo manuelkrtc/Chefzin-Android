@@ -13,8 +13,6 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 
-import static android.R.attr.fragment;
-
 /**
  * Created by manuel on 18/11/16.
  */
