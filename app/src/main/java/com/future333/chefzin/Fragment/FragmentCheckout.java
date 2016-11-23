@@ -80,12 +80,12 @@ public class FragmentCheckout extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //ViewPager
-        checkoutAdapter = new CheckoutPageAdapter(ctx, app.shopCart);
+        checkoutAdapter = new CheckoutPageAdapter(ctx, app.ctrCart);
         viewPager.setAdapter(checkoutAdapter);
 
         //RecyclerView
         rvProduct.setHasFixedSize(true);
-        adapaterRecicler = new AdaptadorProducts(app.shopCart.getProducts(), checkoutAdapter, ctx);
+        adapaterRecicler = new AdaptadorProducts(app.ctrCart.getProducts(), checkoutAdapter, ctx);
         rvProduct.setAdapter(adapaterRecicler);
         rvProduct.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false));
 
@@ -172,7 +172,7 @@ public class FragmentCheckout extends Fragment {
             holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((AppHandler)ctxAdap.getApplication()).shopCart.deleteProduct(product);
+                    ((AppHandler)ctxAdap.getApplication()).ctrCart.deleteProduct(product);
                     thisAdatpter.notifyDataSetChanged();
                     checkoutAdapter.updatePriceView();
                 }

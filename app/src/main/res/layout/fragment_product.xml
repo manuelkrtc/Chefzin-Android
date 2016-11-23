@@ -48,7 +48,7 @@
                 />
         </RelativeLayout>
 
-        <!--zone button shopCart-->
+        <!--zone button ctrCart-->
         <RelativeLayout
             android:layout_width="80dp"
             android:layout_height="match_parent"

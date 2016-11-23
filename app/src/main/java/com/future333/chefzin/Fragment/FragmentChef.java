@@ -57,7 +57,7 @@ public class FragmentChef extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        initSlider(app.chefCtr.getChefs());
+        initSlider(app.ctrChef.getChefs());
     }
 
     private void initSlider(ArrayList<Chef> chefs) {

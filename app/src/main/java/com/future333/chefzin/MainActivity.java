@@ -2,7 +2,6 @@ package com.future333.chefzin;
 
 import android.app.Activity;
 import android.app.FragmentTransaction;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -20,7 +19,6 @@ import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.Fragment.FragmentRecord;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ToolsApi;
-import com.future333.chefzin.tools.ToolsPermissions;
 import com.future333.chefzin.tools.ToolsSystem;
 import com.future333.chefzin.tools.ToolsView;
 
@@ -52,9 +50,9 @@ public class MainActivity extends FragmentActivity {
 
         ToolsSystem.getHash(ctx);
 
-        app.userCtr.getUserLocal(ctx);
+        app.ctrUser.getUserLocal(ctx);
 
-        app.horaryCtr.getApiHorary(ctx, new ToolsApi.OnLogInListener() {
+        app.ctrHorary.getApiHorary(ctx, new ToolsApi.OnLogInListener() {
             @Override
             public void onSuccessful() {
                 goFragmentHorary();
@@ -156,7 +154,7 @@ public class MainActivity extends FragmentActivity {
 
     //-------------------------------------- buttons Toolbar ---------------------------------------
     public void btnProfile(View view){
-        User user = app.userCtr.getUser();
+        User user = app.ctrUser.getUser();
         if(user == null)    goFragmentLogin();
         else                goFragmentProfile();
     }

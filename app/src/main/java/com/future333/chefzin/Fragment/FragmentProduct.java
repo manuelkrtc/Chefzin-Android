@@ -81,8 +81,10 @@ public class FragmentProduct extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
                 Product product = (Product) arraySliderView.get(slider.getCurrentPosition()).productSelect.clone();
-                app.shopCart.addProduct(product);
+                app.ctrCart.addProduct(product);
                 updateView();
             }
         });
@@ -190,12 +192,12 @@ public class FragmentProduct extends Fragment {
     }
 
     public void updateView(){
-        tvQuantity.setText(app.shopCart.quantityProducts());
+        tvQuantity.setText(app.ctrCart.quantityProducts());
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        app.shopCart.clear();
+        app.ctrCart.clear();
     }
 }

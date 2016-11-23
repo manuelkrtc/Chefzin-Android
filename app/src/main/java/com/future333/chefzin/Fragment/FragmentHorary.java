@@ -53,7 +53,7 @@ public class FragmentHorary extends Fragment {
 
         inicializate(view);
 
-        initSlider(app.horaryCtr.getHoraries());
+        initSlider(app.ctrHorary.getHoraries());
 
         return view;
     }
@@ -103,7 +103,7 @@ public class FragmentHorary extends Fragment {
                 @Override
                 public void onClick(View view) {
                     toolsNotif.showDialogProgress();
-                    app.chefCtr.getApiChefs(ctx, horary.getId(), new ToolsApi.OnLogInListener() {
+                    app.ctrChef.getApiChefs(ctx, horary.getId(), new ToolsApi.OnLogInListener() {
                         @Override
                         public void onSuccessful() {
                             ((MainActivity)getActivity()).goFragmentChef();

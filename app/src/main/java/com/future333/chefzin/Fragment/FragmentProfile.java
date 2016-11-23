@@ -72,8 +72,8 @@ public class FragmentProfile extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(app.userCtr.getUser().getFoto() != null)
-            _imageL.loadAndDisplayCircledImage(app.userCtr.getUser().getFoto(), ivProfile);
+        if(app.ctrUser.getUser().getFoto() != null)
+            _imageL.loadAndDisplayCircledImage(app.ctrUser.getUser().getFoto(), ivProfile);
 
         listen();
         setInfo();
@@ -83,7 +83,7 @@ public class FragmentProfile extends Fragment {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                app.userCtr.logOut(ctx, new ToolsApi.OnLogOutListener() {
+                app.ctrUser.logOut(ctx, new ToolsApi.OnLogOutListener() {
                     @Override
                     public void onSuccessful() {
                         ToolsView.msj(ctx,"Vuelve pronto.");
@@ -103,7 +103,7 @@ public class FragmentProfile extends Fragment {
 
     //----------------------------------- METHODS --------------------------------------------------
     private void setInfo(){
-        User user = app.userCtr.getUser();
+        User user = app.ctrUser.getUser();
         if(user != null){
             if(user.getNombres() == null && user.getNombres() == null) tvName.setVisibility(View.GONE);
             else tvName.setText(user.getNombres() + " " + user.getApellidos() );

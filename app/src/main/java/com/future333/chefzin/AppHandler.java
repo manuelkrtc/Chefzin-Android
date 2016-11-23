@@ -15,10 +15,10 @@ import com.future333.chefzin.model.Controller.CtrUser;
  */
 public class AppHandler extends Application {
 
-    public CtrChef chefCtr     = new CtrChef();
-    public CtrUser userCtr     = new CtrUser();
-    public CtrCart shopCart    = new CtrCart();
-    public CtrHorary horaryCtr   = new CtrHorary();
+    public CtrChef      ctrChef     = new CtrChef();
+    public CtrUser      ctrUser     = new CtrUser();
+    public CtrCart      ctrCart     = new CtrCart();
+    public CtrHorary    ctrHorary   = new CtrHorary();
 
     public Chef chefSelect   = new Chef();
 
