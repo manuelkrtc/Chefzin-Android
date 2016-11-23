@@ -82,6 +82,10 @@ public class FragmentProduct extends Fragment {
             @Override
             public void onClick(View view) {
 
+                if(app.ctrUser.getUser() == null){
+                    ((MainActivity)ctx).goFragmentLogin();
+                    return;
+                }
 
                 Product product = (Product) arraySliderView.get(slider.getCurrentPosition()).productSelect.clone();
                 app.ctrCart.addProduct(product);

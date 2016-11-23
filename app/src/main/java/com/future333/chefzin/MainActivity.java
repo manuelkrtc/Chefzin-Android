@@ -83,7 +83,7 @@ public class MainActivity extends FragmentActivity {
 
 
     //--------------------------------------- goFragments ------------------------------------------
-    private void goFragmentLogin(){
+    public void goFragmentLogin(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentLogin.newInstance());
         fragmentTransaction.addToBackStack(null);
