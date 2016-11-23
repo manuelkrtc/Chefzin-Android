@@ -1,6 +1,8 @@
 package com.future333.chefzin.tools;
 
 import android.app.Activity;
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.View;
@@ -50,5 +52,13 @@ public class ToolsView {
 
     public static int dpToPx(Context ctx, int dp) {
         return (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, ctx.getResources().getDisplayMetrics());
+    }
+
+    /**Este devuelve el fragment manager dependiendo la version de android.*/
+    public static FragmentManager getMapFragment(Fragment fragment) {
+        FragmentManager fm = fragment.getFragmentManager();
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN_MR1)
+            fm = fragment.getChildFragmentManager();
+        return fm;
     }
 }
