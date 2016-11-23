@@ -9,7 +9,7 @@ import java.util.ArrayList;
 /**
  * Created by manuel on 11/10/16.
  */
-public class ShopCart {
+public class CtrCart {
 
     private int percentIva      = 16;
     private int priceDomicile   = 5000;

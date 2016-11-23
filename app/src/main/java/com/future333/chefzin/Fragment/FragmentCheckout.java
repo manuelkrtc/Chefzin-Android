@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
-import com.future333.chefzin.model.Controller.ShopCart;
+import com.future333.chefzin.model.Controller.CtrCart;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ToolsFormat;
@@ -216,9 +216,9 @@ public class FragmentCheckout extends Fragment {
         View priceView  = null;
         View paymentView= null;
 
-        ShopCart _shopCart;
+        CtrCart _shopCart;
 
-        public CheckoutPageAdapter(Activity ctx, ShopCart shopCart){
+        public CheckoutPageAdapter(Activity ctx, CtrCart shopCart){
             this.ctx = ctx;
             this._shopCart = shopCart;
         }

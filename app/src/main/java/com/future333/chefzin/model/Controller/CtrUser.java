@@ -24,7 +24,7 @@ import java.util.HashMap;
 /**
  * Created by manuel on 5/10/16.
  */
-public class UserCtr {
+public class CtrUser {
 
     private User user;
 

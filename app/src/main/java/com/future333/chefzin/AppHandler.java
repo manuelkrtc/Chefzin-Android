@@ -5,20 +5,20 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.future333.chefzin.model.Chef;
-import com.future333.chefzin.model.Controller.ChefCtr;
-import com.future333.chefzin.model.Controller.HoraryCtr;
-import com.future333.chefzin.model.Controller.ShopCart;
-import com.future333.chefzin.model.Controller.UserCtr;
+import com.future333.chefzin.model.Controller.CtrChef;
+import com.future333.chefzin.model.Controller.CtrHorary;
+import com.future333.chefzin.model.Controller.CtrCart;
+import com.future333.chefzin.model.Controller.CtrUser;
 
 /**
  * Created by manuel on 3/10/16.
  */
 public class AppHandler extends Application {
 
-    public ChefCtr      chefCtr     = new ChefCtr();
-    public UserCtr      userCtr     = new UserCtr();
-    public ShopCart     shopCart    = new ShopCart();
-    public HoraryCtr    horaryCtr   = new HoraryCtr();
+    public CtrChef chefCtr     = new CtrChef();
+    public CtrUser userCtr     = new CtrUser();
+    public CtrCart shopCart    = new CtrCart();
+    public CtrHorary horaryCtr   = new CtrHorary();
 
     public Chef chefSelect   = new Chef();
 
