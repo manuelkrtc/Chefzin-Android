@@ -145,7 +145,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
 
         listen();
         createArraysEditText();
-        isViewRegister(true);
+        isViewRegister(false);
     }
 
     @Override
