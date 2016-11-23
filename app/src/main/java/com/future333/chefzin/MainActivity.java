@@ -19,6 +19,7 @@ import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.Fragment.FragmentRecord;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsFragment;
 import com.future333.chefzin.tools.ToolsSystem;
 import com.future333.chefzin.tools.ToolsView;
 
@@ -79,6 +80,8 @@ public class MainActivity extends FragmentActivity {
         fragmentLogin   = FragmentLogin.newInstance();
         fragmentHorary  = new FragmentHorary();
         fragmentProfile = new FragmentProfile();
+
+
     }
 
 
@@ -86,7 +89,7 @@ public class MainActivity extends FragmentActivity {
     public void goFragmentLogin(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentLogin.newInstance());
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentLogin.NAME);
         fragmentTransaction.commit();
 
         setToolbartEmpty();
@@ -95,7 +98,7 @@ public class MainActivity extends FragmentActivity {
     public void goFragmentProfile(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentProfile);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentProfile.NAME);
         fragmentTransaction.commit();
 
         setToolbartEmpty();
@@ -104,34 +107,35 @@ public class MainActivity extends FragmentActivity {
     public void goFragmentChef(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentChef);
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentChef.NAME);
         fragmentTransaction.commit();
     }
 
     public void goFragmentHorary(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, fragmentHorary);
+        fragmentTransaction.addToBackStack(FragmentHorary.NAME);
         fragmentTransaction.commit();
     }
 
     public void goFragmentMenu(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, new FragmentProduct());
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentProduct.NAME);
         fragmentTransaction.commit();
     }
 
     public void goFragmentCheckout(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentCheckout.newInstance());
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentCheckout.NAME);
         fragmentTransaction.commit();
     }
 
     private void goFragmentRecord(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentRecord.newInstance());
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentRecord.NAME);
         fragmentTransaction.commit();
 
         setToolbartEmpty();
@@ -140,7 +144,7 @@ public class MainActivity extends FragmentActivity {
     private void goFragmentMap(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentMap.newInstance());
-        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(FragmentMap.NAME);
         fragmentTransaction.commit();
 
         setToolbartEmpty();
@@ -148,8 +152,31 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-        setToolbartFull();
+
+        if(ToolsFragment.getFragmentCurrent(ctx).equals(FragmentHorary.NAME)) return;
         getFragmentManager().popBackStack();
+
+        setToolbar();
+    }
+
+    private void setToolbar(){
+
+        String nameFragmentCurrent = ToolsFragment.getFragmentCurrent(ctx);
+
+        if(nameFragmentCurrent.equals(FragmentHorary.NAME)) setToolbartHome();
+
+        if(     nameFragmentCurrent.equals(FragmentCheckout.NAME)   ||
+                nameFragmentCurrent.equals(FragmentChef.NAME)       ||
+                nameFragmentCurrent.equals(FragmentLogin.NAME)      ||
+                nameFragmentCurrent.equals(FragmentMap.NAME)        ||
+                nameFragmentCurrent.equals(FragmentProduct.NAME)    ||
+                nameFragmentCurrent.equals(FragmentProfile.NAME)    ||
+                nameFragmentCurrent.equals(FragmentRecord.NAME)     ||
+                nameFragmentCurrent.equals(FragmentHorary.NAME)     ||
+                nameFragmentCurrent.equals(FragmentHorary.NAME)     ||
+                nameFragmentCurrent.equals(FragmentHorary.NAME)     ||
+                nameFragmentCurrent.equals(FragmentHorary.NAME)
+                ) setToolbartHome();
     }
 
     //-------------------------------------- buttons Toolbar ---------------------------------------
@@ -174,10 +201,16 @@ public class MainActivity extends FragmentActivity {
         btnProfile.setVisibility(View.GONE);
     }
 
-    private void setToolbartFull(){
+    private void setToolbartHome(){
         btnMenu.setVisibility(View.VISIBLE);
         btnUpdate.setVisibility(View.VISIBLE);
         btnProfile.setVisibility(View.VISIBLE);
+    }
+
+    private void setDisableLogin(){
+        btnMenu.setVisibility(View.VISIBLE);
+        btnUpdate.setVisibility(View.VISIBLE);
+        btnProfile.setVisibility(View.GONE);
     }
 
     @Override
@@ -196,8 +229,6 @@ public class MainActivity extends FragmentActivity {
 //
 //        }
     }
-
-
 
 
 }

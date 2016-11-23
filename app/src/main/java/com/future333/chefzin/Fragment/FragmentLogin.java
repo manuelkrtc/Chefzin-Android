@@ -48,14 +48,16 @@ import java.util.Arrays;
  */
 public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnectionFailedListener {
 
+    public static final String  NAME = "FragmentLogin";
+
     final static int RC_SIGN_IN_GMAIL    = 10;
     final static int RC_SIGN_IN_FACEBOOK = 20;
 
     Activity    ctx;
     AppHandler  app;
     ToolsNotif  toolsNotif;
-    Fragment    thisFragment;
 
+    Fragment    thisFragment;
     //View
     EditText etName;
     EditText etEmail;
@@ -64,28 +66,28 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
     EditText etTelephone;
     EditText etEmailLog;
     EditText etPasswordLog;
+
     EditText etPasswordConfirm;
 
     CheckBox checkTerm;
-
     Button btnLogIn;
     Button btnGoogle;
     Button btnRegister;
     Button btnFacebook;
+
     TextView tvLogIn;
-
     TextView tvRegister;
+
     TextView tvRecoverPassword;
-
     LinearLayout zoneLogIn;
-    LinearLayout zoneRegister;
 
+    LinearLayout zoneRegister;
     //Variables
     ArrayList<EditText> editTextsLogin;
+
     ArrayList<EditText> editTextsRegister;
 
     CallbackManager callbackManager;
-
     private GoogleApiClient mGoogleApiClient;
 
     public static FragmentLogin newInstance() {

@@ -28,6 +28,8 @@ import java.util.ArrayList;
  */
 public class FragmentHorary extends Fragment {
 
+    public static final String  NAME = "FragmentHorary";
+
     Activity    ctx;
     AppHandler  app;
 

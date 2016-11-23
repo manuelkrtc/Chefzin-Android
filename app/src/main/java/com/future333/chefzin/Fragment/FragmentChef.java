@@ -26,6 +26,9 @@ import java.util.ArrayList;
  */
 public class FragmentChef extends Fragment {
 
+    public static final String  NAME = "FragmentChef";
+
+
     Activity    ctx;
     AppHandler  app;
 

@@ -33,6 +33,9 @@ import java.util.ArrayList;
  */
 public class FragmentCheckout extends Fragment {
 
+    public static final String  NAME = "FragmentCheckout";
+
+
     Activity    ctx;
     AppHandler  app;
     ToolsNotif  toolsNotif;

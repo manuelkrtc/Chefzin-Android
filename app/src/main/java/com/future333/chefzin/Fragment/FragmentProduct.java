@@ -33,6 +33,8 @@ import java.util.ArrayList;
  */
 public class FragmentProduct extends Fragment {
 
+    public static final String  NAME = "FragmentProduct";
+
     Activity        ctx;
     AppHandler      app;
     ImageLoader     _imageL;

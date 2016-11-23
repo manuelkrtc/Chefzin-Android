@@ -39,6 +39,8 @@ import java.util.Locale;
  */
 public class FragmentMap extends Fragment {
 
+    public static final String  NAME = "FragmentMap";
+
     Activity    ctx;
     AppHandler  app;
     Fragment    ctxFrag;

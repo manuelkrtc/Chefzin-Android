@@ -23,6 +23,8 @@ import com.future333.chefzin.view.TextViewImage;
  */
 public class FragmentProfile extends Fragment {
 
+    public static final String  NAME = "FragmentProfile";
+
     Activity    ctx;
     AppHandler  app;
 

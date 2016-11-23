@@ -25,6 +25,8 @@ import java.util.zip.Inflater;
  */
 public class FragmentRecord extends Fragment {
 
+    public static final String  NAME = "FragmentRecord";
+
     SliderLayout slider;
 
     public static FragmentRecord newInstance() {
