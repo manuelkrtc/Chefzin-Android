@@ -49,7 +49,8 @@ public class CtrCart {
     }
 
     public void deleteProduct(Activity ctx, AppHandler app, Product product, ToolsApi.OnApiListenerError apiListener){
-        apiOrderProductDelete(ctx, app, product, apiListener);
+        products.remove(product);
+//        apiOrderProductDelete(ctx, app, product, apiListener);
     }
 
     public String quantityProducts(){

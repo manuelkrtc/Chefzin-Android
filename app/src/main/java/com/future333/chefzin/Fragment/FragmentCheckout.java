@@ -178,6 +178,10 @@ public class FragmentCheckout extends Fragment {
             holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    thisAdatpter.notifyDataSetChanged();
+                    checkoutAdapter.updatePriceView();
+
+
                     ((AppHandler)ctxAdap.getApplication()).ctrCart.deleteProduct(ctxAdap, app, product, new ToolsApi.OnApiListenerError() {
                         @Override
                         public void onSuccessful() {

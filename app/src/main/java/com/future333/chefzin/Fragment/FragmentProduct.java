@@ -3,6 +3,7 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +78,7 @@ public class FragmentProduct extends Fragment {
         listen();
         initSlider(products);
     }
-
+    
     //----------------------------------------------------------------------------------------------
     private void listen(){
         btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -108,6 +109,13 @@ public class FragmentProduct extends Fragment {
             @Override
             public void onClick(View view) {
                 ((MainActivity)getActivity()).goFragmentCheckout();
+            }
+        });
+
+        getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+            @Override
+            public void onBackStackChanged() {
+                updateView();
             }
         });
     }
@@ -215,4 +223,6 @@ public class FragmentProduct extends Fragment {
         super.onDestroy();
         app.ctrCart.clear();
     }
+
+
 }
