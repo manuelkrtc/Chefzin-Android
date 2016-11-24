@@ -75,6 +75,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_text_checkout"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         >
         <com.future333.chefzin.view.FontTextView
             style="@style/textCheckout"
@@ -86,8 +87,15 @@
             android:id="@+id/etAddress"
             android:layout_width="match_parent"
             android:layout_marginRight="40dp"
-
             />
+
+        <ImageButton
+            style="@style/icon"
+            android:id="@+id/btnOpenMap"
+            android:layout_marginLeft="-40dp"
+            android:src="@mipmap/ic_faceboook"/>
+
+
     </LinearLayout>
 
 </LinearLayout>

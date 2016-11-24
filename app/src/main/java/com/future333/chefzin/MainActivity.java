@@ -132,7 +132,7 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.commit();
     }
 
-    private void goFragmentRecord(){
+    public void goFragmentRecord(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentRecord.newInstance());
         fragmentTransaction.addToBackStack(FragmentRecord.NAME);
@@ -141,7 +141,7 @@ public class MainActivity extends FragmentActivity {
         setToolbartEmpty();
     }
 
-    private void goFragmentMap(){
+    public void goFragmentMap(){
         fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.rlFragment, FragmentMap.newInstance());
         fragmentTransaction.addToBackStack(FragmentMap.NAME);

@@ -30,11 +30,27 @@ public class CtrCart {
     private int percentIva      = 16;
     private int priceDomicile   = 5000;
 
+    private String address;
+    private String coordinates;
+
     private String id_orden;
     private ArrayList<Product> products = new ArrayList<>();
 
     public ArrayList<Product> getProducts() {
         return products;
+    }
+
+    public void setAddress(String address, String coordinates){
+        this.address = address;
+        this.coordinates = coordinates;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getCoordinates() {
+        return coordinates;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -59,7 +75,10 @@ public class CtrCart {
 
     public void clear(){
         products.clear();
-        id_orden = null;
+        id_orden    = null;
+        address     = null;
+        coordinates = null;
+
     }
 
     //----------------------------------------------------------------------------------------------

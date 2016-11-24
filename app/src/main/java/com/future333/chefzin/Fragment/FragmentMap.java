@@ -134,10 +134,10 @@ public class FragmentMap extends Fragment {
                     try {
                         Geocoder geocoder = new Geocoder(ctx, Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(cameraPosition.target.latitude, cameraPosition.target.longitude, 1);
-                        StringBuilder sb = new StringBuilder();
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
                             autocompleteFragment.setText(address.getAddressLine(0));
+                            app.ctrCart.setAddress(address.getAddressLine(0),"("+cameraPosition.target.latitude+","+cameraPosition.target.longitude+")");
                         }
                     } catch (IOException e) {}
                 }

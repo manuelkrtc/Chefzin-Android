@@ -2,6 +2,7 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -12,11 +13,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.future333.chefzin.AppHandler;
+import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.model.Controller.CtrCart;
 import com.future333.chefzin.model.Ingredient;
@@ -84,7 +87,7 @@ public class FragmentCheckout extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //ViewPager
-        checkoutAdapter = new CheckoutPageAdapter(ctx, app.ctrCart);
+        checkoutAdapter = new CheckoutPageAdapter(ctx, app);
         viewPager.setAdapter(checkoutAdapter);
 
         //RecyclerView
@@ -230,6 +233,7 @@ public class FragmentCheckout extends Fragment {
     public static class CheckoutPageAdapter extends PagerAdapter{
 
         Activity ctx;
+        AppHandler app;
 
         View dataView   = null;
         View priceView  = null;
@@ -237,9 +241,10 @@ public class FragmentCheckout extends Fragment {
 
         CtrCart _shopCart;
 
-        public CheckoutPageAdapter(Activity ctx, CtrCart shopCart){
+        public CheckoutPageAdapter(Activity ctx, AppHandler app){
             this.ctx = ctx;
-            this._shopCart = shopCart;
+            this.app = app;
+            this._shopCart = app.ctrCart;
         }
 
         @Override
@@ -264,6 +269,7 @@ public class FragmentCheckout extends Fragment {
 
             if(position==1 && dataView==null){
                 dataView = LayoutInflater.from(ctx).inflate(R.layout.row_checkout_data, container,false);
+                setDataView();
                 container.addView(dataView);
                 return dataView;
             }
@@ -310,6 +316,34 @@ public class FragmentCheckout extends Fragment {
                             android.R.layout.simple_list_item_1);
 
             spinner.setAdapter(adapter);
+        }
+
+        public void setDataView(){
+            EditText    etName      = (EditText)    dataView.findViewById(R.id.etName);
+            EditText    etPhone     = (EditText)    dataView.findViewById(R.id.etPhone);
+            EditText    etDocument  = (EditText)    dataView.findViewById(R.id.etDocument);
+            final EditText    etAddress   = (EditText)    dataView.findViewById(R.id.etAddress);
+            ImageButton btnOpenMap  = (ImageButton) dataView.findViewById(R.id.btnOpenMap);
+
+            etName.setText(app.ctrUser.getUser().getNombres());
+            etPhone.setText(app.ctrUser.getUser().getTelefono());
+            etDocument.setText(app.ctrUser.getUser().getDocumento());
+
+            btnOpenMap.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((MainActivity)ctx).goFragmentMap();
+                }
+            });
+
+            ctx.getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+                @Override
+                public void onBackStackChanged() {
+                    String address = app.ctrCart.getAddress();
+                    if(address != null)
+                        etAddress.setText(address);
+                }
+            });
         }
 
     }
