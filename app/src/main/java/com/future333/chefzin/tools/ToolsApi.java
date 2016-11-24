@@ -20,6 +20,7 @@ public class ToolsApi {
 
     public final static String URL_ORDEN_CREATE         = URL_SERVICES + "orden/crear";
     public final static String URL_ORDEN_PRODUCT_ADD    = URL_SERVICES + "orden/plato/add";
+    public final static String URL_ORDEN_PRODUCT_DELETE = URL_SERVICES + "orden/plato/delete";
 
     public final static String URL_IMG_CHEF             = URL_IMG + "chef/";
     public final static String URL_IMG_PLATO            = URL_IMG + "plato/";

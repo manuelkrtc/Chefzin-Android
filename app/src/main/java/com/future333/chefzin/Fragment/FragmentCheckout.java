@@ -21,6 +21,7 @@ import com.future333.chefzin.R;
 import com.future333.chefzin.model.Controller.CtrCart;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
+import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsFormat;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ToolsView;
@@ -88,7 +89,7 @@ public class FragmentCheckout extends Fragment {
 
         //RecyclerView
         rvProduct.setHasFixedSize(true);
-        adapaterRecicler = new AdaptadorProducts(app.ctrCart.getProducts(), checkoutAdapter, ctx);
+        adapaterRecicler = new AdaptadorProducts(ctx, app, checkoutAdapter);
         rvProduct.setAdapter(adapaterRecicler);
         rvProduct.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false));
 
@@ -134,14 +135,16 @@ public class FragmentCheckout extends Fragment {
     //----------------------------------------------------------------------------------------------
     public static class AdaptadorProducts extends RecyclerView.Adapter<AdaptadorProducts.ProductsViewHolder> {
 
-        private Activity ctxAdap;
+        private Activity    ctxAdap;
+        private AppHandler  app;
         private ArrayList<Product> products;
         private AdaptadorProducts thisAdatpter;
         private CheckoutPageAdapter checkoutAdapter;
 
-        public AdaptadorProducts(ArrayList<Product> products, CheckoutPageAdapter checkoutAdapter, Activity ctx) {
-            this.ctxAdap = ctx;
-            this.products = products;
+        public AdaptadorProducts(Activity ctx, AppHandler app, CheckoutPageAdapter checkoutAdapter) {
+            this.ctxAdap    = ctx;
+            this.app        = app;
+            this.products   = app.ctrCart.getProducts();
             this.thisAdatpter = this;
             this.checkoutAdapter = checkoutAdapter;
         }
@@ -175,9 +178,18 @@ public class FragmentCheckout extends Fragment {
             holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    ((AppHandler)ctxAdap.getApplication()).ctrCart.deleteProduct(product);
-                    thisAdatpter.notifyDataSetChanged();
-                    checkoutAdapter.updatePriceView();
+                    ((AppHandler)ctxAdap.getApplication()).ctrCart.deleteProduct(ctxAdap, app, product, new ToolsApi.OnApiListenerError() {
+                        @Override
+                        public void onSuccessful() {
+                            thisAdatpter.notifyDataSetChanged();
+                            checkoutAdapter.updatePriceView();
+                        }
+
+                        @Override
+                        public void onError(String error) {
+                            ToolsView.msj(ctxAdap, error);
+                        }
+                    });
                 }
             });
         }

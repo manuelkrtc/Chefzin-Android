@@ -39,12 +39,6 @@ public class CtrCart {
 
     //----------------------------------------------------------------------------------------------
 
-    public void addProduct(Product product){
-        products.add(product);
-
-//        apiOrderCreate(ctx, app, product, apiListener);
-//        products.add(product);
-    }
 
     public void addProduct(Activity ctx, AppHandler app, Product product, ToolsApi.OnApiListenerError apiListener){
 
@@ -54,8 +48,8 @@ public class CtrCart {
             apiOrderProductAdd(ctx, app, product, apiListener);
     }
 
-    public void deleteProduct(Product product){
-        products.remove(product);
+    public void deleteProduct(Activity ctx, AppHandler app, Product product, ToolsApi.OnApiListenerError apiListener){
+        apiOrderProductDelete(ctx, app, product, apiListener);
     }
 
     public String quantityProducts(){
@@ -174,6 +168,45 @@ public class CtrCart {
             e.printStackTrace();
         }
     }
+
+    public void apiOrderProductDelete(final Activity ctx, AppHandler app, final Product product, final ToolsApi.OnApiListenerError apiListener){
+
+        try {
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id_plato", product.getId_plato());
+            jsonObject.put("id_orden", id_orden);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_PRODUCT_DELETE, jsonObject,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if(response.getBoolean("response")){
+                                    products.remove(product);
+                                    apiListener.onSuccessful();
+                                }else {
+                                    apiListener.onError(response.getJSONObject("mensaje").getString("error"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("responseLog", error.toString());
+                    apiListener.onError("Error de conexión.");
+                }
+            });
+
+            SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     private JSONObject createJsonAddProduct(AppHandler app, Product product) throws JSONException {
         JSONArray arrayIngredient = new JSONArray();
