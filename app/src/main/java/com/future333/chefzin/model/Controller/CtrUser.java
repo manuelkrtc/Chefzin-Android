@@ -34,7 +34,7 @@ public class CtrUser {
 
     //-------------------------------- public methods--------------------------------------------------------------
 
-    public void logIn(Activity ctx, String email, String password, ToolsApi.OnLogInListener logInListener){
+    public void logIn(Activity ctx, String email, String password, ToolsApi.OnApiListenerError logInListener){
         String validationLogin = validationLogin(email, password);
         if(validationLogin==null){
             apiLogin(ctx,email,password,logInListener);
@@ -43,7 +43,7 @@ public class CtrUser {
         }
     }
 
-    public void logOut(Activity ctx, ToolsApi.OnLogOutListener logOutListener){
+    public void logOut(Activity ctx, ToolsApi.OnApiListener logOutListener){
         if(this.user == null){
             Log.e("ErrorChefIn","NO hay una sesion activa");
             return;
@@ -52,7 +52,7 @@ public class CtrUser {
         logOutListener.onSuccessful();
     }
 
-    public void register(Activity ctx, FormRegister formRegister, ToolsApi.OnLogInListener logInListener){
+    public void register(Activity ctx, FormRegister formRegister, ToolsApi.OnApiListenerError logInListener){
         String validationRegister = validationRegister(formRegister);
         if(validationRegister==null){
             try {
@@ -66,7 +66,7 @@ public class CtrUser {
         }
     }
 
-    public void registerFacebook(Activity ctx, User _user, ToolsApi.OnLogInListener logInListener){
+    public void registerFacebook(Activity ctx, User _user, ToolsApi.OnApiListenerError logInListener){
         String validationRegister = validationRegisterFacebook(_user);
         if(validationRegister==null){
             try {
@@ -81,7 +81,7 @@ public class CtrUser {
         }
     }
 
-    public void registerGoogle(Activity ctx, User _user, ToolsApi.OnLogInListener logInListener){
+    public void registerGoogle(Activity ctx, User _user, ToolsApi.OnApiListenerError logInListener){
         String validationRegister = validationRegisterGoogle(_user);
         if(validationRegister==null){
             try {
@@ -101,7 +101,7 @@ public class CtrUser {
     }
 
     //----------------------------------------------------------------------------------------------
-    private void apiLogin(final Activity ctx, String email, String password, final ToolsApi.OnLogInListener logInListener){
+    private void apiLogin(final Activity ctx, String email, String password, final ToolsApi.OnApiListenerError logInListener){
             HashMap<String, String> parametros = new HashMap();
             parametros.put("email", email);
             parametros.put("password", ToolsFormat.string_to_md5(password));
@@ -130,7 +130,7 @@ public class CtrUser {
             SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegister(final Activity ctx, FormRegister formRegister, final ToolsApi.OnLogInListener logInListener) throws JSONException {
+    private void apiRegister(final Activity ctx, FormRegister formRegister, final ToolsApi.OnApiListenerError logInListener) throws JSONException {
         String parametros = new Gson().toJson(formRegister);
         JSONObject jsonParam = new JSONObject(parametros);
 
@@ -158,7 +158,7 @@ public class CtrUser {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegisterFacebook(final Activity ctx, User _user, final ToolsApi.OnLogInListener logInListener) throws JSONException {
+    private void apiRegisterFacebook(final Activity ctx, User _user, final ToolsApi.OnApiListenerError logInListener) throws JSONException {
         String parametros = new Gson().toJson(_user);
         JSONObject jsonParam = new JSONObject(parametros);
 
@@ -186,7 +186,7 @@ public class CtrUser {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void apiRegisterGoogle(final Activity ctx, User _user, final ToolsApi.OnLogInListener logInListener) throws JSONException {
+    private void apiRegisterGoogle(final Activity ctx, User _user, final ToolsApi.OnApiListenerError logInListener) throws JSONException {
         String parametros = new Gson().toJson(_user);
         JSONObject jsonParam = new JSONObject(parametros);
 
@@ -214,7 +214,7 @@ public class CtrUser {
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
 
-    private void getApiInfoUser(final Activity ctx, String token, final ToolsApi.OnLogInListener logInListener){
+    private void getApiInfoUser(final Activity ctx, String token, final ToolsApi.OnApiListenerError logInListener){
         JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_INFO_USER + token,
                 new Response.Listener<JSONObject>() {
                     @Override

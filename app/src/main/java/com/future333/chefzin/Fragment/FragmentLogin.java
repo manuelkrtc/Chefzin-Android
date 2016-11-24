@@ -167,7 +167,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 User user = new User();
                 user.setUserGoogle(acct);
 
-                app.ctrUser.registerGoogle(ctx, user, new ToolsApi.OnLogInListener() {
+                app.ctrUser.registerGoogle(ctx, user, new ToolsApi.OnApiListenerError() {
                     @Override
                     public void onSuccessful() {
                         ToolsView.msj(ctx,"Bienvenido " + app.ctrUser.getUser().getNombres());
@@ -215,7 +215,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 String email = etEmailLog.getText().toString();
                 String password = etPasswordLog.getText().toString();
 
-                app.ctrUser.logIn(ctx, email, password, new ToolsApi.OnLogInListener() {
+                app.ctrUser.logIn(ctx, email, password, new ToolsApi.OnApiListenerError() {
                     @Override
                     public void onSuccessful() {
                         ToolsView.msj(ctx,"Bienvenido " + app.ctrUser.getUser().getNombres());
@@ -242,7 +242,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 formRegister.setTelefono(etTelephone.getText().toString());
                 formRegister.setCheckTerm(checkTerm.isChecked());
 
-                app.ctrUser.register(ctx, formRegister, new ToolsApi.OnLogInListener() {
+                app.ctrUser.register(ctx, formRegister, new ToolsApi.OnApiListenerError() {
                     @Override
                     public void onSuccessful() {
                         ToolsView.msj(ctx,"Bienvenido " + app.ctrUser.getUser().getNombres());
@@ -290,7 +290,7 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                                 User user = new User();
                                 user.setUserFacebook(new Gson().fromJson(object.toString(), UserFacebook.class));
 
-                                app.ctrUser.registerFacebook(ctx, user, new ToolsApi.OnLogInListener() {
+                                app.ctrUser.registerFacebook(ctx, user, new ToolsApi.OnApiListenerError() {
                                     @Override
                                     public void onSuccessful() {
                                         ToolsView.msj(ctx,"Bienvenido " + app.ctrUser.getUser().getNombres());

@@ -85,7 +85,7 @@ public class FragmentProfile extends Fragment {
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                app.ctrUser.logOut(ctx, new ToolsApi.OnLogOutListener() {
+                app.ctrUser.logOut(ctx, new ToolsApi.OnApiListener() {
                     @Override
                     public void onSuccessful() {
                         ToolsView.msj(ctx,"Vuelve pronto.");

@@ -35,7 +35,7 @@ public class CtrHorary {
     }
 
     //-------------------------------- public methods--------------------------------------------------------------
-    public void getApiHorary(final Activity ctx, final ToolsApi.OnLogInListener logInListener){
+    public void getApiHorary(final Activity ctx, final ToolsApi.OnApiListenerError logInListener){
 
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_HORARIOS,
                 new Response.Listener<JSONObject>() {

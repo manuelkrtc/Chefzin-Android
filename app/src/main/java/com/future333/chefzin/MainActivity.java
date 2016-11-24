@@ -53,7 +53,7 @@ public class MainActivity extends FragmentActivity {
 
         app.ctrUser.getUserLocal(ctx);
 
-        app.ctrHorary.getApiHorary(ctx, new ToolsApi.OnLogInListener() {
+        app.ctrHorary.getApiHorary(ctx, new ToolsApi.OnApiListenerError() {
             @Override
             public void onSuccessful() {
                 goFragmentHorary();

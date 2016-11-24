@@ -31,7 +31,7 @@ public class CtrChef {
     }
 
     //-------------------------------- public methods--------------------------------------------------------------
-    public void getApiChefs(Activity ctx, String idHorary, final ToolsApi.OnLogInListener logInListener){
+    public void getApiChefs(Activity ctx, String idHorary, final ToolsApi.OnApiListenerError logInListener){
         JsonObjectRequest jsArrayRequest_2 = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_GET_CHEFZ + idHorary ,
                 new Response.Listener<JSONObject>() {
                     @Override

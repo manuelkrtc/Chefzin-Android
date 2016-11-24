@@ -18,16 +18,19 @@ public class ToolsApi {
     public final static String URL_REGISTER_FACEBOOK    = URL_SERVICES + "register/facebook";
     public final static String URL_GET_CHEFZ            = URL_SERVICES + "getdata?id_horarios_franjas=";
 
+    public final static String URL_ORDEN_CREATE         = URL_SERVICES + "orden/crear";
+    public final static String URL_ORDEN_PRODUCT_ADD    = URL_SERVICES + "orden/plato/add";
+
     public final static String URL_IMG_CHEF             = URL_IMG + "chef/";
     public final static String URL_IMG_PLATO            = URL_IMG + "plato/";
 
 
-    public interface OnLogInListener {
+    public interface OnApiListenerError {
         public void onSuccessful();
         public void onError(String error);
     }
 
-    public interface OnLogOutListener{
+    public interface OnApiListener {
         public void onSuccessful();
     }
 

@@ -105,7 +105,7 @@ public class FragmentHorary extends Fragment {
                 @Override
                 public void onClick(View view) {
                     toolsNotif.showDialogProgress();
-                    app.ctrChef.getApiChefs(ctx, horary.getId(), new ToolsApi.OnLogInListener() {
+                    app.ctrChef.getApiChefs(ctx, horary.getId(), new ToolsApi.OnApiListenerError() {
                         @Override
                         public void onSuccessful() {
                             ((MainActivity)getActivity()).goFragmentChef();

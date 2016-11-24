@@ -90,8 +90,17 @@ public class FragmentProduct extends Fragment {
                 }
 
                 Product product = (Product) arraySliderView.get(slider.getCurrentPosition()).productSelect.clone();
-                app.ctrCart.addProduct(product);
-                updateView();
+                app.ctrCart.addProduct(ctx, app, product, new ToolsApi.OnApiListenerError() {
+                    @Override
+                    public void onSuccessful() {
+                        updateView();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        ToolsView.msj(ctx, error);
+                    }
+                });
             }
         });
 
