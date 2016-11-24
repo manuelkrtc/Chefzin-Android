@@ -375,7 +375,7 @@ public class FragmentCheckout extends Fragment {
                                                                         if(response.getBoolean("response")){
 
                                                                             ToolsView.msj(ctx,"Pedido exitoso.");
-
+                                                                            ((MainActivity)ctx).homeFragment();
 
                                                                         }else {
                                                                             ToolsView.msj(ctx,"Error de conexión.");

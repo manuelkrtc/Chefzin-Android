@@ -1,6 +1,7 @@
 package com.future333.chefzin;
 
 import android.app.Activity;
+import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -157,6 +158,11 @@ public class MainActivity extends FragmentActivity {
         getFragmentManager().popBackStack();
 
         setToolbar();
+    }
+
+    public void homeFragment(){
+
+        getFragmentManager().popBackStack(FragmentChef.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
     private void setToolbar(){
