@@ -8,6 +8,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +19,15 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
+import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.Controller.CtrCart;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
@@ -29,6 +36,9 @@ import com.future333.chefzin.tools.ToolsFormat;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ToolsView;
 import com.future333.chefzin.view.CheckProductPrice;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -241,6 +251,20 @@ public class FragmentCheckout extends Fragment {
 
         CtrCart _shopCart;
 
+        TextView tvIva;
+        TextView tvTotal;
+        TextView tvDomicile;
+        TextView tvSubtotal;
+
+        EditText    etName;
+        EditText    etPhone;
+        EditText    etDocument;
+        EditText    etAddress;
+        ImageButton btnOpenMap;
+
+
+
+
         public CheckoutPageAdapter(Activity ctx, AppHandler app){
             this.ctx = ctx;
             this.app = app;
@@ -291,10 +315,10 @@ public class FragmentCheckout extends Fragment {
         }
 
         public void updatePriceView(){
-            TextView tvIva      = (TextView)priceView.findViewById(R.id.tvIva);
-            TextView tvTotal    = (TextView)priceView.findViewById(R.id.tvTotal);
-            TextView tvDomicile = (TextView)priceView.findViewById(R.id.tvDomicile);
-            TextView tvSubtotal = (TextView)priceView.findViewById(R.id.tvSubtotal);
+            tvIva      = (TextView)priceView.findViewById(R.id.tvIva);
+            tvTotal    = (TextView)priceView.findViewById(R.id.tvTotal);
+            tvDomicile = (TextView)priceView.findViewById(R.id.tvDomicile);
+            tvSubtotal = (TextView)priceView.findViewById(R.id.tvSubtotal);
 
             tvIva       .setText(_shopCart.getIva());
             tvTotal     .setText(_shopCart.getTotal());
@@ -303,12 +327,8 @@ public class FragmentCheckout extends Fragment {
         }
 
         public void updatePaymentView(){
-            Spinner spinner      = (Spinner) paymentView.findViewById(R.id.spinner);
-
-//            ArrayAdapter<CharSequence> adapter =
-//                            ArrayAdapter.createFromResource(ctx,
-//                            R.array.payment_method,
-//                            android.R.layout.simple_spinner_item);
+            Button  btnConfirm  = (Button) paymentView.findViewById(R.id.btnConfirm);
+            Spinner spinner     = (Spinner) paymentView.findViewById(R.id.spinner);
 
             ArrayAdapter<CharSequence> adapter =
                     ArrayAdapter.createFromResource(ctx,
@@ -316,14 +336,103 @@ public class FragmentCheckout extends Fragment {
                             android.R.layout.simple_list_item_1);
 
             spinner.setAdapter(adapter);
+
+
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    try {
+
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
+                        jsonObject.put("telefono",      etPhone.getText().toString());
+                        jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
+                        jsonObject.put("descripcion",   app.ctrCart.getAddress());
+
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ADDRESS_CREATE, jsonObject,
+                                new Response.Listener<JSONObject>() {
+                                    @Override
+                                    public void onResponse(JSONObject response) {
+                                        try {
+                                            if(response.getBoolean("response")){
+
+                                                String id_direccion = response.getJSONObject("data").getString("id");
+
+
+                                                try {
+
+                                                    JSONObject jsonObject2 = new JSONObject();
+                                                    jsonObject2.put("api_token",     app.ctrUser.getUser().getApi_token());
+                                                    jsonObject2.put("id_orden",      app.ctrCart.getId_orden());
+                                                    jsonObject2.put("id_direccion",  id_direccion);
+                                                    jsonObject2.put("id_metodo_pago","1");
+
+                                                    JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_CHECKOUT, jsonObject2,
+                                                            new Response.Listener<JSONObject>() {
+                                                                @Override
+                                                                public void onResponse(JSONObject response) {
+                                                                    try {
+                                                                        if(response.getBoolean("response")){
+
+                                                                            ToolsView.msj(ctx,"Pedido exitoso.");
+
+
+                                                                        }else {
+                                                                            ToolsView.msj(ctx,"Error de conexión.");
+                                                                        }
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
+                                                                }
+                                                            }, new Response.ErrorListener() {
+                                                        @Override
+                                                        public void onErrorResponse(VolleyError error) {
+                                                            Log.i("responseLog", error.toString());
+                                                            ToolsView.msj(ctx,"Error de conexión.");
+                                                        }
+                                                    });
+
+                                                    SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest2);
+
+                                                } catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                }
+
+
+
+
+
+
+                                            }else {
+
+                                            }
+                                        } catch (JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+                                Log.i("responseLog", error.toString());
+                                ToolsView.msj(ctx,error.toString());
+                            }
+                        });
+
+                        SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
 
         public void setDataView(){
-            EditText    etName      = (EditText)    dataView.findViewById(R.id.etName);
-            EditText    etPhone     = (EditText)    dataView.findViewById(R.id.etPhone);
-            EditText    etDocument  = (EditText)    dataView.findViewById(R.id.etDocument);
-            final EditText    etAddress   = (EditText)    dataView.findViewById(R.id.etAddress);
-            ImageButton btnOpenMap  = (ImageButton) dataView.findViewById(R.id.btnOpenMap);
+            etName      = (EditText)    dataView.findViewById(R.id.etName);
+            etPhone     = (EditText)    dataView.findViewById(R.id.etPhone);
+            etDocument  = (EditText)    dataView.findViewById(R.id.etDocument);
+            etAddress   = (EditText)    dataView.findViewById(R.id.etAddress);
+            btnOpenMap  = (ImageButton) dataView.findViewById(R.id.btnOpenMap);
 
             etName.setText(app.ctrUser.getUser().getNombres());
             etPhone.setText(app.ctrUser.getUser().getTelefono());

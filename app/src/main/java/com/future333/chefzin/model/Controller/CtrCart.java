@@ -32,6 +32,7 @@ public class CtrCart {
 
     private String address;
     private String coordinates;
+    private String id_direccion;
 
     private String id_orden;
     private ArrayList<Product> products = new ArrayList<>();
@@ -51,6 +52,10 @@ public class CtrCart {
 
     public String getCoordinates() {
         return coordinates;
+    }
+
+    public String getId_orden() {
+        return id_orden;
     }
 
     //----------------------------------------------------------------------------------------------
@@ -205,6 +210,46 @@ public class CtrCart {
                                 if(response.getBoolean("response")){
                                     products.remove(product);
                                     apiListener.onSuccessful();
+                                }else {
+                                    apiListener.onError(response.getJSONObject("mensaje").getString("error"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.i("responseLog", error.toString());
+                    apiListener.onError("Error de conexión.");
+                }
+            });
+
+            SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void apiOrderCheckout(final Activity ctx, AppHandler app, final Product product, final ToolsApi.OnApiListenerError apiListener){
+        try {
+
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("id_orden",      id_orden);
+            jsonObject.put("id_direccion",  id_orden);
+            jsonObject.put("id_metodo_pago",id_orden);
+
+            JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_CHECKOUT, jsonObject,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                if(response.getBoolean("response")){
+
+                                    String id_direccion = response.getJSONObject("data").getString("id");
+
+
                                 }else {
                                     apiListener.onError(response.getJSONObject("mensaje").getString("error"));
                                 }

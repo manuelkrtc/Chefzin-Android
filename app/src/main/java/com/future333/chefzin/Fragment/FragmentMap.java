@@ -7,13 +7,21 @@ import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
+import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsPermissions;
 import com.future333.chefzin.tools.ToolsView;
 import com.future333.chefzin.view.TouchableWrapper;
@@ -29,6 +37,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolygonOptions;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 import java.util.List;
@@ -50,6 +61,8 @@ public class FragmentMap extends Fragment {
     TouchableWrapper            touchableWrapper;
     PlaceAutocompleteFragment   autocompleteFragment;
 
+    ImageButton btnSelectAddress;
+
     public static FragmentMap newInstance() {
         return new FragmentMap();
     }
@@ -70,6 +83,7 @@ public class FragmentMap extends Fragment {
         View v = inflater.inflate(R.layout.fragment_maps, container, false);
 
         mapView                 = (MapView) v.findViewById(R.id.map);
+        btnSelectAddress        = (ImageButton)v.findViewById(R.id.btnSelectAddress);
         touchableWrapper        = (TouchableWrapper)v.findViewById(R.id.touchableWrapper);
         autocompleteFragment    = (PlaceAutocompleteFragment) ToolsView.getMapFragment(ctxFrag).findFragmentById(R.id.autocomplete_fragment);
 
@@ -82,12 +96,19 @@ public class FragmentMap extends Fragment {
 
         initializeMap(savedInstanceState);
         initializeAutocomplete();
+
+        listen();
     }
 
+
+    private void listen(){
+
+    }
 
     //----------------------------------------------------------------------------------------------
     //-------------------------------------- Map ---------------------------------------------------
     //----------------------------------------------------------------------------------------------
+
 
     private void initializeMap(Bundle savedInstanceState){
         mapView.onCreate(savedInstanceState);

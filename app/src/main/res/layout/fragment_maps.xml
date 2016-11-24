@@ -37,7 +37,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin_x"
+        android:layout_marginTop="@dimen/margin_xx"
         android:layout_marginRight="@dimen/margin"
         android:layout_marginLeft="@dimen/margin"
         android:background="@color/white">
@@ -60,6 +60,14 @@
 
     </RelativeLayout>
 
+
+    <ImageButton
+        style="@style/icon"
+        android:id="@+id/btnSelectAddress"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="@dimen/margin"
+        android:src="@mipmap/ic_faceboook"/>
 
     <!--<Button-->
         <!--android:id="@+id/button"-->
