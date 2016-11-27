@@ -89,6 +89,7 @@ public class FragmentProfile extends Fragment {
                     @Override
                     public void onSuccessful() {
                         ToolsView.msj(ctx,"Vuelve pronto.");
+                        app.ctrCart.clear();
                         getActivity().onBackPressed();
                     }
                 });

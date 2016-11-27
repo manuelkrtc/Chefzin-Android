@@ -110,6 +110,11 @@ public class FragmentProduct extends Fragment {
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(app.ctrUser.getUser() == null){
+                    ((MainActivity)ctx).goFragmentLogin();
+                    return;
+                }
+
                 ((MainActivity)getActivity()).goFragmentCheckout();
             }
         });
