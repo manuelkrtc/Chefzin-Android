@@ -31,8 +31,8 @@ public class MainActivity extends FragmentActivity {
     AppHandler  app;
 
     //View
-    ImageView btnMenu;
-    ImageView btnUpdate;
+    ImageView btnBack;
+    ImageView btnRecord;
     ImageView btnProfile;
     RelativeLayout fragment;
 
@@ -72,8 +72,8 @@ public class MainActivity extends FragmentActivity {
         ctx = this;
         app = ((AppHandler)getApplication());
 
-        btnMenu     = (ImageView) findViewById(R.id.btnMenu);
-        btnUpdate   = (ImageView) findViewById(R.id.btnUpdate);
+        btnBack     = (ImageView) findViewById(R.id.btnBack);
+        btnRecord   = (ImageView) findViewById(R.id.btnRecord);
         btnProfile  = (ImageView) findViewById(R.id.btnProfile);
         fragment    = (RelativeLayout) findViewById(R.id.rlFragment);
 
@@ -81,7 +81,6 @@ public class MainActivity extends FragmentActivity {
         fragmentLogin   = FragmentLogin.newInstance();
         fragmentHorary  = new FragmentHorary();
         fragmentProfile = new FragmentProfile();
-
 
     }
 
@@ -93,7 +92,7 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.addToBackStack(FragmentLogin.NAME);
         fragmentTransaction.commit();
 
-        setToolbartEmpty();
+        setToolbar(FragmentLogin.NAME);
     }
 
     public void goFragmentProfile(){
@@ -102,7 +101,7 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.addToBackStack(FragmentProfile.NAME);
         fragmentTransaction.commit();
 
-        setToolbartEmpty();
+        setToolbar(FragmentProfile.NAME);
     }
 
     public void goFragmentChef(){
@@ -110,6 +109,8 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.add(R.id.rlFragment, fragmentChef);
         fragmentTransaction.addToBackStack(FragmentChef.NAME);
         fragmentTransaction.commit();
+
+        setToolbar(FragmentChef.NAME);
     }
 
     public void goFragmentHorary(){
@@ -117,6 +118,8 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.add(R.id.rlFragment, fragmentHorary);
         fragmentTransaction.addToBackStack(FragmentHorary.NAME);
         fragmentTransaction.commit();
+
+        setToolbar(FragmentHorary.NAME);
     }
 
     public void goFragmentMenu(){
@@ -124,6 +127,9 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.add(R.id.rlFragment, new FragmentProduct());
         fragmentTransaction.addToBackStack(FragmentProduct.NAME);
         fragmentTransaction.commit();
+
+        setToolbar(FragmentProduct.NAME);
+
     }
 
     public void goFragmentCheckout(){
@@ -131,6 +137,9 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.add(R.id.rlFragment, FragmentCheckout.newInstance());
         fragmentTransaction.addToBackStack(FragmentCheckout.NAME);
         fragmentTransaction.commit();
+
+        setToolbar(FragmentCheckout.NAME);
+
     }
 
     public void goFragmentRecord(){
@@ -139,7 +148,7 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.addToBackStack(FragmentRecord.NAME);
         fragmentTransaction.commit();
 
-        setToolbartEmpty();
+        setToolbar(FragmentRecord.NAME);
     }
 
     public void goFragmentMap(){
@@ -148,16 +157,16 @@ public class MainActivity extends FragmentActivity {
         fragmentTransaction.addToBackStack(FragmentMap.NAME);
         fragmentTransaction.commit();
 
-        setToolbartEmpty();
+        setToolbar(FragmentMap.NAME);
     }
 
     @Override
     public void onBackPressed() {
 
-        if(ToolsFragment.getFragmentCurrent(ctx).equals(FragmentHorary.NAME)) return;
+        if(ToolsFragment.getNameIteration(ctx).equals(FragmentHorary.NAME)) return;
         getFragmentManager().popBackStack();
 
-        setToolbar();
+        setToolbar(ToolsFragment.getNameIterationPrevious(ctx));
     }
 
     public void homeFragment(){
@@ -165,24 +174,11 @@ public class MainActivity extends FragmentActivity {
         getFragmentManager().popBackStack(FragmentChef.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
     }
 
-    private void setToolbar(){
+    private void setToolbar(String nameFragment){
+        boolean isLogIn = app.ctrUser.getUser() != null;
 
-        String nameFragmentCurrent = ToolsFragment.getFragmentCurrent(ctx);
-
-        if(nameFragmentCurrent.equals(FragmentHorary.NAME)) setToolbartHome();
-
-        if(     nameFragmentCurrent.equals(FragmentCheckout.NAME)   ||
-                nameFragmentCurrent.equals(FragmentChef.NAME)       ||
-                nameFragmentCurrent.equals(FragmentLogin.NAME)      ||
-                nameFragmentCurrent.equals(FragmentMap.NAME)        ||
-                nameFragmentCurrent.equals(FragmentProduct.NAME)    ||
-                nameFragmentCurrent.equals(FragmentProfile.NAME)    ||
-                nameFragmentCurrent.equals(FragmentRecord.NAME)     ||
-                nameFragmentCurrent.equals(FragmentHorary.NAME)     ||
-                nameFragmentCurrent.equals(FragmentHorary.NAME)     ||
-                nameFragmentCurrent.equals(FragmentHorary.NAME)     ||
-                nameFragmentCurrent.equals(FragmentHorary.NAME)
-                ) setToolbartHome();
+        if(nameFragment.equals(FragmentHorary.NAME)) setToolbartHome(isLogIn);
+        else setToolbartBack(isLogIn);
     }
 
     //-------------------------------------- buttons Toolbar ---------------------------------------
@@ -192,8 +188,8 @@ public class MainActivity extends FragmentActivity {
         else                goFragmentProfile();
     }
 
-    public void btnReload(View view){
-        goFragmentMap();
+    public void btnBack(View view){
+        onBackPressed();
 
     }
 
@@ -201,22 +197,19 @@ public class MainActivity extends FragmentActivity {
         goFragmentRecord();
     }
 
-    private void setToolbartEmpty(){
-        btnMenu.setVisibility(View.GONE);
-        btnUpdate.setVisibility(View.GONE);
-        btnProfile.setVisibility(View.GONE);
-    }
 
-    private void setToolbartHome(){
-        btnMenu.setVisibility(View.VISIBLE);
-        btnUpdate.setVisibility(View.VISIBLE);
+    private void setToolbartHome(boolean isVisibleRecord){
+        btnBack.setVisibility(View.GONE);
         btnProfile.setVisibility(View.VISIBLE);
+
+        btnRecord.setVisibility(isVisibleRecord? View.VISIBLE:View.GONE);
     }
 
-    private void setDisableLogin(){
-        btnMenu.setVisibility(View.VISIBLE);
-        btnUpdate.setVisibility(View.VISIBLE);
+    private void setToolbartBack(boolean isVisibleRecord){
+        btnBack.setVisibility(View.VISIBLE);
         btnProfile.setVisibility(View.GONE);
+
+        btnRecord.setVisibility(isVisibleRecord? View.VISIBLE:View.GONE);
     }
 
     @Override

@@ -23,19 +23,22 @@
 
     <ImageButton
         style="@style/icon"
-        android:id="@+id/btnUpdate"
-        android:layout_toLeftOf="@+id/btnMenu"
+        android:id="@+id/btnBack"
+        android:layout_toRightOf="@+id/btnProfile"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_update"
-        android:onClick="btnReload"/>
+        android:src="@drawable/ic_back"
+        android:scaleType="fitCenter"
+        android:onClick="btnBack"
+        android:visibility="gone"/>
 
     <ImageButton
         style="@style/icon"
-        android:id="@+id/btnMenu"
+        android:id="@+id/btnRecord"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/icon_margin"
         android:src="@mipmap/ic_list"
-        android:onClick="btnRecord"/>
+        android:onClick="btnRecord"
+        android:visibility="gone"/>
 
 </RelativeLayout>
