@@ -50,6 +50,7 @@
 
         <!--zone button ctrCart-->
         <RelativeLayout
+            android:id="@+id/zoneBtnCart"
             android:layout_width="80dp"
             android:layout_height="match_parent"
             android:gravity="center"

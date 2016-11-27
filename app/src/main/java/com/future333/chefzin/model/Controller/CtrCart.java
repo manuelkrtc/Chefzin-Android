@@ -74,8 +74,8 @@ public class CtrCart {
 //        apiOrderProductDelete(ctx, app, product, apiListener);
     }
 
-    public String quantityProducts(){
-        return String.valueOf(products.size());
+    public int quantityProducts(){
+        return products.size();
     }
 
     public void clear(){

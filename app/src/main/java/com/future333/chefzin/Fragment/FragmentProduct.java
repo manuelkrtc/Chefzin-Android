@@ -45,6 +45,8 @@ public class FragmentProduct extends Fragment {
     TextView        tvQuantity;
     SliderLayout    slider;
 
+    ViewGroup       zoneBtnCart;
+
     ArrayList<Product> products;
     ArrayList<CustomSliderView> arraySliderView;
 
@@ -68,6 +70,7 @@ public class FragmentProduct extends Fragment {
         btnCheckout = (Button) v.findViewById(R.id.btnCheckout);
         tvQuantity  = (TextView)v.findViewById(R.id.tvQuantity);
         slider      = (SliderLayout)v.findViewById(R.id.slider);
+        zoneBtnCart = (ViewGroup) v.findViewById(R.id.zoneBtnCart);
 
         return v;
     }
@@ -84,7 +87,6 @@ public class FragmentProduct extends Fragment {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(app.ctrUser.getUser() == null){
                     ((MainActivity)ctx).goFragmentLogin();
                     return;
@@ -215,7 +217,10 @@ public class FragmentProduct extends Fragment {
     }
 
     public void updateView(){
-        tvQuantity.setText(app.ctrCart.quantityProducts());
+        int quantityProducts = app.ctrCart.quantityProducts();
+        tvQuantity.setText(String.valueOf(quantityProducts));
+
+        zoneBtnCart.setVisibility(quantityProducts == 0 ? View.GONE:View.VISIBLE);
     }
 
     @Override
