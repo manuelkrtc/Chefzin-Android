@@ -191,10 +191,6 @@ public class FragmentCheckout extends Fragment {
             holder.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    thisAdatpter.notifyDataSetChanged();
-                    checkoutAdapter.updatePriceView();
-
-
                     ((AppHandler)ctxAdap.getApplication()).ctrCart.deleteProduct(ctxAdap, app, product, new ToolsApi.OnApiListenerError() {
                         @Override
                         public void onSuccessful() {
@@ -207,6 +203,11 @@ public class FragmentCheckout extends Fragment {
                             ToolsView.msj(ctxAdap, error);
                         }
                     });
+
+                    thisAdatpter.notifyDataSetChanged();
+                    checkoutAdapter.updatePriceView();
+
+                    if(app.ctrCart.quantityProducts()==0) ctxAdap.onBackPressed();
                 }
             });
         }
@@ -261,9 +262,6 @@ public class FragmentCheckout extends Fragment {
         EditText    etDocument;
         EditText    etAddress;
         ImageButton btnOpenMap;
-
-
-
 
         public CheckoutPageAdapter(Activity ctx, AppHandler app){
             this.ctx = ctx;
