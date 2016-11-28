@@ -74,9 +74,6 @@ public class FragmentProfile extends Fragment {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        if(app.ctrUser.getUser() != null)
-            _imageL.loadAndDisplayCircledImage(app.ctrUser.getUser().getFoto(), ivProfile);
-
         listen();
         setInfo();
     }
@@ -108,6 +105,10 @@ public class FragmentProfile extends Fragment {
     private void setInfo(){
         User user = app.ctrUser.getUser();
         if(user != null){
+
+            if(app.ctrUser.getUser().getFoto() != null)
+                _imageL.loadAndDisplayCircledImage(app.ctrUser.getUser().getFoto(), ivProfile);
+
             if(user.getNombres() == null && user.getNombres() == null) tvName.setVisibility(View.GONE);
             else tvName.setText(user.getNombres() + " " + user.getApellidos() );
 
