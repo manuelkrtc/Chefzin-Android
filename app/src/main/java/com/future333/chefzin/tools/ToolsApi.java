@@ -23,6 +23,8 @@ public class ToolsApi {
     public final static String URL_ORDEN_PRODUCT_DELETE = URL_SERVICES + "orden/plato/delete";
     public final static String URL_ORDEN_CHECKOUT       = URL_SERVICES + "orden/checkout";
 
+    public final static String URL_USER_RECORD          = URL_SERVICES + "orden/gethistorial/usuario?api_token=";
+
     public final static String URL_ADDRESS_CREATE       = URL_SERVICES + "direccion/crear";
 
     public final static String URL_IMG_CHEF             = URL_IMG + "chef/";

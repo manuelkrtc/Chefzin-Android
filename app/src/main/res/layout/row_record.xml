@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_sliderlayout_record"
@@ -24,7 +23,8 @@
             android:layout_margin="@dimen/margin_ss"
             android:gravity="end">
 
-            <com.future333.chefzin.view.FontTextView
+            <!--<com.future333.chefzinpartner.view.FontTextView-->
+            <TextView
                 style="@style/textBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -32,8 +32,9 @@
                 android:textSize="@dimen/sizeText_xx"
                 />
 
-            <com.future333.chefzin.view.FontTextView
-                android:id="@+id/tvOrder"
+            <!--<com.future333.chefzinpartner.view.FontTextView-->
+            <TextView
+                android:id="@+id/tvOrderNumber"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="301975"
@@ -49,38 +50,43 @@
 
     </LinearLayout>
 
-    <!--zone total-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_text_checkout"
-        android:gravity="center_vertical"
-        >
-        <com.future333.chefzin.view.FontTextView
-            style="@style/textCheckout"
-            android:id="@+id/textTotal"
-            android:gravity="left"
-            android:text="Total"/>
-        <View
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="15dp"
-            android:background="@drawable/shape_line_buttom_blue"/>
-        <com.future333.chefzin.view.FontTextView
-            style="@style/textCheckout"
-            android:id="@+id/tvTotal"
-            android:gravity="right"
-            android:text="$3.500"/>
-    </LinearLayout>
-
     <!--zone steps-->
-
-
     <LinearLayout
         android:id="@+id/zoneSteps"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginTop="@dimen/margin_s"
         android:orientation="horizontal"
         >
+
+        <com.future333.chefzin.view.BtnStep
+            android:id="@+id/btnStep1"
+            style="@style/btnSteps"
+            custom:text="Recibido y cocinando"
+            custom:number="1">
+        </com.future333.chefzin.view.BtnStep>
+
+        <com.future333.chefzin.view.BtnStep
+            android:id="@+id/btnStep2"
+            style="@style/btnSteps"
+            custom:text="Listo para entregar"
+            custom:number="2">
+        </com.future333.chefzin.view.BtnStep>
+
+        <com.future333.chefzin.view.BtnStep
+            android:id="@+id/btnStep3"
+            style="@style/btnSteps"
+            custom:text="En camino"
+            custom:number="3">
+        </com.future333.chefzin.view.BtnStep>
+
+        <com.future333.chefzin.view.BtnStep
+            android:id="@+id/btnStep4"
+            style="@style/btnSteps"
+            custom:text="Entregado"
+            custom:number="4">
+        </com.future333.chefzin.view.BtnStep>
+
     </LinearLayout>
 
 </LinearLayout>

@@ -35,6 +35,7 @@
             android:layout_height="@dimen/height_sliderlayout_record"
             android:layout_below="@+id/tvChefs"
             android:layout_above="@+id/strip"
+            custom:indicator_visibility="invisible"
             />
 
         <ImageView

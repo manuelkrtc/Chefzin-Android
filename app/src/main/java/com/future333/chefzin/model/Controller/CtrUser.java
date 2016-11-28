@@ -11,15 +11,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.FormRegister;
+import com.future333.chefzin.model.Order;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsFormat;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by manuel on 5/10/16.
@@ -328,4 +332,32 @@ public class CtrUser {
 
     //----------------------------------------------------------------------------------------------
 
+    public void apiRecord(final Activity ctx, final ToolsApi.OnApiListenerError logInListener){
+        JsonObjectRequest jsArrayRequest = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_USER_RECORD + user.getApi_token(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getBoolean("response")){
+                                user.setOrderRecord((ArrayList<Order>) new Gson().fromJson(response.getJSONObject("data").getJSONArray("orden").toString(), new TypeToken<List<Order>>() {}.getType()));
+                                logInListener.onSuccessful();
+                            }else{
+                                logInListener.onError("Error de conexion");
+                                Log.e("errorChefzin", "Error api token");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("", "Error Respuesta en JSON: " + error.getMessage());
+                        logInListener.onError("Error de conexion");
+                    }
+                }
+        );
+        SingletonVolley.getInstance(ctx).addToRequestQueue(jsArrayRequest);
+    }
 }

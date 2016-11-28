@@ -194,7 +194,19 @@ public class MainActivity extends FragmentActivity {
     }
 
     public void btnRecord(View view){
-        goFragmentRecord();
+
+        app.ctrUser.apiRecord(ctx, new ToolsApi.OnApiListenerError() {
+            @Override
+            public void onSuccessful() {
+                goFragmentRecord();
+            }
+
+            @Override
+            public void onError(String error) {
+                ToolsView.msj(ctx,error);
+            }
+        });
+
     }
 
 

@@ -2,6 +2,8 @@ package com.future333.chefzin.model;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
+import java.util.ArrayList;
+
 /**
  * Created by manuel on 3/10/16.
  */
@@ -18,6 +20,8 @@ public class User {
     private String id_google;
     private String api_token;
     private String email;
+
+    private ArrayList<Order> orderRecord = new ArrayList<>();
 
     public void setUserFacebook(UserFacebook userFacebook){
         email       = userFacebook.getEmail();
@@ -82,6 +86,15 @@ public class User {
         return email;
     }
 
-    //----------------------------------------------------------------------------------------------
+    public ArrayList<Order> getOrderRecord() {
+        return orderRecord;
+    }
+
+    public void setOrderRecord(ArrayList<Order> orderRecord) {
+        this.orderRecord = orderRecord;
+    }
+
+
+//----------------------------------------------------------------------------------------------
 
 }
