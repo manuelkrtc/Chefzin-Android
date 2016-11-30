@@ -95,7 +95,7 @@ public class FragmentMap extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeMap(savedInstanceState);
-        initializeAutocomplete();
+//        initializeAutocomplete();
 
         listen();
     }

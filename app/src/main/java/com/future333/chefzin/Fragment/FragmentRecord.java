@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,13 +24,26 @@ import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.id.IdState;
 import com.future333.chefzin.model.Chef;
+import com.future333.chefzin.model.FBData;
+import com.future333.chefzin.model.FBOrder;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Order;
 import com.future333.chefzin.model.Product;
+import com.future333.chefzin.model.UserFacebook;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.view.BtnStep;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.gson.Gson;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.zip.Inflater;
 
 /**
@@ -44,6 +58,9 @@ public class FragmentRecord extends Fragment {
 
     SliderLayout slider;
 
+    DatabaseReference myRef;
+    FirebaseDatabase database;
+
     public static FragmentRecord newInstance() {
         return new FragmentRecord();
     }
@@ -54,6 +71,11 @@ public class FragmentRecord extends Fragment {
 
         ctx = getActivity();
         app = ((AppHandler)getActivity().getApplication());
+
+        database = FirebaseDatabase.getInstance();
+        myRef = database.getReference();
+
+
     }
 
     @Override
@@ -79,6 +101,11 @@ public class FragmentRecord extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initSlider(app.ctrUser.getUser().getOrderRecord());
+
+
+
+
+
 
     }
 
@@ -128,9 +155,54 @@ public class FragmentRecord extends Fragment {
             rvProduct.setAdapter(adapaterRecicler);
             rvProduct.setLayoutManager(new LinearLayoutManager(ctx,LinearLayoutManager.VERTICAL,false));
 
-            tvOrderNumber.setText(order.getId_orden());
+            tvOrderNumber.setText(String.valueOf(order.getId_orden()));
 
             selectStep(order.getId_estado());
+
+
+
+
+
+
+            // Read from the database
+            myRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+
+                    Map<String, Object> map = (Map<String, Object>) dataSnapshot.getValue();
+                    JSONObject jsonObject = new JSONObject(map);
+                    FBData fbData = new Gson().fromJson(jsonObject.toString(), FBData.class);
+
+                    ArrayList<Order> ordersRecord = app.ctrUser.getUser().getOrderRecord();
+                    ArrayList<FBOrder> ordersFB   = fbData.getEstado_orden();
+
+                    boolean thereChange = false;
+
+//                    for(Order order: ordersRecord){
+                        for(FBOrder fbOrder: ordersFB){
+                            if(fbOrder != null){
+                                if (order.getId_orden() == fbOrder.getId_orden()){
+                                    if(order.getId_estado() != fbOrder.getId_estado()){
+                                        order.setId_estado(fbOrder.getId_estado());
+                                        selectStep(fbOrder.getId_estado());
+                                    }
+
+                                }
+                            }
+
+                        }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    // Failed to read value
+                    Log.w("FireBase", "Failed to read value.", error.toException());
+                }
+            });
+
+
+
+
 
             return v;
         }

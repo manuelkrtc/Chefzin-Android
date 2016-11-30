@@ -8,7 +8,7 @@ import java.util.ArrayList;
  */
 public class Order {
 
-    private String id_orden;
+    private int    id_orden;
     private String id_direccion;
     private String subtotal;
     private String impuesto;
@@ -23,7 +23,7 @@ public class Order {
 
     //----------------------------------------------------------------------------------------------
 
-    public String getId_orden() {
+    public int getId_orden() {
         return id_orden;
     }
 
@@ -63,8 +63,11 @@ public class Order {
         return platos;
     }
 
+    public void setId_estado(int id_estado) {
+        this.id_estado = id_estado;
+    }
 
 
-    //----------------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------
 
 }
