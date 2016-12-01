@@ -1,9 +1,13 @@
 package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -19,12 +23,14 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.AppHandler;
+import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.tools.ToolsApi;
@@ -76,8 +82,10 @@ public class FragmentMap extends Fragment {
 
     RelativeLayout relative;
     Geocoder geocoder;
-
+    ImageButton btnConfirm;
     boolean isPlaceSelect = false;
+
+    String textAddress;
 
 //    public static FragmentMap newInstance() {
 //        return new FragmentMap();
@@ -112,6 +120,9 @@ public class FragmentMap extends Fragment {
         touchableWrapper        = (TouchableWrapper)v.findViewById(R.id.touchableWrapper);
 //        autocompleteFragment    = (PlaceAutocompleteFragment) ToolsView.getMapFragment(ctxFrag).findFragmentById(R.id.autocomplete_fragment);
         relative =(RelativeLayout)v.findViewById(R.id.relative);
+        btnConfirm = (ImageButton)v.findViewById(R.id.btnConfirm);
+
+
 
 
 
@@ -139,7 +150,83 @@ public class FragmentMap extends Fragment {
 
 
     private void listen(){
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                LayoutInflater inflater = getActivity().getLayoutInflater();
+                View vDialog = inflater.inflate(R.layout.dialog_address, null);
+                TextView tvAddress = (TextView)vDialog.findViewById(R.id.tvAddress);
+                final EditText etPhone = (EditText)vDialog.findViewById(R.id.etPhone);
+                final EditText etIndications = (EditText)vDialog.findViewById(R.id.etIndications);
+                tvAddress.setText(textAddress);
+
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+
+                builder.setView(vDialog)
+                        .setCancelable(false)
+                        .setPositiveButton("Crear Direccion", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+
+                                if(etPhone.getText().toString().equals("")){
+                                    ToolsView.msj(ctx, "Campo Telefono vacio");
+                                    return;
+
+                                }
+
+                                try {
+                                    JSONObject jsonObject = new JSONObject();
+                                    jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
+                                    jsonObject.put("telefono",      etPhone.getText().toString());
+                                    jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
+                                    jsonObject.put("descripcion",   app.ctrCart.getAddress());
+                                    if(!etIndications.getText().toString().equals(""))
+                                        jsonObject.put("comentarios",   etIndications.getText().toString());
+
+                                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ADDRESS_CREATE, jsonObject,
+                                            new Response.Listener<JSONObject>() {
+                                                @Override
+                                                public void onResponse(JSONObject response) {
+                                                    try {
+                                                        if(response.getBoolean("response")){
+
+                                                            String id_direccion = response.getJSONObject("data").getString("id");
+
+                                                        }else {
+
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                }
+                                            }, new Response.ErrorListener() {
+                                        @Override
+                                        public void onErrorResponse(VolleyError error) {
+                                            Log.i("responseLog", error.toString());
+                                            ToolsView.msj(ctx,error.toString());
+                                        }
+                                    });
+
+                                    SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+
+            }
+        });
     }
 
     //----------------------------------------------------------------------------------------------
@@ -194,7 +281,8 @@ public class FragmentMap extends Fragment {
                         List<Address> addresses = geocoder.getFromLocation(cameraPosition.target.latitude, cameraPosition.target.longitude, 1);
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
-                            autocompleteFragment.setText(address.getAddressLine(0));
+                            textAddress = address.getAddressLine(0);
+                            autocompleteFragment.setText(textAddress);
                             app.ctrCart.setAddress(address.getAddressLine(0),"("+cameraPosition.target.latitude+","+cameraPosition.target.longitude+")");
                         }
                     } catch (IOException e) {}
@@ -241,6 +329,7 @@ public class FragmentMap extends Fragment {
         });
     }
 
+
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
     //----------------------------------------------------------------------------------------------
@@ -281,5 +370,24 @@ public class FragmentMap extends Fragment {
         super.onLowMemory();
         mapView.onLowMemory();
     }
+
+    //----------------------------------------------------------------------------------------------
+//    public class DialogoPersonalizado extends DialogFragment {
+//        @Override
+//        public Dialog onCreateDialog(Bundle savedInstanceState) {
+//
+//            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+//            LayoutInflater inflater = getActivity().getLayoutInflater();
+//
+//            builder.setView(inflater.inflate(R.layout.dialog_address, null))
+//                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+//                        public void onClick(DialogInterface dialog, int id) {
+//                            dialog.cancel();
+//                        }
+//                    });
+//
+//            return builder.create();
+//        }
+//    }
 
 }
