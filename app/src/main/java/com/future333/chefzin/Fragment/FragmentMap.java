@@ -2,6 +2,8 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
@@ -16,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -72,13 +75,14 @@ public class FragmentMap extends Fragment {
     ToolsNotif toolsNotif;
 
     ImageButton btnSelectAddress;
+    RelativeLayout relative;
     Geocoder geocoder;
 
     boolean isPlaceSelect = false;
 
-    public static FragmentMap newInstance() {
-        return new FragmentMap();
-    }
+//    public static FragmentMap newInstance() {
+//        return new FragmentMap();
+//    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -108,7 +112,10 @@ public class FragmentMap extends Fragment {
         mapView                 = (MapView) v.findViewById(R.id.map);
         btnSelectAddress        = (ImageButton)v.findViewById(R.id.btnSelectAddress);
         touchableWrapper        = (TouchableWrapper)v.findViewById(R.id.touchableWrapper);
-        autocompleteFragment    = (PlaceAutocompleteFragment) ToolsView.getMapFragment(ctxFrag).findFragmentById(R.id.autocomplete_fragment);
+//        autocompleteFragment    = (PlaceAutocompleteFragment) ToolsView.getMapFragment(ctxFrag).findFragmentById(R.id.autocomplete_fragment);
+        relative =(RelativeLayout)v.findViewById(R.id.relative);
+
+
 
         return v;
     }
@@ -116,6 +123,15 @@ public class FragmentMap extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        autocompleteFragment = new PlaceAutocompleteFragment();
+
+//        FragmentManager fm = ToolsView.getMapFragment(ctxFrag);
+        FragmentManager fm = getFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.relative, autocompleteFragment);
+        ft.commit();
+
 
         initializeMap(savedInstanceState);
         initializeAutocomplete();
@@ -212,7 +228,7 @@ public class FragmentMap extends Fragment {
     //----------------------------------------------------------------------------------------------
 
     private void initializeAutocomplete(){
-        ((EditText)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input)).setTextSize(ToolsView.dpToPx(ctx,5));
+//        ((EditText)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input)).setTextSize(ToolsView.dpToPx(ctx,5));
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {

@@ -153,7 +153,7 @@ public class MainActivity extends FragmentActivity {
 
     public void goFragmentMap(){
         fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.rlFragment, FragmentMap.newInstance());
+        fragmentTransaction.add(R.id.rlFragment, new FragmentMap());
         fragmentTransaction.addToBackStack(FragmentMap.NAME);
         fragmentTransaction.commit();
 
