@@ -31,26 +31,6 @@
             />
     </LinearLayout>
 
-    <!--zone Phone-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_text_checkout"
-        android:gravity="center_vertical"
-        >
-        <com.future333.chefzin.view.FontTextView
-            style="@style/textCheckout"
-            android:gravity="left"
-            android:text="Telefono"/>
-
-        <com.future333.chefzin.view.FontEditText
-            style="@style/form"
-            android:id="@+id/etPhone"
-            android:layout_width="match_parent"
-            android:layout_marginRight="40dp"
-            android:inputType="number"
-            />
-    </LinearLayout>
-
     <!--zone Address-->
     <LinearLayout
         android:layout_width="match_parent"
@@ -63,9 +43,9 @@
             android:gravity="left"
             android:text="Direccion"/>
 
-        <com.future333.chefzin.view.FontEditText
+        <com.future333.chefzin.view.FontTextView
             style="@style/form"
-            android:id="@+id/etAddress"
+            android:id="@+id/tvAddress"
             android:layout_width="match_parent"
             android:layout_marginRight="40dp"
             />
@@ -85,13 +65,33 @@
         >
         <com.future333.chefzin.view.FontTextView
             style="@style/textCheckout"
+            android:gravity="left"
+            android:text="Telefono"/>
+
+        <com.future333.chefzin.view.FontTextView
+            style="@style/form"
+            android:id="@+id/tvPhone"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+            android:inputType="number"
+            />
+    </LinearLayout>
+
+    <!--zone Phone-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_text_checkout"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
             android:layout_width="105dp"
             android:gravity="left"
             android:text="Indicaciones"/>
 
-        <com.future333.chefzin.view.FontEditText
+        <com.future333.chefzin.view.FontTextView
             style="@style/form"
-            android:id="@+id/etIndications"
+            android:id="@+id/tvIndications"
             android:layout_width="match_parent"
             android:layout_marginRight="40dp"
             />

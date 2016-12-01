@@ -10,6 +10,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.model.Address;
 import com.future333.chefzin.model.FormRegister;
 import com.future333.chefzin.model.Order;
 import com.future333.chefzin.model.User;
@@ -360,4 +361,34 @@ public class CtrUser {
         );
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsArrayRequest);
     }
+
+    public void apiAddress(final Activity ctx, final ToolsApi.OnApiListenerError logInListener){
+        JsonObjectRequest jsArrayRequest = new JsonObjectRequest(Request.Method.GET, ToolsApi.URL_ADDRESS_GET + user.getApi_token(),
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            if(response.getBoolean("response")){
+                                user.setAddresses((ArrayList<Address>) new Gson().fromJson(response.getJSONArray("data").toString(), new TypeToken<List<Address>>() {}.getType()));
+                                logInListener.onSuccessful();
+                            }else{
+                                logInListener.onError("Error de conexion");
+                                Log.e("errorChefzin", "Error api token");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.d("", "Error Respuesta en JSON: " + error.getMessage());
+                        logInListener.onError("Error de conexion");
+                    }
+                }
+        );
+        SingletonVolley.getInstance(ctx).addToRequestQueue(jsArrayRequest);
+    }
+
 }

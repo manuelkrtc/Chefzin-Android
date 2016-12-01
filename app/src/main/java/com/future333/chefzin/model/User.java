@@ -22,6 +22,7 @@ public class User {
     private String email;
 
     private ArrayList<Order> orderRecord = new ArrayList<>();
+    private ArrayList<Address> addresses = new ArrayList<>();
 
     public void setUserFacebook(UserFacebook userFacebook){
         email       = userFacebook.getEmail();
@@ -94,7 +95,13 @@ public class User {
         this.orderRecord = orderRecord;
     }
 
+    public ArrayList<Address> getAddresses() {
+        return addresses;
+    }
 
-//----------------------------------------------------------------------------------------------
+    public void setAddresses(ArrayList<Address> addresses) {
+        this.addresses = addresses;
+    }
+    //----------------------------------------------------------------------------------------------
 
 }

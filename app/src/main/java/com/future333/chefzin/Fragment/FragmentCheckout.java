@@ -1,8 +1,11 @@
 package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -28,6 +31,7 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.model.Address;
 import com.future333.chefzin.model.Controller.CtrCart;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
@@ -257,10 +261,10 @@ public class FragmentCheckout extends Fragment {
         TextView tvDomicile;
         TextView tvSubtotal;
 
-        EditText    etPhone;
-        EditText    etAddress;
         EditText    etDocument;
-        EditText    etIndications;
+        TextView    tvPhone;
+        TextView    tvAddress;
+        TextView    tvIndications;
         ImageButton btnOpenMap;
 
         public CheckoutPageAdapter(Activity ctx, AppHandler app){
@@ -341,10 +345,6 @@ public class FragmentCheckout extends Fragment {
                 public void onClick(View view) {
                     try {
 
-                        if(etPhone.getText().toString().equals("")){
-                            ToolsView.msj(ctx,"El campo telefono esta vacio");
-                            return;
-                        }
 
                         if(etDocument.getText().toString().equals("")){
                             ToolsView.msj(ctx,"El campo cedula esta vacio");
@@ -353,11 +353,11 @@ public class FragmentCheckout extends Fragment {
 
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
-                        jsonObject.put("telefono",      etPhone.getText().toString());
+//                        jsonObject.put("telefono",      etPhone.getText().toString());
                         jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
                         jsonObject.put("descripcion",   app.ctrCart.getAddress());
-                        if(!etIndications.getText().toString().equals(""))
-                            jsonObject.put("comentarios",   etIndications.getText().toString());
+//                        if(!etIndications.getText().toString().equals(""))
+//                            jsonObject.put("comentarios",   etIndications.getText().toString());
 
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ADDRESS_CREATE, jsonObject,
                                 new Response.Listener<JSONObject>() {
@@ -433,13 +433,12 @@ public class FragmentCheckout extends Fragment {
         }
 
         public void setDataView(){
-            etPhone         = (EditText)    dataView.findViewById(R.id.etPhone);
             etDocument      = (EditText)    dataView.findViewById(R.id.etDocument);
-            etAddress       = (EditText)    dataView.findViewById(R.id.etAddress);
-            etIndications   = (EditText)    dataView.findViewById(R.id.etIndications);
+            tvPhone         = (TextView)    dataView.findViewById(R.id.tvPhone);
+            tvAddress       = (TextView)    dataView.findViewById(R.id.tvAddress);
+            tvIndications   = (TextView)    dataView.findViewById(R.id.tvIndications);
             btnOpenMap      = (ImageButton) dataView.findViewById(R.id.btnOpenMap);
 
-            etPhone.setText(app.ctrUser.getUser().getTelefono());
             etDocument.setText(app.ctrUser.getUser().getDocumento());
 
             btnOpenMap.setOnClickListener(new View.OnClickListener() {
@@ -454,7 +453,37 @@ public class FragmentCheckout extends Fragment {
                 public void onBackStackChanged() {
                     String address = app.ctrCart.getAddress();
                     if(address != null)
-                        etAddress.setText(address);
+                        tvAddress.setText(address);
+                }
+            });
+
+            tvAddress.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    final ArrayList<Address> addresses = app.ctrUser.getUser().getAddresses();
+                    String[] items = new String[addresses.size()];
+
+                    for (int i=0; i<addresses.size(); i++){
+                        items[i] = addresses.get(i).getDescripcion();
+                    }
+
+
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+
+                    builder.setTitle("Direccion")
+                            .setItems(items, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int item) {
+                                    Address address = addresses.get(item);
+                                    tvAddress.setText(address.getDescripcion());
+                                    tvPhone.setText(address.getTelefono());
+                                    tvIndications.setText(address.getComentarios());
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+
                 }
             });
         }

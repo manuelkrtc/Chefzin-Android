@@ -26,6 +26,7 @@ public class ToolsApi {
     public final static String URL_USER_RECORD          = URL_SERVICES + "orden/gethistorial/usuario?api_token=";
 
     public final static String URL_ADDRESS_CREATE       = URL_SERVICES + "direccion/crear";
+    public final static String URL_ADDRESS_GET          = URL_SERVICES + "direccion/get?api_token=";
 
     public final static String URL_IMG_CHEF             = URL_IMG + "chef/";
     public final static String URL_IMG_PLATO            = URL_IMG + "plato/";

@@ -115,7 +115,17 @@ public class FragmentProduct extends Fragment {
                     return;
                 }
 
-                ((MainActivity)getActivity()).goFragmentCheckout();
+                app.ctrUser.apiAddress(ctx, new ToolsApi.OnApiListenerError() {
+                    @Override
+                    public void onSuccessful() {
+                        ((MainActivity)getActivity()).goFragmentCheckout();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        ToolsView.msj(ctx,error);
+                    }
+                });
             }
         });
 
