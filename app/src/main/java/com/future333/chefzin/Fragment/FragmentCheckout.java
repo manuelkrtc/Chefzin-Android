@@ -257,10 +257,10 @@ public class FragmentCheckout extends Fragment {
         TextView tvDomicile;
         TextView tvSubtotal;
 
-        EditText    etName;
         EditText    etPhone;
-        EditText    etDocument;
         EditText    etAddress;
+        EditText    etDocument;
+        EditText    etIndications;
         ImageButton btnOpenMap;
 
         public CheckoutPageAdapter(Activity ctx, AppHandler app){
@@ -341,11 +341,23 @@ public class FragmentCheckout extends Fragment {
                 public void onClick(View view) {
                     try {
 
+                        if(etPhone.getText().toString().equals("")){
+                            ToolsView.msj(ctx,"El campo telefono esta vacio");
+                            return;
+                        }
+
+                        if(etDocument.getText().toString().equals("")){
+                            ToolsView.msj(ctx,"El campo cedula esta vacio");
+                            return;
+                        }
+
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
                         jsonObject.put("telefono",      etPhone.getText().toString());
                         jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
                         jsonObject.put("descripcion",   app.ctrCart.getAddress());
+                        if(!etIndications.getText().toString().equals(""))
+                            jsonObject.put("comentarios",   etIndications.getText().toString());
 
                         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ADDRESS_CREATE, jsonObject,
                                 new Response.Listener<JSONObject>() {
@@ -396,11 +408,6 @@ public class FragmentCheckout extends Fragment {
                                                     e.printStackTrace();
                                                 }
 
-
-
-
-
-
                                             }else {
 
                                             }
@@ -426,13 +433,12 @@ public class FragmentCheckout extends Fragment {
         }
 
         public void setDataView(){
-            etName      = (EditText)    dataView.findViewById(R.id.etName);
-            etPhone     = (EditText)    dataView.findViewById(R.id.etPhone);
-            etDocument  = (EditText)    dataView.findViewById(R.id.etDocument);
-            etAddress   = (EditText)    dataView.findViewById(R.id.etAddress);
-            btnOpenMap  = (ImageButton) dataView.findViewById(R.id.btnOpenMap);
+            etPhone         = (EditText)    dataView.findViewById(R.id.etPhone);
+            etDocument      = (EditText)    dataView.findViewById(R.id.etDocument);
+            etAddress       = (EditText)    dataView.findViewById(R.id.etAddress);
+            etIndications   = (EditText)    dataView.findViewById(R.id.etIndications);
+            btnOpenMap      = (ImageButton) dataView.findViewById(R.id.btnOpenMap);
 
-            etName.setText(app.ctrUser.getUser().getNombres());
             etPhone.setText(app.ctrUser.getUser().getTelefono());
             etDocument.setText(app.ctrUser.getUser().getDocumento());
 

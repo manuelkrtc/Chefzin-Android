@@ -74,7 +74,6 @@ public class FragmentMap extends Fragment {
 
     ToolsNotif toolsNotif;
 
-    ImageButton btnSelectAddress;
     RelativeLayout relative;
     Geocoder geocoder;
 
@@ -110,7 +109,6 @@ public class FragmentMap extends Fragment {
         v = inflater.inflate(R.layout.fragment_maps, container, false);
 
         mapView                 = (MapView) v.findViewById(R.id.map);
-        btnSelectAddress        = (ImageButton)v.findViewById(R.id.btnSelectAddress);
         touchableWrapper        = (TouchableWrapper)v.findViewById(R.id.touchableWrapper);
 //        autocompleteFragment    = (PlaceAutocompleteFragment) ToolsView.getMapFragment(ctxFrag).findFragmentById(R.id.autocomplete_fragment);
         relative =(RelativeLayout)v.findViewById(R.id.relative);

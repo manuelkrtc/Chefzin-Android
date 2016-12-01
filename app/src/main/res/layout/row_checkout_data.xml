@@ -11,7 +11,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     >
 
-    <!--zone Name-->
+    <!--zone Document-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_text_checkout"
@@ -20,13 +20,14 @@
         <com.future333.chefzin.view.FontTextView
             style="@style/textCheckout"
             android:gravity="left"
-            android:text="Nombre"/>
+            android:text="Cedula"/>
 
         <com.future333.chefzin.view.FontEditText
             style="@style/form"
-            android:id="@+id/etName"
+            android:id="@+id/etDocument"
             android:layout_width="match_parent"
             android:layout_marginRight="40dp"
+            android:inputType="number"
             />
     </LinearLayout>
 
@@ -46,27 +47,7 @@
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_marginRight="40dp"
-
-            />
-    </LinearLayout>
-
-    <!--zone Document-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_text_checkout"
-        android:gravity="center_vertical"
-        >
-        <com.future333.chefzin.view.FontTextView
-            style="@style/textCheckout"
-            android:gravity="left"
-            android:text="Cedula"/>
-
-        <com.future333.chefzin.view.FontEditText
-            style="@style/form"
-            android:id="@+id/etDocument"
-            android:layout_width="match_parent"
-            android:layout_marginRight="40dp"
-
+            android:inputType="number"
             />
     </LinearLayout>
 
@@ -93,9 +74,27 @@
             style="@style/icon"
             android:id="@+id/btnOpenMap"
             android:layout_marginLeft="-40dp"
-            android:src="@mipmap/ic_faceboook"/>
+            android:src="@drawable/ic_map"/>
+    </LinearLayout>
 
+    <!--zone Phone-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_text_checkout"
+        android:gravity="center_vertical"
+        >
+        <com.future333.chefzin.view.FontTextView
+            style="@style/textCheckout"
+            android:layout_width="105dp"
+            android:gravity="left"
+            android:text="Indicaciones"/>
 
+        <com.future333.chefzin.view.FontEditText
+            style="@style/form"
+            android:id="@+id/etIndications"
+            android:layout_width="match_parent"
+            android:layout_marginRight="40dp"
+            />
     </LinearLayout>
 
 </LinearLayout>
