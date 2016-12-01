@@ -6,9 +6,12 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -22,6 +25,7 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ToolsPermissions;
 import com.future333.chefzin.tools.ToolsView;
 import com.future333.chefzin.view.TouchableWrapper;
@@ -34,6 +38,8 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.GroundOverlay;
+import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolygonOptions;
@@ -52,6 +58,8 @@ public class FragmentMap extends Fragment {
 
     public static final String  NAME = "FragmentMap";
 
+    View v;
+
     Activity    ctx;
     AppHandler  app;
     Fragment    ctxFrag;
@@ -61,7 +69,12 @@ public class FragmentMap extends Fragment {
     TouchableWrapper            touchableWrapper;
     PlaceAutocompleteFragment   autocompleteFragment;
 
+    ToolsNotif toolsNotif;
+
     ImageButton btnSelectAddress;
+    Geocoder geocoder;
+
+    boolean isPlaceSelect = false;
 
     public static FragmentMap newInstance() {
         return new FragmentMap();
@@ -74,13 +87,23 @@ public class FragmentMap extends Fragment {
         ctx     = getActivity();
         ctxFrag = this;
         app     = ((AppHandler)getActivity().getApplication());
+
+        toolsNotif = new ToolsNotif(ctx);
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_maps, container, false);
+//        v = inflater.inflate(R.layout.fragment_maps, container, false);
+
+//        if (v != null) {
+//            ViewGroup parent = (ViewGroup) v.getParent();
+//            if (parent != null)
+//                parent.removeView(v);
+//        }
+
+        v = inflater.inflate(R.layout.fragment_maps, container, false);
 
         mapView                 = (MapView) v.findViewById(R.id.map);
         btnSelectAddress        = (ImageButton)v.findViewById(R.id.btnSelectAddress);
@@ -95,7 +118,7 @@ public class FragmentMap extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initializeMap(savedInstanceState);
-//        initializeAutocomplete();
+        initializeAutocomplete();
 
         listen();
     }
@@ -145,15 +168,15 @@ public class FragmentMap extends Fragment {
     }
 
     private void setOnTextLocation(){
-        map.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
-            @Override
-            public void onCameraMove() {
 
+        map.setOnCameraIdleListener(new GoogleMap.OnCameraIdleListener() {
+            @Override
+            public void onCameraIdle() {
                 CameraPosition cameraPosition = map.getCameraPosition();
 
-                if(!touchableWrapper.ismMapIsTouched()){
+                if(!isPlaceSelect){
                     try {
-                        Geocoder geocoder = new Geocoder(ctx, Locale.getDefault());
+                        geocoder = new Geocoder(ctx, Locale.getDefault());
                         List<Address> addresses = geocoder.getFromLocation(cameraPosition.target.latitude, cameraPosition.target.longitude, 1);
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
@@ -162,8 +185,13 @@ public class FragmentMap extends Fragment {
                         }
                     } catch (IOException e) {}
                 }
+
+                isPlaceSelect = false;
+
             }
         });
+
+
     }
 
     private void enableMyLocation(){
@@ -188,6 +216,7 @@ public class FragmentMap extends Fragment {
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
+                isPlaceSelect = true;
                 map.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 14.5F));
             }
 
