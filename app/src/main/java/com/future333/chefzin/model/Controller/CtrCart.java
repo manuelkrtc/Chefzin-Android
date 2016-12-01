@@ -9,11 +9,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.model.Address;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsFormat;
-import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,9 +30,7 @@ public class CtrCart {
     private int percentIva      = 16;
     private int priceDomicile   = 5000;
 
-    private String address;
-    private String coordinates;
-    private String id_direccion;
+    private Address addressSelect;
 
     private String id_orden;
     private ArrayList<Product> products = new ArrayList<>();
@@ -41,25 +39,20 @@ public class CtrCart {
         return products;
     }
 
-    public void setAddress(String address, String coordinates){
-        this.address = address;
-        this.coordinates = coordinates;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getCoordinates() {
-        return coordinates;
-    }
-
     public String getId_orden() {
         return id_orden;
     }
 
     //----------------------------------------------------------------------------------------------
 
+
+    public Address getAddressSelect() {
+        return addressSelect;
+    }
+
+    public void setAddressSelect(Address addressSelect) {
+        this.addressSelect = addressSelect;
+    }
 
     public void addProduct(Activity ctx, AppHandler app, Product product, ToolsApi.OnApiListenerError apiListener){
 
@@ -81,9 +74,7 @@ public class CtrCart {
     public void clear(){
         products.clear();
         id_orden    = null;
-        address     = null;
-        coordinates = null;
-
+        addressSelect = null;
     }
 
     //----------------------------------------------------------------------------------------------

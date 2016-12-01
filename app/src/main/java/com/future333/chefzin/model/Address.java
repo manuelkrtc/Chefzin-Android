@@ -35,4 +35,28 @@ public class Address implements Cloneable {
     public String getComentarios() {
         return comentarios;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setId_usuario(String id_usuario) {
+        this.id_usuario = id_usuario;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+
+    public void setCoordenada(String coordenada) {
+        this.coordenada = coordenada;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public void setComentarios(String comentarios) {
+        this.comentarios = comentarios;
+    }
 }

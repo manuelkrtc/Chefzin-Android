@@ -2,8 +2,6 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,12 +10,9 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -30,7 +25,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.AppHandler;
-import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.tools.ToolsApi;
@@ -47,11 +41,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
-import com.google.android.gms.maps.model.GroundOverlay;
-import com.google.android.gms.maps.model.IndoorBuilding;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -85,7 +78,7 @@ public class FragmentMap extends Fragment {
     ImageButton btnConfirm;
     boolean isPlaceSelect = false;
 
-    String textAddress;
+    String textCoordinates;
 
 //    public static FragmentMap newInstance() {
 //        return new FragmentMap();
@@ -159,6 +152,10 @@ public class FragmentMap extends Fragment {
                 TextView tvAddress = (TextView)vDialog.findViewById(R.id.tvAddress);
                 final EditText etPhone = (EditText)vDialog.findViewById(R.id.etPhone);
                 final EditText etIndications = (EditText)vDialog.findViewById(R.id.etIndications);
+//                tvAddress.setText(textAddress);
+//                tvAddress.setText(autocompleteFragment.getText(R.id.place_autocomplete_search_input).toString());
+                EditText editText = (EditText)autocompleteFragment.getView().findViewById(R.id.place_autocomplete_search_input);
+                final String textAddress = editText.getText().toString();
                 tvAddress.setText(textAddress);
 
 
@@ -180,8 +177,8 @@ public class FragmentMap extends Fragment {
                                     JSONObject jsonObject = new JSONObject();
                                     jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
                                     jsonObject.put("telefono",      etPhone.getText().toString());
-                                    jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
-                                    jsonObject.put("descripcion",   app.ctrCart.getAddress());
+                                    jsonObject.put("coordenada",    textCoordinates);
+                                    jsonObject.put("descripcion",   textAddress);
                                     if(!etIndications.getText().toString().equals(""))
                                         jsonObject.put("comentarios",   etIndications.getText().toString());
 
@@ -192,7 +189,11 @@ public class FragmentMap extends Fragment {
                                                     try {
                                                         if(response.getBoolean("response")){
 
-                                                            String id_direccion = response.getJSONObject("data").getString("id");
+                                                            com.future333.chefzin.model.Address address = new Gson().fromJson(response.getJSONObject("data").toString(), com.future333.chefzin.model.Address.class);
+                                                            app.ctrUser.getUser().getAddresses().add(address);
+                                                            app.ctrCart.setAddressSelect(address);
+
+                                                            ctx.onBackPressed();
 
                                                         }else {
 
@@ -281,9 +282,8 @@ public class FragmentMap extends Fragment {
                         List<Address> addresses = geocoder.getFromLocation(cameraPosition.target.latitude, cameraPosition.target.longitude, 1);
                         if (addresses.size() > 0) {
                             Address address = addresses.get(0);
-                            textAddress = address.getAddressLine(0);
-                            autocompleteFragment.setText(textAddress);
-                            app.ctrCart.setAddress(address.getAddressLine(0),"("+cameraPosition.target.latitude+","+cameraPosition.target.longitude+")");
+                            textCoordinates = "("+cameraPosition.target.latitude+","+cameraPosition.target.longitude+")";
+                            autocompleteFragment.setText(address.getAddressLine(0));
                         }
                     } catch (IOException e) {}
                 }

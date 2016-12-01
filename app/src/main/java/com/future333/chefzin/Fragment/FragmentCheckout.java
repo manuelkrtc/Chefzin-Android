@@ -2,7 +2,6 @@ package com.future333.chefzin.Fragment;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.DialogInterface;
@@ -26,7 +25,6 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
@@ -354,8 +352,8 @@ public class FragmentCheckout extends Fragment {
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
 //                        jsonObject.put("telefono",      etPhone.getText().toString());
-                        jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
-                        jsonObject.put("descripcion",   app.ctrCart.getAddress());
+//                        jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
+                        jsonObject.put("descripcion",   app.ctrCart.getAddressSelect());
 //                        if(!etIndications.getText().toString().equals(""))
 //                            jsonObject.put("comentarios",   etIndications.getText().toString());
 
@@ -451,9 +449,9 @@ public class FragmentCheckout extends Fragment {
             ctx.getFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
                 @Override
                 public void onBackStackChanged() {
-                    String address = app.ctrCart.getAddress();
+                    Address address = app.ctrCart.getAddressSelect();
                     if(address != null)
-                        tvAddress.setText(address);
+                        paintViewAddress(address);
                 }
             });
 
@@ -476,9 +474,8 @@ public class FragmentCheckout extends Fragment {
                             .setItems(items, new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int item) {
                                     Address address = addresses.get(item);
-                                    tvAddress.setText(address.getDescripcion());
-                                    tvPhone.setText(address.getTelefono());
-                                    tvIndications.setText(address.getComentarios());
+                                    paintViewAddress(address);
+                                    app.ctrCart.setAddressSelect(address);
                                 }
                             });
                     AlertDialog alert = builder.create();
@@ -486,6 +483,12 @@ public class FragmentCheckout extends Fragment {
 
                 }
             });
+        }
+
+        private void paintViewAddress(Address address){
+            tvAddress.setText(address.getDescripcion());
+            tvPhone.setText(address.getTelefono());
+            tvIndications.setText(address.getComentarios());
         }
 
     }
