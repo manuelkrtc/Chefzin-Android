@@ -63,8 +63,7 @@ public class CtrCart {
     }
 
     public void deleteProduct(Activity ctx, AppHandler app, Product product, ToolsApi.OnApiListenerError apiListener){
-        products.remove(product);
-//        apiOrderProductDelete(ctx, app, product, apiListener);
+        apiOrderProductDelete(ctx, app, product, apiListener);
     }
 
     public int quantityProducts(){
@@ -123,6 +122,7 @@ public class CtrCart {
                         public void onResponse(JSONObject response) {
                             try {
                                 if(response.getBoolean("response")){
+                                    product.setId_orden_plato(response.getJSONObject("data").getString("id_orden_plato"));
                                     products.add(product);
                                     id_orden = response.getJSONObject("data").getString("id_orden");
                                     apiListener.onSuccessful();
@@ -161,6 +161,7 @@ public class CtrCart {
                         public void onResponse(JSONObject response) {
                             try {
                                 if(response.getBoolean("response")){
+                                    product.setId_orden_plato(response.getJSONObject("data").getString("id_orden_plato"));
                                     products.add(product);
                                     apiListener.onSuccessful();
                                 }else {
@@ -190,8 +191,8 @@ public class CtrCart {
         try {
 
             JSONObject jsonObject = new JSONObject();
-            jsonObject.put("id_plato", product.getId_plato());
-            jsonObject.put("id_orden", id_orden);
+            jsonObject.put("api_token",         app.ctrUser.getUser().getApi_token());
+            jsonObject.put("id_orden_plato",    product.getId_orden_plato());
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_PRODUCT_DELETE, jsonObject,
                     new Response.Listener<JSONObject>() {

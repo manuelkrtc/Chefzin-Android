@@ -15,6 +15,8 @@ public class Product implements Cloneable {
     int impuesto;
     int unidad_cocina;
     int tiempo_preparacion;
+    String id_orden_plato;
+
     ArrayList<Ingredient> ingredientes = new ArrayList<>();
 
     public Object clone(){
@@ -71,5 +73,13 @@ public class Product implements Cloneable {
                 ingredientes.remove(i);
             }
         }
+    }
+
+    public String getId_orden_plato() {
+        return id_orden_plato;
+    }
+
+    public void setId_orden_plato(String id_orden_plato) {
+        this.id_orden_plato = id_orden_plato;
     }
 }
