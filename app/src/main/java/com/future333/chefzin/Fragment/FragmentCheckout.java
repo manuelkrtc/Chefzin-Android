@@ -198,6 +198,7 @@ public class FragmentCheckout extends Fragment {
                         public void onSuccessful() {
                             thisAdatpter.notifyDataSetChanged();
                             checkoutAdapter.updatePriceView();
+                            if(app.ctrCart.quantityProducts()==0) ctxAdap.onBackPressed();
                         }
 
                         @Override
@@ -205,11 +206,6 @@ public class FragmentCheckout extends Fragment {
                             ToolsView.msj(ctxAdap, error);
                         }
                     });
-
-                    thisAdatpter.notifyDataSetChanged();
-                    checkoutAdapter.updatePriceView();
-
-                    if(app.ctrCart.quantityProducts()==0) ctxAdap.onBackPressed();
                 }
             });
         }
