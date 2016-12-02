@@ -341,73 +341,32 @@ public class FragmentCheckout extends Fragment {
             btnConfirm.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
+                    if(app.ctrCart.getAddressSelect() == null){
+                        ToolsView.msj(ctx, "No se asigno una direccion a la orden.");
+                        return;
+                    }
+
                     try {
 
+                        JSONObject jsonObject2 = new JSONObject();
+                        jsonObject2.put("api_token",     app.ctrUser.getUser().getApi_token());
+                        jsonObject2.put("id_orden",      app.ctrCart.getId_orden());
+                        jsonObject2.put("id_direccion",  app.ctrCart.getAddressSelect().getId());
+                        jsonObject2.put("id_metodo_pago","1");
 
-                        if(etDocument.getText().toString().equals("")){
-                            ToolsView.msj(ctx,"El campo cedula esta vacio");
-                            return;
-                        }
-
-                        JSONObject jsonObject = new JSONObject();
-                        jsonObject.put("api_token",     app.ctrUser.getUser().getApi_token());
-//                        jsonObject.put("telefono",      etPhone.getText().toString());
-//                        jsonObject.put("coordenada",    app.ctrCart.getCoordinates());
-                        jsonObject.put("descripcion",   app.ctrCart.getAddressSelect());
-//                        if(!etIndications.getText().toString().equals(""))
-//                            jsonObject.put("comentarios",   etIndications.getText().toString());
-
-                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ADDRESS_CREATE, jsonObject,
+                        JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_CHECKOUT, jsonObject2,
                                 new Response.Listener<JSONObject>() {
                                     @Override
                                     public void onResponse(JSONObject response) {
                                         try {
                                             if(response.getBoolean("response")){
 
-                                                String id_direccion = response.getJSONObject("data").getString("id");
-
-
-                                                try {
-
-                                                    JSONObject jsonObject2 = new JSONObject();
-                                                    jsonObject2.put("api_token",     app.ctrUser.getUser().getApi_token());
-                                                    jsonObject2.put("id_orden",      app.ctrCart.getId_orden());
-                                                    jsonObject2.put("id_direccion",  id_direccion);
-                                                    jsonObject2.put("id_metodo_pago","1");
-
-                                                    JsonObjectRequest jsonObjectRequest2 = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_CHECKOUT, jsonObject2,
-                                                            new Response.Listener<JSONObject>() {
-                                                                @Override
-                                                                public void onResponse(JSONObject response) {
-                                                                    try {
-                                                                        if(response.getBoolean("response")){
-
-                                                                            ToolsView.msj(ctx,"Pedido exitoso.");
-                                                                            ((MainActivity)ctx).homeFragment();
-
-                                                                        }else {
-                                                                            ToolsView.msj(ctx,"Error de conexión.");
-                                                                        }
-                                                                    } catch (JSONException e) {
-                                                                        e.printStackTrace();
-                                                                    }
-                                                                }
-                                                            }, new Response.ErrorListener() {
-                                                        @Override
-                                                        public void onErrorResponse(VolleyError error) {
-                                                            Log.i("responseLog", error.toString());
-                                                            ToolsView.msj(ctx,"Error de conexión.");
-                                                        }
-                                                    });
-
-                                                    SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest2);
-
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
-                                                }
+                                                ToolsView.msj(ctx,"Pedido exitoso.");
+                                                ((MainActivity)ctx).homeFragment();
 
                                             }else {
-
+                                                ToolsView.msj(ctx,"Error de conexión.");
                                             }
                                         } catch (JSONException e) {
                                             e.printStackTrace();
@@ -417,15 +376,17 @@ public class FragmentCheckout extends Fragment {
                             @Override
                             public void onErrorResponse(VolleyError error) {
                                 Log.i("responseLog", error.toString());
-                                ToolsView.msj(ctx,error.toString());
+                                ToolsView.msj(ctx,"Error de conexión.");
                             }
                         });
 
-                        SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
+                        SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest2);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+
                 }
             });
         }
