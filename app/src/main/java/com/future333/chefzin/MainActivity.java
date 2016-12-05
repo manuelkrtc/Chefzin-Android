@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
@@ -34,7 +35,10 @@ public class MainActivity extends FragmentActivity {
     ImageView btnBack;
     ImageView btnRecord;
     ImageView btnProfile;
-    RelativeLayout fragment;
+
+    ViewGroup fragment;
+    ViewGroup zoneScreenHome;
+    ViewGroup zoneCheckConnection;
 
     FragmentChef    fragmentChef;
     FragmentLogin   fragmentLogin;
@@ -54,17 +58,8 @@ public class MainActivity extends FragmentActivity {
 
         app.ctrUser.getUserLocal(ctx);
 
-        app.ctrHorary.getApiHorary(ctx, new ToolsApi.OnApiListenerError() {
-            @Override
-            public void onSuccessful() {
-                goFragmentHorary();
-            }
+        getHorary();
 
-            @Override
-            public void onError(String error) {
-                ToolsView.msj(ctx,error);
-            }
-        });
     }
 
     private void inicializate(){
@@ -75,7 +70,10 @@ public class MainActivity extends FragmentActivity {
         btnBack     = (ImageView) findViewById(R.id.btnBack);
         btnRecord   = (ImageView) findViewById(R.id.btnRecord);
         btnProfile  = (ImageView) findViewById(R.id.btnProfile);
-        fragment    = (RelativeLayout) findViewById(R.id.rlFragment);
+
+        fragment            = (ViewGroup) findViewById(R.id.rlFragment);
+        zoneScreenHome      = (ViewGroup) findViewById(R.id.zoneScreenHome);
+        zoneCheckConnection = (ViewGroup) findViewById(R.id.zoneCheckConnection);
 
         fragmentChef    = new FragmentChef();
         fragmentLogin   = FragmentLogin.newInstance();
@@ -200,6 +198,9 @@ public class MainActivity extends FragmentActivity {
 
     }
 
+    public void btnReload(View view){
+        getHorary();
+    }
 
     //----------------------------------------------- Toolbars -------------------------------------
     private void setToolbar(String nameFragment){
@@ -222,6 +223,24 @@ public class MainActivity extends FragmentActivity {
         btnProfile.setVisibility(View.GONE);
 
         btnRecord.setVisibility(isVisibleRecord? View.VISIBLE:View.GONE);
+    }
+
+    //----------------------------------------- Methods --------------------------------------------
+    private void getHorary(){
+        zoneCheckConnection.setVisibility(View.GONE);
+        app.ctrHorary.getApiHorary(ctx, new ToolsApi.OnApiListenerError() {
+            @Override
+            public void onSuccessful() {
+                zoneScreenHome.setVisibility(View.GONE);
+                goFragmentHorary();
+            }
+
+            @Override
+            public void onError(String error) {
+                ToolsView.msj(ctx,error);
+                zoneCheckConnection.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     //----------------------------------------------------------------------------------------------

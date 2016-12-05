@@ -1,20 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.future333.chefzin.MainActivity"
     android:orientation="vertical">
 
-    <include
+    <!--zone fragment and toolbart-->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        layout="@layout/toolbar"
-        />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/toolbar"
+            />
+
+        <RelativeLayout
+            android:id="@+id/rlFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <!--zone home screen-->
     <RelativeLayout
-        android:id="@+id/rlFragment"
+        android:id="@+id/zoneScreenHome"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:clickable="true">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@mipmap/background_screen_home"
+            android:scaleType="centerCrop"/>
+
+        <!--zone checkConnection-->
+        <LinearLayout
+            android:id="@+id/zoneCheckConnection"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/margin_x"
+            >
+
+            <ImageView
+                style="@style/icon"
+                android:src="@mipmap/ic_update"
+                android:onClick="btnReload"/>
+
+            <TextView
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="Sin conexión, Verifica tu conexión y vuelve a intentarlo."
+                android:gravity="center"
+                android:textColor="@color/white"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
