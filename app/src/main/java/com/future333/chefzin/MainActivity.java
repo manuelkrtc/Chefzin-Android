@@ -36,9 +36,9 @@ public class MainActivity extends FragmentActivity {
     ImageView btnProfile;
     RelativeLayout fragment;
 
-    FragmentChef fragmentChef;
-    FragmentLogin fragmentLogin;
-    FragmentHorary fragmentHorary;
+    FragmentChef    fragmentChef;
+    FragmentLogin   fragmentLogin;
+    FragmentHorary  fragmentHorary;
     FragmentProfile fragmentProfile;
 
     FragmentTransaction fragmentTransaction;
@@ -162,23 +162,15 @@ public class MainActivity extends FragmentActivity {
 
     @Override
     public void onBackPressed() {
-
         if(ToolsFragment.getNameIteration(ctx).equals(FragmentHorary.NAME)) return;
-        getFragmentManager().popBackStack();
 
+        getFragmentManager().popBackStack();
         setToolbar(ToolsFragment.getNameIterationPrevious(ctx));
     }
 
     public void homeFragment(){
-
         getFragmentManager().popBackStack(FragmentChef.NAME, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-    }
-
-    private void setToolbar(String nameFragment){
-        boolean isLogIn = app.ctrUser.getUser() != null;
-
-        if(nameFragment.equals(FragmentHorary.NAME)) setToolbartHome(isLogIn);
-        else setToolbartBack(isLogIn);
+        setToolbar(FragmentHorary.NAME);
     }
 
     //-------------------------------------- buttons Toolbar ---------------------------------------
@@ -210,6 +202,15 @@ public class MainActivity extends FragmentActivity {
     }
 
 
+    //----------------------------------------------- Toolbars -------------------------------------
+    private void setToolbar(String nameFragment){
+        boolean isLogIn = app.ctrUser.getUser() != null;
+
+        if(nameFragment.equals(FragmentHorary.NAME)) setToolbartHome(isLogIn);
+        else setToolbartBack(isLogIn);
+    }
+
+    //toolbars
     private void setToolbartHome(boolean isVisibleRecord){
         btnBack.setVisibility(View.GONE);
         btnProfile.setVisibility(View.VISIBLE);
@@ -224,21 +225,10 @@ public class MainActivity extends FragmentActivity {
         btnRecord.setVisibility(isVisibleRecord? View.VISIBLE:View.GONE);
     }
 
+    //----------------------------------------------------------------------------------------------
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-//        switch (requestCode) {
-//            case ToolsPermissions.MY_PERMISSIONS_REQUEST_FINE_LOCATION: {
-//                // If request is cancelled, the result arrays are empty.
-//                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-//                    ToolsView.msj(ctx,"Cago1");
-//                } else {
-//                    ToolsView.msj(ctx,"cago2");
-//                }
-//                return;
-//            }
-//
-//        }
     }
 
 
