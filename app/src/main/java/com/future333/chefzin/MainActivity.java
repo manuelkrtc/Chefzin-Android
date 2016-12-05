@@ -84,7 +84,6 @@ public class MainActivity extends FragmentActivity {
 
     }
 
-
     //--------------------------------------- goFragments ------------------------------------------
     public void goFragmentLogin(){
         fragmentTransaction = getFragmentManager().beginTransaction();

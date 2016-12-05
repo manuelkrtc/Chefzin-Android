@@ -37,7 +37,9 @@
                 style="@style/form"
                 android:id="@+id/etPasswordLog"
                 android:hint="Contraseña"
-                android:layout_marginBottom="@dimen/margin"/>
+                android:layout_marginBottom="@dimen/margin"
+                android:inputType="textPassword"
+                />
 
 
             <com.future333.chefzin.view.FontTextView
@@ -98,17 +100,20 @@
             <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etPassword"
-                android:hint="Contraseña"/>
+                android:hint="Contraseña"
+                android:inputType="textPassword"/>
 
             <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etPasswordConfirm"
-                android:hint="Confirmar contraseña"/>
+                android:hint="Confirmar contraseña"
+                android:inputType="textPassword"/>
 
             <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etTelephone"
-                android:hint="Telefono"/>
+                android:hint="Telefono"
+                android:inputType="number"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
