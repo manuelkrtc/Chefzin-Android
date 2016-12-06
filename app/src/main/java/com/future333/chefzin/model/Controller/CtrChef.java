@@ -41,7 +41,7 @@ public class CtrChef {
                                 chefs = new Gson().fromJson(response.getJSONObject("data").getJSONArray("chef").toString(), new TypeToken<List<Chef>>() {}.getType());
                                 logInListener.onSuccessful();
                             }else{
-                                logInListener.onError(response.getJSONObject("data").getString("mensaje"));
+                                logInListener.onError(response.getString("mensaje"));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
