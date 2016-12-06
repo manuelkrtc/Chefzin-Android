@@ -12,11 +12,13 @@ public class ToolsApi {
 
     public final static String URL_LOGIN                = URL_SERVICES + "login";
     public final static String URL_REGISTER             = URL_SERVICES + "register";
-    public final static String URL_HORARIOS             = URL_SERVICES + "gethorariosfranjas/all";
     public final static String URL_INFO_USER            = URL_SERVICES + "getuser?api_token=";
     public final static String URL_REGISTER_GOOGLE      = URL_SERVICES + "register/google";
     public final static String URL_REGISTER_FACEBOOK    = URL_SERVICES + "register/facebook";
+
     public final static String URL_GET_CHEFZ            = URL_SERVICES + "getdata?id_horarios_franjas=";
+    public final static String URL_GET_HORARIOS         = URL_SERVICES + "gethorariosfranjas/all";
+    public final static String URL_GET_COBERTURA        = URL_SERVICES + "cobertura?ciudad=bogota";
 
     public final static String URL_ORDEN_CREATE         = URL_SERVICES + "orden/crear";
     public final static String URL_ORDEN_PRODUCT_ADD    = URL_SERVICES + "orden/plato/add";

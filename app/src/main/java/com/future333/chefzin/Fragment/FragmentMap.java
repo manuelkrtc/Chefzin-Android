@@ -27,6 +27,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
+import com.future333.chefzin.model.Controller.CtrApp;
+import com.future333.chefzin.model.Coordinate;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsNotif;
 import com.future333.chefzin.tools.ToolsPermissions;
@@ -50,6 +52,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -258,15 +261,33 @@ public class FragmentMap extends Fragment {
 
     private void setCoverageAreas(){
         // Instantiates a new Polygon object and adds points to define a rectangle
-        PolygonOptions rectOptions = new PolygonOptions()
+//        PolygonOptions rectOptions = new PolygonOptions()
+//                .strokeColor(Color.RED)
+//                .fillColor(R.color.colorPrimaryBlur)
+//                .add(new LatLng(4.706559, -74.053683),
+//                        new LatLng(4.686884, -74.056966),
+//                        new LatLng(4.685077, -74.048054),
+//                        new LatLng(4.679826, -74.038126),
+//                        new LatLng(4.702046, -74.028577));
+//        map.addPolygon(rectOptions);
+        app.ctrApp.getCoordinates(ctx, new CtrApp.OnApiListenerError() {
+            @Override
+            public void onSuccessful(ArrayList<Coordinate> coordinates) {
+                PolygonOptions rectOptions = new PolygonOptions()
                 .strokeColor(Color.RED)
-                .fillColor(R.color.colorPrimaryBlur)
-                .add(new LatLng(4.706559, -74.053683),
-                        new LatLng(4.686884, -74.056966),
-                        new LatLng(4.685077, -74.048054),
-                        new LatLng(4.679826, -74.038126),
-                        new LatLng(4.702046, -74.028577));
-        map.addPolygon(rectOptions);
+                .fillColor(R.color.colorPrimaryBlur);
+
+                for(Coordinate coordinate: coordinates){
+                    rectOptions.add(new LatLng(coordinate.getLatitud(),coordinate.getLongitud()));
+                }
+                map.addPolygon(rectOptions);
+            }
+
+            @Override
+            public void onError(String error) {
+                ToolsView.msj(ctx,error);
+            }
+        });
     }
 
     private void setOnTextLocation(){

@@ -59,7 +59,6 @@ public class MainActivity extends FragmentActivity {
         app.ctrUser.getUserLocal(ctx);
 
         getHorary();
-
     }
 
     private void inicializate(){
@@ -204,6 +203,8 @@ public class MainActivity extends FragmentActivity {
 
     //----------------------------------------------- Toolbars -------------------------------------
     private void setToolbar(String nameFragment){
+        getApis();
+
         boolean isLogIn = app.ctrUser.getUser() != null;
 
         if(nameFragment.equals(FragmentHorary.NAME)) setToolbartHome(isLogIn);
@@ -226,6 +227,12 @@ public class MainActivity extends FragmentActivity {
     }
 
     //----------------------------------------- Methods --------------------------------------------
+    //este metodo pedira datos que se necesitaran mas adelante, la idea es verificar esta
+    // informacion en cada vista.
+    private void getApis(){
+        app.ctrApp.getCoordinates(ctx);
+    }
+
     private void getHorary(){
         zoneCheckConnection.setVisibility(View.GONE);
         app.ctrHorary.getApiHorary(ctx, new ToolsApi.OnApiListenerError() {
