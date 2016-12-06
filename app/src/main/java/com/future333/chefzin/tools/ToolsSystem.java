@@ -31,4 +31,14 @@ public class ToolsSystem {
 
         }
     }
+
+    public static void getVersionName(Activity ctx){
+        try {
+            PackageInfo pInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
+            String version = pInfo.versionName;
+            Log.i("Version Name",version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 }
