@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.future333.chefzin.Fragment.FragmentCheckout;
 import com.future333.chefzin.Fragment.FragmentChef;
@@ -35,6 +36,8 @@ public class MainActivity extends FragmentActivity {
     AppHandler  app;
 
     //View
+    TextView tvVersion;
+
     ImageView btnBack;
     ImageView btnRecord;
     ImageView btnProfile;
@@ -57,12 +60,14 @@ public class MainActivity extends FragmentActivity {
 
         inicializate();
 
-        ToolsSystem.getHash(ctx);
-
         app.ctrUser.getUserLocal(ctx);
 
-        getHorary();
+        ToolsSystem.getHash(ctx);
 
+        ToolsSystem.getVersionName(ctx, tvVersion);
+//        ToolsSystem.checkMinimumVersion(ctx,"");
+
+        getHorary();
 
     }
 
@@ -71,6 +76,7 @@ public class MainActivity extends FragmentActivity {
         ctx = this;
         app = ((AppHandler)getApplication());
 
+        tvVersion   = (TextView) findViewById(R.id.tvVersion);
         btnBack     = (ImageView) findViewById(R.id.btnBack);
         btnRecord   = (ImageView) findViewById(R.id.btnRecord);
         btnProfile  = (ImageView) findViewById(R.id.btnProfile);

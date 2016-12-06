@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.Signature;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -32,13 +34,37 @@ public class ToolsSystem {
         }
     }
 
-    public static void getVersionName(Activity ctx){
+
+
+    //---------------------------------- Version Name ----------------------------------------------
+    public static void getVersionName(Activity ctx, TextView tv){
+        String versionName = getVersionName(ctx);
+        if(versionName == null) tv.setVisibility(View.GONE);
+        else tv.setText(versionName);
+    }
+
+    public static String getVersionName(Activity ctx){
         try {
             PackageInfo pInfo = ctx.getPackageManager().getPackageInfo(ctx.getPackageName(), 0);
-            String version = pInfo.versionName;
-            Log.i("Version Name",version);
+            return pInfo.versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        return null;
+    }
+
+    public static void checkMinimumVersion(Activity ctx, String minimumVersion){
+        String version = getVersionName(ctx);
+        if(version != null){
+            String versionArray[]           = version.split("\\.");
+            String minimumVersionArray[]    = minimumVersion.split("\\.");
+
+            if(versionArray.length!=3 || minimumVersionArray.length!=3) {
+                Log.e("Version","Formato de version incorrecto");
+                return;
+            }
+
+        }
+
     }
 }

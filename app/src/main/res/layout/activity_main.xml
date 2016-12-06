@@ -31,6 +31,7 @@
         android:layout_height="match_parent"
         android:clickable="true">
 
+        <!--zone background-->
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -62,6 +63,18 @@
 
         </LinearLayout>
 
+        <!--zone version-->
+        <TextView
+            android:id="@+id/tvVersion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_ss"
+            android:text="0.0.0 v"
+            android:textSize="@dimen/sizeText_s"
+            android:textColor="@color/white"
+            />
 
     </RelativeLayout>
 
