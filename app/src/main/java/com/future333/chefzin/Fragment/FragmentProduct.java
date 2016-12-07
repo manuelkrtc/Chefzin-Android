@@ -19,9 +19,12 @@ import com.daimajia.slider.library.SliderTypes.BaseSliderView;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.MainActivity;
 import com.future333.chefzin.R;
+import com.future333.chefzin.model.Controller.CtrHorary;
+import com.future333.chefzin.model.Horary;
 import com.future333.chefzin.model.Ingredient;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsDate;
 import com.future333.chefzin.tools.ToolsFormat;
 import com.future333.chefzin.tools.ImageLoader;
 import com.future333.chefzin.tools.ToolsView;
@@ -89,6 +92,12 @@ public class FragmentProduct extends Fragment {
             public void onClick(View view) {
                 if(app.ctrUser.getUser() == null){
                     ((MainActivity)ctx).goFragmentLogin();
+                    return;
+                }
+
+                Horary horary = app.ctrHorary.getHorarySelect();
+                if(!ToolsDate.checkHourRange(horary.getHora_ini(), horary.getHora_fin())){
+                    ToolsView.msj(ctx, "En este momento no puede realizar pedidos en esta franja de horario.");
                     return;
                 }
 

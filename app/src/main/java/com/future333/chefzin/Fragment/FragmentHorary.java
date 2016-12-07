@@ -108,6 +108,7 @@ public class FragmentHorary extends Fragment {
                     app.ctrChef.getApiChefs(ctx, horary.getId(), new ToolsApi.OnApiListenerError() {
                         @Override
                         public void onSuccessful() {
+                            app.ctrHorary.setPositionSelect(slider.getCurrentPosition());
                             ((MainActivity)getActivity()).goFragmentChef();
                             toolsNotif.cancelDialogProgress();
                         }

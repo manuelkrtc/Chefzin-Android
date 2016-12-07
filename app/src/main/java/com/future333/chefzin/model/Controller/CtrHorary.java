@@ -24,16 +24,20 @@ import java.util.List;
  */
 public class CtrHorary {
 
-    private ArrayList<Horary> horaries = new ArrayList<>();
+    int positionSelect;
+    ArrayList<Horary> horaries = new ArrayList<>();
 
     public ArrayList<Horary> getHoraries() {
         return horaries;
     }
 
-    public void setHoraries(ArrayList<Horary> horaries) {
-        this.horaries = horaries;
+    public void setPositionSelect(int positionSelect) {
+        this.positionSelect = positionSelect;
     }
 
+    public Horary getHorarySelect(){
+        return horaries.get(positionSelect);
+    }
     //-------------------------------- public methods--------------------------------------------------------------
     public void getApiHorary(final Activity ctx, final ToolsApi.OnApiListenerError logInListener){
 
@@ -61,5 +65,4 @@ public class CtrHorary {
         });
         SingletonVolley.getInstance(ctx).addToRequestQueue(jsonObjectRequest);
     }
-
 }
