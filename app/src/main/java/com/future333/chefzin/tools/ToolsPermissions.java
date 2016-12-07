@@ -44,15 +44,26 @@ public class ToolsPermissions {
      */
     public static boolean enabledPermissionsLocation(Activity ctx, Fragment fragment){
         if (ContextCompat.checkSelfPermission(ctx, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(ctx, Manifest.permission.ACCESS_FINE_LOCATION)){
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    fragment.requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
-                }
 
-            } else {
-                ToolsView.msj(ctx,"Si desea activar los permisos de localización debes acceder a la configuración del dispositivo.");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                fragment.requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_FINE_LOCATION);
             }
+
+//            if (ActivityCompat.shouldShowRequestPermissionRationale(ctx, Manifest.permission.ACCESS_FINE_LOCATION)){
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    fragment.requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+//                }
+//
+//            }
+//            else {
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+//                    fragment.requestPermissions( new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                            MY_PERMISSIONS_REQUEST_FINE_LOCATION);
+//                }
+////                ToolsView.msj(ctx,"Si desea activar los permisos de localización debes acceder a la configuración del dispositivo.");
+//            }
             return false;
         }
         return true;
