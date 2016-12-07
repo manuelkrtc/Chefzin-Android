@@ -31,6 +31,7 @@ import com.future333.chefzin.model.Order;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.model.UserFacebook;
 import com.future333.chefzin.tools.ToolsApi;
+import com.future333.chefzin.tools.ToolsFormat;
 import com.future333.chefzin.view.BtnStep;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -83,15 +84,7 @@ public class FragmentRecord extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_record, container, false);
 
-         slider = (SliderLayout)v.findViewById(R.id.slider);
-
-//        ArrayList<Chef> chefs = new ArrayList<>();
-//        chefs.add(new Chef("manuel","Vegetariano","Comida saludable, acopañada con moluscos ", null));
-//        chefs.add(new Chef("Paez","Oriental","En la cocina oriental podemos encontrar platos exóticos y fáciles de preparar para sorprender a nuestra familia o deleitar a nuestros invitados.", null));
-//        chefs.add(new Chef("Jose Vernicio","Carnivoro","super mega  dss play", null));
-//        chefs.add(new Chef("Davis loquen","Marina","Sudado de tramboyo, sabroso plato en donde el pescado se cocina en su propio jugo\n" , null));
-
-//        initSlider(chefs);
+        slider = (SliderLayout)v.findViewById(R.id.slider);
 
         return v;
     }
@@ -101,12 +94,6 @@ public class FragmentRecord extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         initSlider(app.ctrUser.getUser().getOrderRecord());
-
-
-
-
-
-
     }
 
     private void initSlider(ArrayList<Order> orders) {
@@ -244,6 +231,7 @@ public class FragmentRecord extends Fragment {
             final Product product = products.get(position);
 
             holder.tvName.setText(product.getNombre());
+            holder.tvPrice.setText(ToolsFormat.int_to_price(product.getPrecio()));
             holder.btnDeleteProduct.setVisibility(View.GONE);
 
             holder.lyAdditions.removeAllViews();
@@ -251,7 +239,6 @@ public class FragmentRecord extends Fragment {
 
                 TextView textView = new TextView(ctxAdap);
                 textView.setText(ingredient.getNombre());
-
                 holder.lyAdditions.addView(textView);
             }
 
@@ -267,6 +254,7 @@ public class FragmentRecord extends Fragment {
         public static class ProductsViewHolder extends RecyclerView.ViewHolder {
 
             private TextView    tvName;
+            private TextView    tvPrice;
             private ViewGroup   lyAdditions;
             private ViewGroup   zoneAdditions;
             private ImageButton btnDeleteProduct;
@@ -275,6 +263,7 @@ public class FragmentRecord extends Fragment {
                 super(itemView);
 
                 tvName              = (TextView)    itemView.findViewById(R.id.tvName);
+                tvPrice             = (TextView)    itemView.findViewById(R.id.tvPrice);
                 lyAdditions         = (ViewGroup)   itemView.findViewById(R.id.lyAdditions);
                 zoneAdditions       = (ViewGroup)   itemView.findViewById(R.id.zoneAdditions);
                 btnDeleteProduct    = (ImageButton) itemView.findViewById(R.id.btnDeleteProduct);
