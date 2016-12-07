@@ -324,14 +324,14 @@ public class FragmentCheckout extends Fragment {
 
         public void updatePaymentView(){
             Button  btnConfirm  = (Button) paymentView.findViewById(R.id.btnConfirm);
-            Spinner spinner     = (Spinner) paymentView.findViewById(R.id.spinner);
+//            Spinner spinner     = (Spinner) paymentView.findViewById(R.id.spinner);
 
             ArrayAdapter<CharSequence> adapter =
                     ArrayAdapter.createFromResource(ctx,
                             R.array.payment_method,
                             android.R.layout.simple_list_item_1);
 
-            spinner.setAdapter(adapter);
+//            spinner.setAdapter(adapter);
 
 
             btnConfirm.setOnClickListener(new View.OnClickListener() {

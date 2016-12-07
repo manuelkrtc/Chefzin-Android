@@ -36,6 +36,7 @@ public class ToolsDate {
     }
 
     //----------------------------------------------------------------------------------------------
+    /*** Verifico si la hora del dispositivo esta dentro de un rango */
     public static boolean checkHourRange(String hourOn, String hourOff){
         if(checkHourHigher(stringToCalentar(hourOn)) && checkHourLess(stringToCalentar(hourOff)))
             return true;

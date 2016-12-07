@@ -22,14 +22,26 @@
         android:textSize="@dimen/sizeText_xx"
         />
     <!---->
-   <Spinner
-       android:id="@+id/spinner"
-       android:layout_width="match_parent"
-       android:layout_height="30dp"
-       android:layout_marginBottom="@dimen/margin_s"
-       android:background="@drawable/shape_rectangle_stroke_corner_blue"
-       >
-   </Spinner>
+   <!--<Spinner-->
+       <!--android:id="@+id/spinner"-->
+       <!--android:layout_width="match_parent"-->
+       <!--android:layout_height="30dp"-->
+       <!--android:layout_marginBottom="@dimen/margin_s"-->
+       <!--android:background="@drawable/shape_rectangle_stroke_corner_blue"-->
+       <!--&gt;-->
+   <!--</Spinner>-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:text="  Efectivo"
+        android:textStyle="bold"
+        android:textSize="@dimen/sizeText_xx"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/margin_s"
+        android:background="@drawable/shape_rectangle_stroke_corner_blue"
+        >
+    </TextView>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -48,7 +60,7 @@
             style="@style/form"
             android:id="@+id/etDocument"
             android:layout_width="match_parent"
-
+            android:inputType="number"
             />
     </LinearLayout>
 
