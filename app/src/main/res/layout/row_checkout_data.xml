@@ -85,7 +85,7 @@
         >
         <com.future333.chefzin.view.FontTextView
             style="@style/textCheckout"
-            android:layout_width="105dp"
+            android:layout_width="110dp"
             android:gravity="left"
             android:text="Indicaciones"/>
 
