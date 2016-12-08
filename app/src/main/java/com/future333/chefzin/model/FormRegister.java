@@ -10,7 +10,6 @@ public class FormRegister {
     private String  email;
     private String  password;
     private String  password_confirmation;
-    private String  telefono;
     private boolean isCheckTerm;
 
     public String getNombres() {
@@ -51,14 +50,6 @@ public class FormRegister {
 
     public void setPassword_confirmation(String password_confirmation) {
         this.password_confirmation = password_confirmation;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
     }
 
     public boolean isCheckTerm() {

@@ -84,12 +84,14 @@
                 style="@style/form"
                 android:id="@+id/etName"
                 android:hint="Nombres"
+                android:inputType="textCapWords"
                 />
 
             <com.future333.chefzin.view.FontEditText
                 style="@style/form"
                 android:id="@+id/etLastName"
                 android:hint="Apellidos"
+                android:inputType="textCapWords"
                 />
 
             <com.future333.chefzin.view.FontEditText
@@ -108,12 +110,6 @@
                 android:id="@+id/etPasswordConfirm"
                 android:hint="Confirmar contraseña"
                 android:inputType="textPassword"/>
-
-            <com.future333.chefzin.view.FontEditText
-                style="@style/form"
-                android:id="@+id/etTelephone"
-                android:hint="Telefono"
-                android:inputType="number"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"

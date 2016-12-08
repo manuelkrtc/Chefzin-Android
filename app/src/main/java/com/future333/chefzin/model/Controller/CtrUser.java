@@ -276,10 +276,6 @@ public class CtrUser {
             return "La contraseña debe tener mínimo 6 caracteres.";
         if(!formRegister.getPassword().equals(formRegister.getPassword_confirmation()))
             return "Las contraseñas no coinciden.";
-        if(formRegister.getTelefono().equals(""))
-            return "El campo telefono esta vacío.";
-        if(formRegister.getTelefono().length()<7 || formRegister.getTelefono().length()>10)
-            return "Telefono invalido.";
         if(!formRegister.isCheckTerm())
             return "No has aceptado términos y condiciones.";
         return null;

@@ -63,7 +63,6 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
     EditText etEmail;
     EditText etLastName;
     EditText etPassword;
-    EditText etTelephone;
     EditText etEmailLog;
     EditText etPasswordLog;
 
@@ -135,7 +134,6 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
         etEmail             = (EditText) v.findViewById(R.id.etEmail);
         etLastName          = (EditText) v.findViewById(R.id.etLastName);
         etPassword          = (EditText) v.findViewById(R.id.etPassword);
-        etTelephone         = (EditText) v.findViewById(R.id.etTelephone);
         etPasswordConfirm   = (EditText) v.findViewById(R.id.etPasswordConfirm);
 
         return v;
@@ -239,7 +237,6 @@ public class FragmentLogin extends Fragment implements GoogleApiClient.OnConnect
                 formRegister.setEmail(etEmail.getText().toString());
                 formRegister.setPassword(etPassword.getText().toString());
                 formRegister.setPassword_confirmation(etPasswordConfirm.getText().toString());
-                formRegister.setTelefono(etTelephone.getText().toString());
                 formRegister.setCheckTerm(checkTerm.isChecked());
 
                 app.ctrUser.register(ctx, formRegister, new ToolsApi.OnApiListenerError() {
