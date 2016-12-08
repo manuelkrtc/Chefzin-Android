@@ -68,12 +68,12 @@
 
         <com.future333.chefzin.view.FontTextView
             style="@style/textInfo"
-            android:layout_width="200dp"
-            android:layout_height="100dp"
+            android:layout_width="230dp"
+            android:layout_height="120dp"
             android:layout_marginTop="10dp"
             android:gravity="center_horizontal"
             android:textColor="@color/grey"
-            android:text="hola"
+            android:text="Definición de chef. Chef es un término que procede del francés y que hace referencia al jefe de cocina. El concepto se utiliza, en el lenguaje cotidiano"
             android:layout_gravity="center_horizontal"
             android:id="@+id/tvDescription" />
 
