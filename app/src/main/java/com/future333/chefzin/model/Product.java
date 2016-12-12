@@ -11,11 +11,12 @@ public class Product implements Cloneable {
     String imagen;
     String nombre;
     String info_adicional;
+    String id_orden_plato;
+
     int precio;
     int impuesto;
     int unidad_cocina;
     int tiempo_preparacion;
-    String id_orden_plato;
 
     ArrayList<Ingredient> ingredientes = new ArrayList<>();
 

@@ -11,9 +11,11 @@ import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.SingletonVolley;
 import com.future333.chefzin.model.Address;
 import com.future333.chefzin.model.Ingredient;
+import com.future333.chefzin.model.Price;
 import com.future333.chefzin.model.Product;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsFormat;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,8 +29,7 @@ import java.util.ArrayList;
 public class CtrCart {
 
 
-    private int percentIva      = 16;
-    private int priceDomicile   = 5000;
+    private Price price;
 
     private Address addressSelect;
 
@@ -89,25 +90,25 @@ public class CtrCart {
         return total;
     }
 
-    private int priceIva(){
-        return priceProductsIngredients()*percentIva/100;
-    }
-
     //----------------------------------------------------------------------------------------------
     public String getSubTotal(){
-        return ToolsFormat.int_to_price(priceProductsIngredients());
+//        return ToolsFormat.int_to_price(priceProductsIngredients());
+        return ToolsFormat.int_to_price(price.getSubtotal());
     }
 
     public String getIva(){
-        return ToolsFormat.int_to_price(priceIva());
+//        return ToolsFormat.int_to_price(priceIva());
+        return ToolsFormat.int_to_price(price.getImpuesto());
     }
 
     public String getDomicile(){
-        return ToolsFormat.int_to_price(priceDomicile);
+//        return ToolsFormat.int_to_price(priceDomicile);
+        return ToolsFormat.int_to_price(price.getDomicilio());
     }
 
     public String getTotal(){
-        return ToolsFormat.int_to_price( priceProductsIngredients() + priceIva() + priceDomicile);
+//        return ToolsFormat.int_to_price( priceProductsIngredients() + priceIva() + priceDomicile);
+        return ToolsFormat.int_to_price(price.getTotal());
     }
 
     //----------------------------------------- methods Api ----------------------------------------
@@ -125,6 +126,7 @@ public class CtrCart {
                                     product.setId_orden_plato(response.getJSONObject("data").getString("id_orden_plato"));
                                     products.add(product);
                                     id_orden = response.getJSONObject("data").getString("id_orden");
+                                    price = new Gson().fromJson(response.getJSONObject("data").toString(), Price.class);
                                     apiListener.onSuccessful();
                                 }else {
                                     apiListener.onError(response.getJSONObject("mensaje").getString("error"));
@@ -163,6 +165,7 @@ public class CtrCart {
                                 if(response.getBoolean("response")){
                                     product.setId_orden_plato(response.getJSONObject("data").getString("id_orden_plato"));
                                     products.add(product);
+                                    price = new Gson().fromJson(response.getJSONObject("data").toString(), Price.class);
                                     apiListener.onSuccessful();
                                 }else {
                                     apiListener.onError(response.getJSONObject("mensaje").getString("error"));
@@ -193,6 +196,7 @@ public class CtrCart {
             JSONObject jsonObject = new JSONObject();
             jsonObject.put("api_token",         app.ctrUser.getUser().getApi_token());
             jsonObject.put("id_orden_plato",    product.getId_orden_plato());
+            jsonObject.put("id_orden_plato",    product.getId_orden_plato());
 
             JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ToolsApi.URL_ORDEN_PRODUCT_DELETE, jsonObject,
                     new Response.Listener<JSONObject>() {
@@ -201,6 +205,7 @@ public class CtrCart {
                             try {
                                 if(response.getBoolean("response")){
                                     products.remove(product);
+                                    price = new Gson().fromJson(response.getJSONObject("data").toString(), Price.class);
                                     apiListener.onSuccessful();
                                 }else {
                                     apiListener.onError(response.getJSONObject("mensaje").getString("error"));
