@@ -99,7 +99,10 @@ public class FragmentHorary extends Fragment {
             if(startTime!=null && finalTime!=null) tvHorary.setText(startTime + " - " + finalTime);
             else tvHorary.setVisibility(View.GONE);
 
-            if(horary.foto_movil != null)  ;
+//            if(horary.foto_movil != null)  ;
+                if(horary.id.equals("1")) ivHorary.setImageResource(R.drawable.desayunos);
+                if(horary.id.equals("2")) ivHorary.setImageResource(R.drawable.almuerzos);
+                if(horary.id.equals("3")) ivHorary.setImageResource(R.drawable.cena);
 
             lyParent.setOnClickListener(new View.OnClickListener() {
                 @Override

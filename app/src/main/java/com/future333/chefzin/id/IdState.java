@@ -22,8 +22,10 @@ public class IdState {
     public static final int ID_DOMI_EN_CAMINO_RECOGER     = 23;
     public static final int ID_DOMI_EN_CAMINO_ENTREGAR    = 24;
 
-    public static String nameSteps(int idState){
+    public static final int ID_FRANJA_ACTIVA    = 1;
+    public static final int ID_FRANJA_INACTIVA  = 0;
 
+    public static String nameSteps(int idState){
         if(idState == ID_REC_Y_COC)         return "Recibido y cocinando";
         if(idState == ID_LISTO_ENTREGAR)    return "Listo para entregar";
         if(idState == ID_EN_CAMINO)         return "En camino";
