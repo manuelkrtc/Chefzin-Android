@@ -23,6 +23,7 @@
             android:id="@+id/ivProfile"
             android:layout_width="100dp"
             android:layout_height="100dp"
+            android:src="@mipmap/ic_profile_blue"
             android:background="@drawable/shape_circle_stroke_blue"/>
 
         <TextView
