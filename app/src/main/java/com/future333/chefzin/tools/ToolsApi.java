@@ -19,6 +19,7 @@ public class ToolsApi {
     public final static String URL_GET_CHEFZ            = URL_SERVICES + "getdata?id_horarios_franjas=";
     public final static String URL_GET_HORARIOS         = URL_SERVICES + "gethorariosfranjas/all";
     public final static String URL_GET_COBERTURA        = URL_SERVICES + "cobertura?ciudad=bogota";
+    public final static String URL_GET_VERSION          = URL_SERVICES + "build/beta/last?plataforma=android&tipo_app=user";
 
     public final static String URL_ORDEN_CREATE         = URL_SERVICES + "orden/crear";
     public final static String URL_ORDEN_PRODUCT_ADD    = URL_SERVICES + "orden/plato/add";

@@ -24,7 +24,7 @@ import java.util.List;
  * Created by manuel on 12/5/16.
  */
 
-public class CtrApp {
+public class CtrCoordinates {
 
     ArrayList<Coordinate> coordinates;
 

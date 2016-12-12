@@ -34,8 +34,6 @@ public class ToolsSystem {
         }
     }
 
-
-
     //---------------------------------- Version Name ----------------------------------------------
     public static void getVersionName(Activity ctx, TextView tv){
         String versionName = getVersionName(ctx);
@@ -53,18 +51,30 @@ public class ToolsSystem {
         return null;
     }
 
-    public static void checkMinimumVersion(Activity ctx, String minimumVersion){
+    public static boolean checkMinimumVersion(Activity ctx, String minimumVersion){
         String version = getVersionName(ctx);
         if(version != null){
-            String versionArray[]           = version.split("\\.");
-            String minimumVersionArray[]    = minimumVersion.split("\\.");
+            int[] versionArray           = ToolsFormat.arrayString_to_arrayInt(version.split("\\."));
+            int[] minimumVersionArray    = ToolsFormat.arrayString_to_arrayInt(minimumVersion.split("\\."));
 
             if(versionArray.length!=3 || minimumVersionArray.length!=3) {
                 Log.e("Version","Formato de version incorrecto");
-                return;
+                return false;
             }
 
+            if(versionArray[0] > minimumVersionArray[0]) return true;
+            if(versionArray[0] < minimumVersionArray[0]) return false;
+            if(versionArray[0] == minimumVersionArray[0]) {
+                if(versionArray[1] > minimumVersionArray[1]) return true;
+                if(versionArray[1] < minimumVersionArray[1]) return false;
+                if(versionArray[1] == minimumVersionArray[1]) {
+                    if(versionArray[2] >= minimumVersionArray[2]) return true;
+                    if(versionArray[2] < minimumVersionArray[2]) return false;
+                }
+            }
         }
-
+        Log.e("Version","La version no coincidio en ninguna verificacion");
+        return false;
     }
+
 }

@@ -1,10 +1,12 @@
 package com.future333.chefzin;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
@@ -12,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.future333.chefzin.Fragment.FragmentCheckout;
@@ -23,6 +24,7 @@ import com.future333.chefzin.Fragment.FragmentMap;
 import com.future333.chefzin.Fragment.FragmentProduct;
 import com.future333.chefzin.Fragment.FragmentProfile;
 import com.future333.chefzin.Fragment.FragmentRecord;
+import com.future333.chefzin.model.Controller.OtherApi;
 import com.future333.chefzin.model.User;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsFragment;
@@ -67,7 +69,10 @@ public class MainActivity extends FragmentActivity {
         ToolsSystem.getVersionName(ctx, tvVersion);
 //        ToolsSystem.checkMinimumVersion(ctx,"");
 
+        Log.i("name packe", getApplicationContext().getPackageName());
+
         getHorary();
+        getVersion();
 
     }
 
@@ -210,6 +215,7 @@ public class MainActivity extends FragmentActivity {
 
     public void btnReload(View view){
         getHorary();
+        getVersion();
     }
 
     //----------------------------------------------- Toolbars -------------------------------------
@@ -241,7 +247,7 @@ public class MainActivity extends FragmentActivity {
     //este metodo pedira datos que se necesitaran mas adelante, la idea es verificar esta
     // informacion en cada vista.
     private void getApis(){
-        app.ctrApp.getCoordinates(ctx);
+        app.ctrCoordinates.getCoordinates(ctx);
     }
 
     private void getHorary(){
@@ -257,6 +263,32 @@ public class MainActivity extends FragmentActivity {
             public void onError(String error) {
                 ToolsView.msj(ctx,error);
                 zoneCheckConnection.setVisibility(View.VISIBLE);
+            }
+        });
+    }
+
+    private void getVersion(){
+        OtherApi.getVersion(ctx, new OtherApi.OnApiListenerError() {
+            @Override
+            public void onSuccessful(String version) {
+                if(!ToolsSystem.checkMinimumVersion(ctx,version)){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
+                    builder.setMessage("En la tienda ya se encuentra una nueva actualización.")
+                            .setTitle("Versión desactualizada")
+                            .setCancelable(false)
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                                    intent.setData(Uri.parse("market://details?id="+getApplicationContext().getPackageName()));
+                                    startActivity(intent);
+
+                                    zoneScreenHome.setVisibility(View.VISIBLE);
+                                    zoneCheckConnection.setVisibility(View.GONE);
+                                }
+                            });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                }
             }
         });
     }

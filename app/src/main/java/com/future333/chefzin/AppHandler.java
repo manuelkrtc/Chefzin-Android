@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.future333.chefzin.model.Chef;
-import com.future333.chefzin.model.Controller.CtrApp;
+import com.future333.chefzin.model.Controller.CtrCoordinates;
 import com.future333.chefzin.model.Controller.CtrChef;
 import com.future333.chefzin.model.Controller.CtrHorary;
 import com.future333.chefzin.model.Controller.CtrCart;
@@ -20,7 +20,7 @@ public class AppHandler extends Application {
     public CtrUser      ctrUser     = new CtrUser();
     public CtrCart      ctrCart     = new CtrCart();
     public CtrHorary    ctrHorary   = new CtrHorary();
-    public CtrApp       ctrApp      = new CtrApp();
+    public CtrCoordinates ctrCoordinates = new CtrCoordinates();
 
     public Chef chefSelect   = new Chef();
 

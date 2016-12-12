@@ -27,7 +27,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.future333.chefzin.AppHandler;
 import com.future333.chefzin.R;
 import com.future333.chefzin.SingletonVolley;
-import com.future333.chefzin.model.Controller.CtrApp;
+import com.future333.chefzin.model.Controller.CtrCoordinates;
 import com.future333.chefzin.model.Coordinate;
 import com.future333.chefzin.tools.ToolsApi;
 import com.future333.chefzin.tools.ToolsNotif;
@@ -270,7 +270,7 @@ public class FragmentMap extends Fragment {
 //                        new LatLng(4.679826, -74.038126),
 //                        new LatLng(4.702046, -74.028577));
 //        map.addPolygon(rectOptions);
-        app.ctrApp.getCoordinates(ctx, new CtrApp.OnApiListenerError() {
+        app.ctrCoordinates.getCoordinates(ctx, new CtrCoordinates.OnApiListenerError() {
             @Override
             public void onSuccessful(ArrayList<Coordinate> coordinates) {
                 PolygonOptions rectOptions = new PolygonOptions()
